@@ -1,0 +1,7 @@
+Images go inside this folder.
+
+Can be accessed within a React Component by:
+
+require('images/filename.ext');
+
+since images/ is an alias to a root path defined in webpack.config.js.

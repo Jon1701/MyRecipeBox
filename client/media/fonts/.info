@@ -1,0 +1,11 @@
+Fonts files go inside this folder.
+
+Can be accessed within a stylesheet by:
+
+@font-face {
+  font-family: "FontName";
+  src: url("../media/fonts/filename.ttf");
+}
+
+Root-relative aliases do not work with css-loader, so a relative
+path is needed.
