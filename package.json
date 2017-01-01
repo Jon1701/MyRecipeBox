@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "main": "server.js",
   "repository": "https://github.com/Jon1701/RecipeBoxV2.git",
-  "author": "Jon1701 <jon.j.balon@gmail.com>",
+  "author": "Jon1701",
   "license": "MIT",
   "engines": {
     "node": "7.3.0",
