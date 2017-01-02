@@ -4,7 +4,7 @@ import React from 'react';
 // Component definition.
 const App = (props) => (
   <div>
-    Hello World
+    <a href="/api/auth/twitter">Log In</a>
   </div>
 );
 
