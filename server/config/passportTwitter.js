@@ -1,15 +1,7 @@
 // Dependencies.
-const passport = require('passport'); // Passport.
 const TwitterStrategy = require('passport-twitter'); // Twitter Passport Strategy.
+const passport = require('passport'); // Passport.
 const rfr = require('rfr'); // Root-relative paths.
-const mongoose = require('mongoose'); // MongoDB database driver.
-
-// Database config file.
-const DBCONFIG = rfr('/server/config/database');
-
-// Connect to the database.
-mongoose.Promise = global.Promise;
-mongoose.createConnection(DBCONFIG.CONNSTRING);
 
 // Models.
 const User = rfr('/server/models/User');
