@@ -162,7 +162,7 @@ app.get('*', (req, res) => {
  */
 
 // Get next available port.
-const port = process.env.PORT;
+const port = process.env.PORT || 8080;
 
 // Listen for connections.
 app.listen(port, () => {

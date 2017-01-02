@@ -12,7 +12,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack -p",
     "client": "cross-env NODE_ENV=development webpack && webpack-dev-server --quiet --hot --progress --inline",
-    "server": "cross-env NODE_ENV=development nodemon ./server.js 8080"
+    "server": "cross-env NODE_ENV=development nodemon ./server.js"
   },
   "devDependencies": {
     "babel": "^6.5.2",
