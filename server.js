@@ -1,19 +1,72 @@
-// Dependencies.
+/*
+ *
+ *
+ *  Dependencies.
+ *
+ *
+ */
 const session = require('express-session'); // Session management for Express.
 const bodyParser = require('body-parser'); // Parse parameters from request body.
+const mongoose = require('mongoose'); // MongoDB database driver.
 const passport = require('passport'); // Passport authentication.
 const express = require('express'); // ExpressJS.
 const morgan = require('morgan');   // Log requests to console.
 const path = require('path');       // Path module.
 const rfr = require('rfr');         // Root relative paths.
 
-// Passport strategies.
-const passportTwitter = rfr('/server/config/passportTwitter');
+/*
+ *
+ *
+ *  Other dependencies.
+ *
+ *
+ */
+const passportTwitter = rfr('/server/config/passportTwitter');  // Twitter Passport Strategy.
+const DBCONFIG = rfr('/server/config/database');  // Database configuration.
+const auth = rfr('/server/config/auth');  // Secret keys.
 
-// Keys.
-const auth = rfr('/server/config/auth');
+/*
+ *
+ *
+ *  Database connection and logging.
+ *
+ *
+ */
 
-// Express JS instance.
+// Initial database connection.
+mongoose.connect(DBCONFIG.CONNSTRING);
+
+// Mongoose log if connected.
+mongoose.connection.on('connected', () => {
+  console.log(`Mongoose default connection open: ${DBCONFIG.CONNSTRING_NO_CREDENTIALS}`);
+});
+
+// Mongoose log if an error occurred.
+mongoose.connection.on('error', (err) => {
+  console.log(`Mongoose default connection error: ${err}`);
+});
+
+// Mongoose log if database is disconnected.
+mongoose.connection.on('disconnected', () => {
+  console.log('Mongoose default connection disconnected');
+});
+
+// If the Node process ends, close the Mongoose connection
+process.on('SIGINT', () => {
+  mongoose.connection.close(() => {
+    console.log('Mongoose default connection disconnected through app termination');
+    process.exit(0);
+  });
+});
+
+/*
+ *
+ *
+ *  Express instance.
+ *
+ *
+ */
+
 const app = express();
 
 /*
@@ -54,29 +107,29 @@ app.use(passport.session());
  *
  */
 
-// Router: Base endpoint: /api.
+ // Router for: /api endpoints.
 const apiRoutes = express.Router();
 app.use('/api', apiRoutes);
 
-// Twitter login.
-apiRoutes.get('/auth/twitter', passportTwitter.authenticate('twitter'));
-
-// Twitter login callback.
-apiRoutes.get('/auth/twitter/callback', passportTwitter.authenticate('twitter', { failureRedirect: '/' }), (req, res, next) => {
-  res.json(req.user);
-});
+// Router for: /api/auth endpoints.
+const authRoutes = express.Router();
+app.use('/api/auth', authRoutes);
 
 /*
  *
  *
- *  Unprotected routes.
- *  Base endpoint: /api
+ *  Routes.
  *
  *
  */
 
-// Search route.
-apiRoutes.get('/test', rfr('/server/routes/test'));
+// Twitter login.
+authRoutes.get('/twitter', passportTwitter.authenticate('twitter'));
+
+// Twitter login callback.
+authRoutes.get('/twitter/callback', passportTwitter.authenticate('twitter', { failureRedirect: '/' }), (req, res, next) => {
+  res.json(req.user);
+});
 
 /*
  *
@@ -108,8 +161,8 @@ app.get('*', (req, res) => {
  *
  */
 
-// Get next available port, or use 8080 if available.
-const port = process.env.PORT || 8080;
+// Get next available port.
+const port = process.env.PORT;
 
 // Listen for connections.
 app.listen(port, () => {
