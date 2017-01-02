@@ -9,6 +9,7 @@ const dbConfig = {
 
 // Store database connection string in dbConfig.
 dbConfig.CONNSTRING = `mongodb://${dbConfig.USER}:${dbConfig.PASSWORD}@${dbConfig.DOMAIN}:${dbConfig.PORT}/${dbConfig.DBNAME}`;
+dbConfig.CONNSTRING_NO_CREDENTIALS = `mongodb://${dbConfig.DOMAIN}:${dbConfig.PORT}/${dbConfig.DBNAME}`;
 
 // Export config.
 module.exports = dbConfig;
