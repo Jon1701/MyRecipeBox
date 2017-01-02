@@ -1,9 +1,17 @@
 // Dependencies.
+const session = require('express-session'); // Session management for Express.
 const bodyParser = require('body-parser'); // Parse parameters from request body.
+const passport = require('passport'); // Passport authentication.
 const express = require('express'); // ExpressJS.
 const morgan = require('morgan');   // Log requests to console.
 const path = require('path');       // Path module.
 const rfr = require('rfr');         // Root relative paths.
+
+// Passport strategies.
+const passportTwitter = rfr('/server/config/passportTwitter');
+
+// Keys.
+const auth = rfr('/server/config/auth');
 
 // Express JS instance.
 const app = express();
@@ -22,8 +30,21 @@ app.use(morgan('dev'));
 // Use middleware which parses urlencoded bodies.
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// use middleware which parses JSON.
+// Use middleware which parses JSON.
 app.use(bodyParser.json());
+
+// Session middleware.
+app.use(session({
+  secret: auth.KEY.SESSION_SECRET_KEY,
+  resave: true,
+  saveUninitialized: true,
+}));
+
+// Initialize passport.
+app.use(passport.initialize());
+
+// Initialize session.
+app.use(passport.session());
 
 /*
  *
@@ -37,6 +58,14 @@ app.use(bodyParser.json());
 const apiRoutes = express.Router();
 app.use('/api', apiRoutes);
 
+// Twitter login.
+apiRoutes.get('/auth/twitter', passportTwitter.authenticate('twitter'));
+
+// Twitter login callback.
+apiRoutes.get('/auth/twitter/callback', passportTwitter.authenticate('twitter', { failureRedirect: '/' }), (req, res, next) => {
+  res.json(req.user);
+});
+
 /*
  *
  *
@@ -47,7 +76,7 @@ app.use('/api', apiRoutes);
  */
 
 // Search route.
-apiRoutes.get('/test', rfr('server/routes/test'));
+apiRoutes.get('/test', rfr('/server/routes/test'));
 
 /*
  *
