@@ -32,10 +32,7 @@ const auth = rfr('/server/config/auth');  // Secret keys.
  *
  *
  */
-
-// Initial database connection.
-mongoose.connect(DBCONFIG.CONNSTRING);
-
+/*
 // Mongoose log if connected.
 mongoose.connection.on('connected', () => {
   console.log(`Mongoose default connection open: ${DBCONFIG.CONNSTRING_NO_CREDENTIALS}`);
@@ -58,7 +55,7 @@ process.on('SIGINT', () => {
     process.exit(0);
   });
 });
-
+*/
 /*
  *
  *
@@ -124,6 +121,8 @@ app.use('/api/auth', authRoutes);
  */
 
 apiRoutes.post('/login', rfr('/server/routes/login'));
+
+apiRoutes.post('/signup', rfr('/server/routes/signup'));
 
 // Twitter login.
 //authRoutes.get('/twitter', passportTwitter.authenticate('twitter'));
