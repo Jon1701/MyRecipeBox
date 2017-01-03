@@ -64,7 +64,7 @@ const login = (req, res, next) => {
      */
     const token = jwt.sign(
       { username: result.username },
-      JWT.SIGNING_KEY,
+      JWT_SIGNING_KEY,
       { expiresIn: 86400 });
 
     // Payload to be send back to user in the response.
