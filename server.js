@@ -124,6 +124,12 @@ apiRoutes.post('/login', rfr('/server/routes/login'));
 
 apiRoutes.post('/signup', rfr('/server/routes/signup'));
 
+// Middleware to verify JSON Web Tokens for authenticated routes.
+authRoutes.use(rfr('/server/middleware/verifyJWT'));
+
+// Create recipe route.
+authRoutes.post('/create_recipe', rfr('/server/routes/auth/create_recipe'));
+
 // Twitter login.
 //authRoutes.get('/twitter', passportTwitter.authenticate('twitter'));
 
