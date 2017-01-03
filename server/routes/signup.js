@@ -20,7 +20,7 @@ const DBCONFIG = rfr('/server/config/database');  // Database config.
 mongoose.Promise = global.Promise;
 
 // Connect to database.
-mongoose.connect(DBCONFIG.CONNSTRING);
+mongoose.createConnection(DBCONFIG.CONNSTRING);
 
 /*
  *
