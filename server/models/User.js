@@ -6,9 +6,11 @@ const Schema = mongoose.Schema;
 
 // Schema definition.
 const User = mongoose.model('User', new Schema({
-  id: String,
   username: String,
-  displayName: String,
+  password: {
+    hash: String,
+    salt: String,
+  },
 }));
 
 // Export schema.
