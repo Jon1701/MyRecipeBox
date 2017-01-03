@@ -26,7 +26,7 @@ const errors = {
     MISSING_INGREDIENTS: response('MISSING_INGREDIENTS', 'Recipe ingredients are required.'),
     MISSING_INSTRUCTIONS: response('MISSING_INSTRUCTIONS', 'Recipe preparation instructions are required.'),
     MULTIPLE_INGREDIENTS_NEEDED: response('MULTIPLE_INGREDIENTS_NEEDED', 'More than 1 ingredient is required.'),
-    MULTIPLE_INSTRUCTION_STEPS_NEEDED: response('MULTIPLE_INSTRUCTION_STEPS_NEEDED', 'More than 1 instruction step is required.'),
+    MULTIPLE_PREPARATION_STEPS_NEEDED: response('MULTIPLE_PREPARATION_STEPS_NEEDED', 'More than 1 instruction step is required.'),
   },
   DB: {
     DB_ERROR: response('DB_ERROR', 'Unknown database error occurred.'),
