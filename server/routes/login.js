@@ -9,9 +9,23 @@ const hashing = rfr('/server/common/hashing');  // Hash and salt functions.
 // Configuration files.
 const MSG = rfr('/server/messages/index');// Response error/success messages.
 const JWT_SIGNING_KEY = rfr('/server/config/auth').KEY.JWT_SIGNING_KEY;  // JWT Signing key.
+const DBCONFIG = rfr('/server/config/database');  // Database config.
 
 // Database models.
 const User = rfr('/server/models/User');  // User database model.
+
+/*
+ *
+ *
+ *  Database connection.
+ *
+ *
+ */
+// Use mongoose promises.
+mongoose.Promise = global.Promise;
+
+// Connect to database.
+mongoose.connect(DBCONFIG.CONNSTRING);
 
 /*
  *
