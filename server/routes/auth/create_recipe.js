@@ -8,10 +8,45 @@ const MSG = rfr('/server/messages/index');// Response error/success messages.
 const Recipe = rfr('/server/models/Recipe');  // Recipe database model.
 
 /*
- *
- *
  *  Route definition.
  *
+ *  Creates a recipe.
+ *
+ *  Method: POST
+ *
+ *  Request header:
+ *
+ *    Name            Data Type   Required/Optional   Description
+ *    ==============  =========   =================   ===========
+ *    x-access-token  String      required            Access token
+ *
+ *
+ *  Request body:
+ *
+ *    Name          Data Type   Required/Optional   Description
+ *    ============  ==========  =================   ===========
+ *    title:        String      required            Recipe title
+ *    tagline:      String      required            Short description
+ *    ingredients:  [ String ]  required            List of ingredients (at least 2)
+ *    instructions: [ String ]  required            List of preparation instructions (at least 2)
+ *
+ *  Error codes:
+ *
+ *    Code                               Reason
+ *    =================================  ======
+ *    DB_ERROR                           Database error
+ *    MISSING_TITLE                      No title
+ *    MISSING_TAGLINE                    No tagline
+ *    MISSING_INGREDIENTS                No ingredients
+ *    MISSING_INSTRUCTIONS               No instructions
+ *    MULTIPLE_INGREDIENTS_NEEDED        Fewer than 2 ingredients provided
+ *    MULTIPLE_PREPARATION_STEPS_NEEDED  Fewer than 2 preparation steps provided
+ *
+ *  Success codes:
+ *
+ *    Code                    Reason                        Payload
+ *    =====================   ======                        =======
+ *    CREATE_RECIPE_SUCCESS   Recipe successfully created   Recipe document
  *
  */
 const createRecipe = (req, res, next) => {
@@ -57,7 +92,7 @@ const createRecipe = (req, res, next) => {
 
   // Error check: only one instruction step.
   if (typeof instructions === 'string') {
-    return next(MSG.ERROR.CREATE_RECIPE.MULTIPLE_INSTRUCTION_STEPS_NEEDED);
+    return next(MSG.ERROR.CREATE_RECIPE.MULTIPLE_PREPARATION_STEPS_NEEDED);
   }
 
   // Filter out empty ingredients.
@@ -73,7 +108,7 @@ const createRecipe = (req, res, next) => {
 
   // Check if more than 1 instruction is left over after filtering.
   if (instructions.length < 2) {
-    return next(MSG.ERROR.CREATE_RECIPE.MULTIPLE_INSTRUCTION_STEPS_NEEDED);
+    return next(MSG.ERROR.CREATE_RECIPE.MULTIPLE_PREPARATION_STEPS_NEEDED);
   }
 
   // Create a new Recipe document using the Recipe model.
