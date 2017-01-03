@@ -20,6 +20,14 @@ const errors = {
     MISSING_PASSWORD_CONFIRMATION: response('MISSING_PASSWORD_CONFIRMATION', 'Both password and password confirmation are required.'),
     USER_EXISTS: response('USER_EXISTS', 'User already exists.'),
   },
+  CREATE_RECIPE: {
+    MISSING_TITLE: response('MISSING_TITLE', 'Recipe title is required.'),
+    MISSING_TAGLINE: response('MISSING_TAGLINE', 'Recipe tagline is required.'),
+    MISSING_INGREDIENTS: response('MISSING_INGREDIENTS', 'Recipe ingredients are required.'),
+    MISSING_INSTRUCTIONS: response('MISSING_INSTRUCTIONS', 'Recipe preparation instructions are required.'),
+    MULTIPLE_INGREDIENTS_NEEDED: response('MULTIPLE_INGREDIENTS_NEEDED', 'More than 1 ingredient is required.'),
+    MULTIPLE_INSTRUCTION_STEPS_NEEDED: response('MULTIPLE_INSTRUCTION_STEPS_NEEDED', 'More than 1 instruction step is required.'),
+  },
   DB: {
     DB_ERROR: response('DB_ERROR', 'Unknown database error occurred.'),
   },
@@ -32,6 +40,9 @@ const successes = {
   },
   SIGNUP: {
     USER_CREATED: response('USER_CREATED', 'User successfully created.'),
+  },
+  CREATE_RECIPE: {
+    CREATE_RECIPE_SUCCESS: response('CREATE_RECIPE_SUCCESS', 'Recipe successfully created.'),
   },
 };
 
