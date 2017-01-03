@@ -30,6 +30,7 @@
 
 ## API Reference
 
+- **[<code>GET</code> /api/get_recipes](documentation/get_recipes.md)**
 - **[<code>POST</code> /api/login](documentation/login.md)**
 - **[<code>POST</code> /api/signup](documentation/signup.md)**
 - **[<code>POST</code> /api/auth/create_recipe](documentation/create_recipe.md)**
