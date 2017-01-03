@@ -5,7 +5,7 @@
  *
  *
  */
-const session = require('express-session'); // Session management for Express.
+//const session = require('express-session'); // Session management for Express.
 const bodyParser = require('body-parser'); // Parse parameters from request body.
 const mongoose = require('mongoose'); // MongoDB database driver.
 //const passport = require('passport'); // Passport authentication.
@@ -32,7 +32,10 @@ const auth = rfr('/server/config/auth');  // Secret keys.
  *
  *
  */
-/*
+
+// Default Connect to the database.
+mongoose.connect(DBCONFIG.CONNSTRING);
+
 // Mongoose log if connected.
 mongoose.connection.on('connected', () => {
   console.log(`Mongoose default connection open: ${DBCONFIG.CONNSTRING_NO_CREDENTIALS}`);
@@ -55,7 +58,7 @@ process.on('SIGINT', () => {
     process.exit(0);
   });
 });
-*/
+
 /*
  *
  *
