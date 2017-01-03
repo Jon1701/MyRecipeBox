@@ -7,20 +7,6 @@ const hashing = rfr('/server/common/hashing');  // Hash and salt functions.
 const MSG = rfr('/server/messages/index');// Response error/success messages.
 const REGEX = rfr('/server/regex/index'); // Regular expressions.
 const User = rfr('/server/models/User');  // User database model.
-const DBCONFIG = rfr('/server/config/database');  // Database config.
-
-/*
- *
- *
- *  Database connection.
- *
- *
- */
-// Use mongoose promises.
-mongoose.Promise = global.Promise;
-
-// Connect to database.
-mongoose.createConnection(DBCONFIG.CONNSTRING);
 
 /*
  *
