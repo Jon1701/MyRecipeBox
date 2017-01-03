@@ -123,7 +123,7 @@ app.use('/api/auth', authRoutes);
  *
  */
 
-
+apiRoutes.post('/login', rfr('/server/routes/login'));
 
 // Twitter login.
 //authRoutes.get('/twitter', passportTwitter.authenticate('twitter'));
