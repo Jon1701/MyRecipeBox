@@ -31,6 +31,10 @@ const errors = {
   DB: {
     DB_ERROR: response('DB_ERROR', 'Unknown database error occurred.'),
   },
+  VIEW_RECIPE: {
+    INVALID_PAGE_NUMBER: response('INVALID_PAGE_NUMBER', 'Page number must be an integer greater than or equal to 1.'),
+    INVALID_RECIPE_ID: response('INVALID_RECIPE_ID', 'Recipe ID is invalid'),
+  },
 };
 
 // Success messages.
@@ -43,6 +47,9 @@ const successes = {
   },
   CREATE_RECIPE: {
     CREATE_RECIPE_SUCCESS: response('CREATE_RECIPE_SUCCESS', 'Recipe successfully created.'),
+  },
+  VIEW_RECIPE: {
+    RECIPE_SEARCH_COMPLETE: response('RECIPE_SEARCH_COMPLETE', 'Search results returned.'),
   },
 };
 
