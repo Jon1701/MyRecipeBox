@@ -127,6 +127,8 @@ apiRoutes.post('/login', rfr('/server/routes/login'));
 
 apiRoutes.post('/signup', rfr('/server/routes/signup'));
 
+apiRoutes.get('/get_recipes', rfr('/server/routes/get_recipes'));
+
 // Middleware to verify JSON Web Tokens for authenticated routes.
 authRoutes.use(rfr('/server/middleware/verifyJWT'));
 
