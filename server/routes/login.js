@@ -6,11 +6,26 @@ const rfr = require('rfr'); // Root-relative paths.
 const hashing = rfr('/server/common/hashing');  // Hash and salt functions.
 
 // Configuration files.
-const MSG = rfr('/server/messages/index');// Response error/success messages.
 const JWT_SIGNING_KEY = rfr('/server/config/auth').KEY.JWT_SIGNING_KEY;  // JWT Signing key.
 
 // Database models.
 const User = rfr('/server/models/User');  // User database model.
+
+// Success/Error Response messages.
+const MSG = (code) => {
+  const messages = {
+    MISSING_CREDENTIALS: 'Username and password are required.',
+    INVALID_CREDENTIALS: 'Incorrect username or password.',
+    LOGIN_SUCCESS: 'Login successful.',
+    DB_ERROR: 'Database error.',
+  };
+
+  // Return message as an Object.
+  return {
+    code,
+    message: messages[code],
+  };
+};
 
 /*
  *
@@ -26,19 +41,19 @@ const login = (req, res, next) => {
 
   // Check if username/password are provided.
   if (!username || !password) {
-    return next(MSG.ERROR.LOGIN.MISSING_CREDENTIALS);
+    return next(MSG('MISSING_CREDENTIALS'));
   }
 
   // Access the database. Search for the user.
   User.findOne({ username: { $regex: new RegExp(username, 'i') } }, (err, result) => {
     // Database error check.
     if (err) {
-      return next(MSG.ERROR.DB.DB_ERROR);
+      return next(MSG('DB_ERROR'));
     }
 
     // If no user was found, return an error.
     if (!result) {
-      return next(MSG.ERROR.LOGIN.NO_USER_FOUND);
+      return next(MSG('INVALID_CREDENTIALS'));
     }
 
     // User was found, get salt and hashed password.
@@ -54,7 +69,7 @@ const login = (req, res, next) => {
      */
 
     if (storedHashedPassword !== genHashedPassword) {
-      return next(MSG.ERROR.LOGIN.INVALID_CREDENTIALS);
+      return next(MSG('INVALID_CREDENTIALS'));
     }
 
     /*
@@ -73,7 +88,7 @@ const login = (req, res, next) => {
     };
 
     // Send success message with payload.
-    return res.json(Object.assign({}, MSG.SUCCESS.LOGIN.LOGIN_SUCCESS, { payload }));
+    return res.json(Object.assign({}, MSG('LOGIN_SUCCESS'), { payload }));
   });
 
   // Required to keep linter happy.

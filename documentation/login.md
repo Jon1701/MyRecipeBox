@@ -46,7 +46,6 @@ All known errors cause the resource to return HTTP error code header along with 
 | DB_ERROR            | Some database error occurred |
 | MISSING_CREDENTIALS | No username or password were provided |
 | INVALID_CREDENTIALS | Invalid username or password |
-| NO_USER_FOUND       | No user was found with the given username |
 
 
 ### Example
