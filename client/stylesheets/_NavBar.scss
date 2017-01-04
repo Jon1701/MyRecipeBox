@@ -1,0 +1,20 @@
+.navbar-primary {
+  background-color: #000000;
+  color: #FFFFFF;
+
+  // Navbar child container.
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+   }
+
+  // Navbar item padding.
+  .nav-item {
+    padding: 10px 15px 10px 15px;
+
+  }
+
+}
