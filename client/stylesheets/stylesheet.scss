@@ -9,6 +9,12 @@ body {
   cursor: pointer;
 }
 
+// Remove ugly default hyperlink styling.
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 // Navigation bar styles.
 @import '_NavBar';
 
