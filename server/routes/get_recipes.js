@@ -2,11 +2,24 @@
 const rfr = require('rfr'); // Root-relative paths.
 const isObjectIdValid = require('mongoose').Types.ObjectId.isValid;
 
-// Configuration files.
-const MSG = rfr('/server/messages/index');// Response error/success messages.
-
 // Database models.
 const Recipe = rfr('/server/models/Recipe');  // Recipe database model.
+
+// Success/Error Response messages.
+const MSG = (code) => {
+  const messages = {
+    INVALID_PAGE_NUMBER: 'Page number must be an integer greater than or equal to 1.',
+    INVALID_RECIPE_ID: 'Recipe ID is invalid',
+    RECIPE_SEARCH_COMPLETE: 'Search results returned.',
+    DB_ERROR: 'Unknown database error occurred.',
+  };
+
+  // Return message as an Object.
+  return {
+    code,
+    message: messages[code],
+  };
+};
 
 /*
  *
@@ -42,11 +55,11 @@ const getRecipes = (req, res, next) => {
   const perPage = 20;
 
   // Check for invalid page number.
-  if (pageNum < 1) { return next(MSG.ERROR.VIEW_RECIPE.INVALID_PAGE_NUMBER); }
+  if (pageNum < 1) { return next(MSG('INVALID_PAGE_NUMBER')); }
 
   // Check if object id is invalid
   if (recipeID && !isObjectIdValid(recipeID)) {
-    return next(MSG.ERROR.VIEW_RECIPE.INVALID_RECIPE_ID);
+    return next(MSG('INVALID_RECIPE_ID'));
   }
 
   // Blank search query.
@@ -67,7 +80,7 @@ const getRecipes = (req, res, next) => {
   // Find all matching recipes.
   Recipe.find(searchQuery, null, paginationOptions, (errFind, resultsFind) => {
     // Database error handling.
-    if (errFind) { return next(MSG.ERROR.DB.DB_ERROR); }
+    if (errFind) { return next(MSG('DB_ERROR')); }
 
     // Response payload.
     const payload = {
@@ -75,7 +88,7 @@ const getRecipes = (req, res, next) => {
     };
 
     // Return success response payload.
-    return res.send(Object.assign({}, MSG.SUCCESS.VIEW_RECIPE.RECIPE_SEARCH_COMPLETE, { payload }));
+    return res.send(Object.assign({}, MSG('RECIPE_SEARCH_COMPLETE'), { payload }));
   });
 
   // Keep eslint happy.
