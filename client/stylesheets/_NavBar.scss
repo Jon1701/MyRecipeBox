@@ -1,5 +1,8 @@
+$navbar-bgcolor: #DC143C;
+$accent-color: 	#ED1C40;
+
 .navbar-primary {
-  background-color: #000000;
+  background-color: $navbar-bgcolor;
   color: #FFFFFF;
 
   // Navbar child container.
@@ -11,10 +14,18 @@
     justify-content: space-between;
    }
 
-  // Navbar item padding.
+  // Navbar item.
   .nav-item {
-    padding: 10px 15px 10px 15px;
+    padding: 20px 15px 20px 15px;
+  }
 
+  // Navbar item link.
+  .nav-item-link:hover {
+    background-color: $accent-color;
+  }
+
+  .brand {
+    padding-left: 15px;
   }
 
 }

@@ -10,7 +10,7 @@ class NavBar extends React.Component {
           <ul>
             <li className="subnav-left">
               <ul>
-                <li className="nav-item">Brand</li>
+                <li className="brand cursor-hand nav-item">Brand</li>
               </ul>
             </li>
 
@@ -29,13 +29,13 @@ export default NavBar;
 
 const NotLoggedInSubNav = () => (
   <ul>
-    <li className="nav-item">Login</li>
-    <li className="nav-item">Sign up</li>
+    <li className="nav-item nav-item-link cursor-hand">Login</li>
+    <li className="nav-item nav-item-link cursor-hand">Sign up</li>
   </ul>
 );
 
 const LoggedInSubNav = () => (
   <ul>
-    <li className="nav-item">Username</li>
+    <li className="nav-item nav-item-link cursor-hand">Username</li>
   </ul>
 );
