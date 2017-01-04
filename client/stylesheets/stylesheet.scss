@@ -18,10 +18,12 @@ a {
 // Navigation bar styles.
 @import '_NavBar';
 
+// Alertbox styles.
+@import '_AlertBox';
+
 // Remove header spacing, and make font normal.
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, p {
   margin: 0;
-  padding: 0;
   font-weight: normal;
 }
 
@@ -44,4 +46,36 @@ h1, h2, h3, h4, h5, h6 {
 // Page container
 .container-page {
   padding: 10px;
+}
+
+
+
+form {
+
+  // Inputs
+  input {
+    height: 25px;
+    font-size: 0.9em;
+    &:not(:last-child) { margin-bottom: 15px; };
+    box-sizing: border-box;
+  }
+
+  button {
+    box-sizing: border-box;
+    height: 30px;
+    background-color: #DC143C;
+    border: none;
+    color: #FFFFFF;
+    font-size: 0.9em;
+  }
+
+
+}
+
+.hidden {
+  display: none;
+}
+
+.width-100 {
+  width: 100%;
 }
