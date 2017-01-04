@@ -11,3 +11,31 @@ body {
 
 // Navigation bar styles.
 @import '_NavBar';
+
+// Remove header spacing, and make font normal.
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+// Center text.
+.text-center {
+  text-align: center;
+}
+
+// Faint shadow.
+.shadow {
+  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+}
+
+// Box component.
+.box {
+  margin: 5px;
+  padding: 15px;
+}
+
+// Page container
+.container-page {
+  padding: 10px;
+}
