@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 
 // React Components.
 import App from 'containers/App';
+import HomePage from 'containers/HomePage';
+import Dummy from 'components/Dummy';
 
 // React Router dependencies.
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
@@ -28,7 +30,9 @@ require("stylesheets/stylesheet.scss");
 const ApplicationUIContainer = (
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={App} />
+      <Route path="/" component={App}>
+        <IndexRoute component={HomePage} />
+      </Route>
     </Router>
   </Provider>
 );

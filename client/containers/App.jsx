@@ -1,10 +1,14 @@
 // React.
 import React from 'react';
 
+// React Components.
+import NavBar from 'components/NavBar';
+
 // Component definition.
-const App = (props) => (
+const App = props => (
   <div>
-    <a href="/api/auth/twitter">Log In</a>
+    <NavBar />
+    {props.children}
   </div>
 );
 
