@@ -14,6 +14,7 @@ const MSG = (code) => {
     MULTIPLE_INGREDIENTS_NEEDED: 'More than 1 ingredient is required.',
     MULTIPLE_PREPARATION_STEPS_NEEDED: 'More than 1 instruction step is required.',
     CREATE_RECIPE_SUCCESS: 'Recipe successfully created.',
+    DB_ERROR: 'Unknown database error occurred.',
   };
 
   // Return message as an Object.
