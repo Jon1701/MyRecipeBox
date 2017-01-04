@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react';  // React.
+import { Link } from 'react-router';  // React Router.
 
 // Component definition.
 class NavBar extends React.Component {
@@ -10,7 +11,9 @@ class NavBar extends React.Component {
           <ul>
             <li className="subnav-left">
               <ul>
-                <li className="brand cursor-hand nav-item">Brand</li>
+                <li className="brand cursor-hand nav-item">
+                  <Link to="/">Brand</Link>
+                </li>
               </ul>
             </li>
 
@@ -29,13 +32,19 @@ export default NavBar;
 
 const NotLoggedInSubNav = () => (
   <ul>
-    <li className="nav-item nav-item-link cursor-hand">Login</li>
-    <li className="nav-item nav-item-link cursor-hand">Sign up</li>
+    <li className="nav-item nav-item-link cursor-hand">
+      <Link to="/login">Login</Link>
+    </li>
+    <li className="nav-item nav-item-link cursor-hand">
+      <Link to="/signup">Sign up</Link>
+    </li>
   </ul>
 );
 
 const LoggedInSubNav = () => (
   <ul>
-    <li className="nav-item nav-item-link cursor-hand">Username</li>
+    <li className="nav-item nav-item-link cursor-hand">
+      <Link to="/dashboard">Login</Link>
+    </li>
   </ul>
 );
