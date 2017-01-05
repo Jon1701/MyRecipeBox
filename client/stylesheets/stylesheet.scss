@@ -96,6 +96,15 @@ form {
     @include box-sizing(border-box);
   }
 
+  .input-textarea {
+    width: 100%;
+    border: solid 1px #D3D3D3;
+    overflow: auto;
+    padding: 10px;
+    font-size: 1rem;
+    @include box-sizing(border-box);
+  }
+
   .btn {
     height: 30px;
     font-size: 0.9em;

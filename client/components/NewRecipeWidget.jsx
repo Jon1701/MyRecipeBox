@@ -17,8 +17,8 @@ class NewRecipeWidget extends React.Component {
     // Local state.
     this.state = {
       alert: null,  // Alert Box notification.
-      ingredients: ['8 Green Eggs', '1 Jam'],
-      instructions: ['Preheat Oven', 'Place in oven', 'cook', 'eat'],
+      ingredients: [],
+      instructions: [],
     };
 
     // Bind methods to component instance.
@@ -135,12 +135,13 @@ class NewRecipeWidget extends React.Component {
 
     // Dynamically render <input/> for each instruction.
     const renderInstructions = this.state.instructions.map((val, idx) => (
-      <input
-        className="input"
+      <textarea
+        className="input-textarea"
         key={`recipe-instruction-${idx}`}
         type="text"
         value={this.state.instructions[idx]}
         onChange={(e) => { this.updateInstruction(e, idx); }}
+        rows="2"
       />
     ));
 
