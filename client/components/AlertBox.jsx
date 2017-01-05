@@ -15,6 +15,7 @@ export default class AlertBox extends React.Component {
     const myClasses = classNames({
       alertbox: true,
       'cursor-hand': true,
+      'text-center': true,
       'alertbox-success': this.props.alert.type === 'SUCCESS',
       'alertbox-warning': this.props.alert.type === 'WARNING',
       'alertbox-failure': this.props.alert.type === 'FAILURE',
