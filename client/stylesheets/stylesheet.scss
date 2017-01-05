@@ -62,73 +62,63 @@ h1, h2, h3, h4, h5, h6, p {
   box-sizing: $value;
 }
 
-form {
-
-  // Space inputs.
-  .input-group {
-    &:not(:last-child) { margin-bottom: 15px; };
-  }
-
-  // Standard text field.
-  .input {
-    display: block;
-    height: 45px;
-    font-size: 1rem;
-    outline: none;
-    text-align: center;
-    width: 100%;
-    @include box-sizing(border-box);
-  }
-
-  // Add/Remove button group.
-  .btn-group-plusminus {
-    button {
-      border: solid 1px #D3D3D3;
-      background-color: #FFFFFF;
-      padding: 10px 0 10px 0;
-    }
-    margin-bottom: 2px;
-  }
-
-  // Ingredients list.
-  .ingredients-list {
-    .ingredient-item {
-      border: solid 1px #D3D3D3;
-      padding: 10px;
-      &:not(:last-child) { margin-bottom: 2px; };
-    }
-  }
-
-  button[type="submit"] {
-    height: 30px;
-    background-color: #DC143C;
-    border: none;
-    color: #FFFFFF;
-    font-size: 0.9em;
-    @include box-sizing(border-box);
-  }
-
-  .picture {
-    width: 300px;
-    height: 300px;
-    border: solid 1px #D3D3D3;
-  }
-
-  .flex-container {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    .input-group {
-      flex: 1
-    }
-  }
-
-}
-
 .hidden {
   display: none;
 }
 
 .width-100 {
   width: 100%;
+}
+
+form {
+
+  // Form is a flexbox container.
+  display: flex;
+  flex-direction: column;
+  flex-wrap: no-wrap;
+
+  .input-group {
+    flex-grow: 1;
+  }
+
+  .ingredients-group {
+    margin: 25px 0 25px 0;
+  }
+
+  .instructions-group {
+    margin: 0 0 25px 0;
+  }
+
+  .input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    @include box-sizing(border-box);
+  }
+
+  .btn {
+    height: 30px;
+    font-size: 0.9em;
+    @include box-sizing(border-box);
+  }
+
+  .btn-submit {
+    border: none;
+    background-color: #DC143C;
+    color: #FFFFFF;
+  }
+
+  .btn-add-remove {
+    border: solid 1px #D3D3D3;
+    background-color: #FFFFFF;
+    color: #000000;
+    margin-bottom: 2px;
+  }
+
+  // Remove left and right margins on the Add/Remove buttons, respectively.
+  .btn-group-plusminus {
+    button:nth-child(1) { margin-left: 0;}
+    button:nth-child(2) { margin-right: 0; }
+  }
+
 }

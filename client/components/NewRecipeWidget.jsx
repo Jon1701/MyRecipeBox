@@ -17,8 +17,8 @@ class NewRecipeWidget extends React.Component {
     // Local state.
     this.state = {
       alert: null,  // Alert Box notification.
-      ingredients: ['8 Green Eggs', '1 Ham'],
-      instructions: ['Step 1', 'Step 2'],
+      ingredients: ['8 Green Eggs', '1 Jam'],
+      instructions: ['Preheat Oven', 'Place in oven', 'cook', 'eat'],
     };
 
     // Bind methods to component instance.
@@ -124,22 +124,22 @@ class NewRecipeWidget extends React.Component {
   render() {
     // Dynamically render <input/> for each ingredient.
     const renderIngredients = this.state.ingredients.map((val, idx) => (
-      <ContentEditable
-        className="content-editable ingredient-item"
+      <input
+        className="input"
         key={`recipe-ingredient-${idx}`}
         type="text"
-        html={this.state.ingredients[idx]}
+        value={this.state.ingredients[idx]}
         onChange={(e) => { this.updateIngredient(e, idx); }}
       />
     ));
 
     // Dynamically render <input/> for each instruction.
     const renderInstructions = this.state.instructions.map((val, idx) => (
-      <ContentEditable
-        className="content-editable ingredient-item"
+      <input
+        className="input"
         key={`recipe-instruction-${idx}`}
         type="text"
-        html={this.state.instructions[idx]}
+        value={this.state.instructions[idx]}
         onChange={(e) => { this.updateInstruction(e, idx); }}
       />
     ));
@@ -167,9 +167,7 @@ class NewRecipeWidget extends React.Component {
             />
           </div>
 
-          <div className="flex-container">
-
-          <div className="input-group">
+          <div className="input-group ingredients-group">
             <div className="text-center">Ingredients:</div>
             <PlusMinus handleClick={this.addRemoveFields} stateKey="ingredients" />
             <div className="ingredients-list">
@@ -177,15 +175,7 @@ class NewRecipeWidget extends React.Component {
             </div>
           </div>
 
-          <div>
-            <div className="input-group picture">
-              Test
-            </div>
-          </div>
-
-          </div>
-
-          <div className="input-group">
+          <div className="input-group instructions-group">
             <div className="text-center">Preparation Instructions:</div>
             <PlusMinus handleClick={this.addRemoveFields} stateKey="instructions" />
             <div className="ingredients-list">
@@ -193,7 +183,7 @@ class NewRecipeWidget extends React.Component {
             </div>
           </div>
 
-          <button type="submit" value="submit"className="width-100">Save Recipe</button>
+          <button className="width-100 btn btn-submit" type="submit" value="submit">Save Recipe</button>
         </form>
       </div>
     );
@@ -217,8 +207,8 @@ export default connect(mapStateToProps, null)(NewRecipeWidget);
 // Component containing buttons to add/remove fields.
 const PlusMinus = ({ handleClick, stateKey }) => (
   <div className="btn-group-plusminus">
-    <button type="button" onClick={(e) => { handleClick(e, 'ADD', stateKey); }}>Add</button>
-    <button type="button" onClick={(e) => { handleClick(e, 'REMOVE', stateKey); }}>Remove</button>
+    <button className="btn btn-add-remove" type="button" onClick={(e) => { handleClick(e, 'ADD', stateKey); }}>Add</button>
+    <button className="btn btn-add-remove" type="button" onClick={(e) => { handleClick(e, 'REMOVE', stateKey); }}>Remove</button>
   </div>
 );
 
