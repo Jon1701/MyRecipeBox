@@ -7,6 +7,7 @@ import App from 'containers/App';
 import HomePage from 'containers/HomePage';
 import LoginPage from 'containers/LoginPage';
 import SignupPage from 'containers/SignupPage';
+import NewRecipePage from 'containers/NewRecipePage';
 import Dummy from 'components/Dummy';
 
 // React Router dependencies.
@@ -50,6 +51,7 @@ const ApplicationUIContainer = (
         <IndexRoute component={HomePage} />
           <Route path='/login' component={LoginPage} />
           <Route path='/signup' component={SignupPage} />
+          <Route path='/new_recipe' component={NewRecipePage} />
       </Route>
     </Router>
   </Provider>
