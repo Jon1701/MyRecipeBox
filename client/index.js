@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import App from 'containers/App';
 import HomePage from 'containers/HomePage';
 import LoginPage from 'containers/LoginPage';
+import SignupPage from 'containers/SignupPage';
 import Dummy from 'components/Dummy';
 
 // React Router dependencies.
@@ -33,7 +34,8 @@ const ApplicationUIContainer = (
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={HomePage} />
-        <Route path='/login' component={LoginPage} />
+          <Route path='/login' component={LoginPage} />
+          <Route path='/signup' component={SignupPage} />            
       </Route>
     </Router>
   </Provider>
