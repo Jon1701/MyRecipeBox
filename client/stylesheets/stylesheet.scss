@@ -21,6 +21,14 @@ a {
 // Alertbox styles.
 @import '_AlertBox';
 
+.btn-group-plusminus {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+
+  button { flex: 1; }
+}
+
 // Remove header spacing, and make font normal.
 h1, h2, h3, h4, h5, h6, p {
   margin: 0;
@@ -48,27 +56,72 @@ h1, h2, h3, h4, h5, h6, p {
   padding: 10px;
 }
 
-
+@mixin box-sizing($value) {
+  -moz-box-sizing: $value;
+  -webkit-box-sizing: $value;
+  box-sizing: $value;
+}
 
 form {
 
-  // Inputs
-  input {
-    height: 25px;
-    font-size: 0.9em;
+  // Space inputs.
+  .input-group {
     &:not(:last-child) { margin-bottom: 15px; };
-    box-sizing: border-box;
   }
 
-  button {
-    box-sizing: border-box;
+  // Standard text field.
+  .input {
+    display: block;
+    height: 45px;
+    font-size: 1rem;
+    outline: none;
+    text-align: center;
+    width: 100%;
+    @include box-sizing(border-box);
+  }
+
+  // Add/Remove button group.
+  .btn-group-plusminus {
+    button {
+      border: solid 1px #D3D3D3;
+      background-color: #FFFFFF;
+      padding: 10px 0 10px 0;
+    }
+    margin-bottom: 2px;
+  }
+
+  // Ingredients list.
+  .ingredients-list {
+    .ingredient-item {
+      border: solid 1px #D3D3D3;
+      padding: 10px;
+      &:not(:last-child) { margin-bottom: 2px; };
+    }
+  }
+
+  button[type="submit"] {
     height: 30px;
     background-color: #DC143C;
     border: none;
     color: #FFFFFF;
     font-size: 0.9em;
+    @include box-sizing(border-box);
   }
 
+  .picture {
+    width: 300px;
+    height: 300px;
+    border: solid 1px #D3D3D3;
+  }
+
+  .flex-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    .input-group {
+      flex: 1
+    }
+  }
 
 }
 
