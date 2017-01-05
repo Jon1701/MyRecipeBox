@@ -22,6 +22,20 @@ const store = createStore(reducers);
 
 // Subscribe to state changes.
 store.subscribe(() => {
+  // Get the token in state.
+  const token = store.getState().token;
+
+  // Store/delete token in local storage depending if it is stored in Redux store..
+  try {
+    if (token) {
+      localStorage.setItem('token', token);
+    } else {
+      localStorage.removeItem('token');
+    }
+  } catch (e) {
+    // Do nothing.
+  }
+
   console.log(store.getState());
 });
 
@@ -35,7 +49,7 @@ const ApplicationUIContainer = (
       <Route path="/" component={App}>
         <IndexRoute component={HomePage} />
           <Route path='/login' component={LoginPage} />
-          <Route path='/signup' component={SignupPage} />            
+          <Route path='/signup' component={SignupPage} />
       </Route>
     </Router>
   </Provider>
