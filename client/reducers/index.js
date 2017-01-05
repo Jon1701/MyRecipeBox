@@ -2,11 +2,11 @@
 import { combineReducers } from 'redux';  // Combines many reducers into one.
 
 // Reducers.
-import testReducer from 'reducers/testReducer'; // Test reducer.
+import tokenReducer from 'reducers/reducer_token'; // Test reducer.
 
 // Combine all reducers into one.
 const reducers = combineReducers({
-  test: testReducer,
+  token: tokenReducer,  // this.state.token
 });
 
 // Export the redux state.
