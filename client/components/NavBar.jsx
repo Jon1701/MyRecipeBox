@@ -1,5 +1,6 @@
-import React from 'react';  // React.
-import { Link } from 'react-router';  // React Router.
+import React from 'react';              // React.
+import { Link } from 'react-router';    // React Router.
+import { connect } from 'react-redux';  // Connects component to Redux store.
 
 // Component definition.
 class NavBar extends React.Component {
@@ -27,9 +28,26 @@ class NavBar extends React.Component {
   }
 }
 
-// Component export.
-export default NavBar;
+// Maps state to props.
+const mapStateToProps = state => ({ token: state.token });
 
+// Allow component access to Redux store.
+export default connect(mapStateToProps, null)(NavBar);
+
+// Prop validation.
+NavBar.propTypes = {
+  token: React.PropTypes.string,
+};
+
+/*
+ *
+ *
+ *  Presentational Components.
+ *
+ *
+ */
+
+// SubNavigation bar for unauthenticated users.
 const NotLoggedInSubNav = () => (
   <ul>
     <li className="nav-item nav-item-link cursor-hand">
@@ -41,10 +59,11 @@ const NotLoggedInSubNav = () => (
   </ul>
 );
 
+// SubNavifation bar for authenticated users.
 const LoggedInSubNav = () => (
   <ul>
     <li className="nav-item nav-item-link cursor-hand">
-      <Link to="/dashboard">Login</Link>
+      <Link to="/dashboard">My Recipes</Link>
     </li>
   </ul>
 );
