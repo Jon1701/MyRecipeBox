@@ -76,6 +76,9 @@ const NotLoggedInSubNav = () => (
 const LoggedInSubNav = (props) => (
   <ul>
     <li className="nav-item nav-item-link cursor-hand">
+      <Link to="/new_recipe">New Recipe</Link>
+    </li>
+    <li className="nav-item nav-item-link cursor-hand">
       <Link to="/dashboard">My Recipes</Link>
     </li>
     <li className="nav-item nav-item-link cursor-hand">
