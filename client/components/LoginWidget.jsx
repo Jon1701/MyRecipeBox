@@ -1,9 +1,14 @@
 // Dependencies.
-import React from 'react';  // React.
-import request from 'common/request'; // HTTP GET/POST functionality.
+import React from 'react';                  // React.
+import request from 'common/request';       // HTTP GET/POST functionality.
+import { bindActionCreators } from 'redux'; // Binds actions to component.
+import { connect } from 'react-redux';      // Connects component to Redux store.
 
 // React Components.
 import AlertBox from 'components/AlertBox'; // Alert Box.
+
+// Redux actions.
+import { storeToken } from 'actions/token'; // Store token in Redux store.
 
 // Component definition.
 class LoginWidget extends React.Component {
@@ -51,10 +56,18 @@ class LoginWidget extends React.Component {
       .post('/api/login', { username, password })
       .then((res) => {
         switch (res.data.code) {
-
+          // Login successful.
           case 'LOGIN_SUCCESS':
+            // Set alert box.
             this.setAlert('SUCCESS', 'Login successful.');
+
+            // Store token in Redux store.
+            this.props.storeToken(res.data.payload.token);
+
+            // Break out of switch.
             break;
+
+          // Default.
           default:
             break;
 
@@ -122,5 +135,16 @@ class LoginWidget extends React.Component {
   }
 }
 
-// Component export.
-export default LoginWidget;
+// Maps state to props.
+const mapStateToProps = state => ({ token: state.token });
+
+// Allows access of actions as props.
+const mapDispatchToProps = dispatch => (bindActionCreators({ storeToken }, dispatch));
+
+// Allow component access to Redux store.
+export default connect(mapStateToProps, mapDispatchToProps)(LoginWidget);
+
+// Prop validation.
+LoginWidget.propTypes = {
+  storeToken: React.PropTypes.func,
+};
