@@ -2,7 +2,7 @@
 import React from 'react';                  // React.
 import request from 'common/request';       // HTTP GET/POST functionality.
 import { connect } from 'react-redux';      // Connects component to Redux store.
-import ContentEditable from 'react-contentEditable';  // Content-editable divs.
+import { withRouter } from 'react-router';  // Allows component to be aware of React Router.
 
 // React Components.
 import AlertBox from 'components/AlertBox'; // Alert Box.
@@ -17,8 +17,10 @@ class NewRecipeWidget extends React.Component {
     // Local state.
     this.state = {
       alert: null,  // Alert Box notification.
-      ingredients: [],
-      instructions: [],
+      title: null,      // Recipe title.
+      tagline: null,    // Recipe tagline.
+      ingredients: [],  // Array of recipe ingredients.
+      instructions: [], // Array of recipe preparation instructions.
     };
 
     // Bind methods to component instance.
@@ -48,11 +50,85 @@ class NewRecipeWidget extends React.Component {
 
     // Clear any existing alerts.
     this.clearAlert();
+
+    // Gather form field values.
+    const { title, tagline, ingredients, instructions } = this.state;
+
+    // Request body.
+    const body = { title, tagline, ingredients, instructions };
+
+    // Make a POST request to the API server, send recipe data, and token.
+    request
+      .post('/api/auth/create_recipe', body, this.props.token)
+      .then((res) => {
+        // Get recipe ID.
+        const recipeID = res.data.payload.recipe['_id'];
+
+        switch (res.data.code) {
+          case 'CREATE_RECIPE_SUCCESS': {
+            // Display success message.
+            this.setAlert('SUCCESS', 'Recipe successfully created. Redirecting now.');
+
+            // Redirect function.
+            const redirect = () => {
+              this.props.router.replace(`/view_recipe/${recipeID}`);
+            };
+
+            // Redirect to the login page.
+            setTimeout(redirect.bind(this), 2000);
+            break;
+          }
+
+          default:
+            break;
+        }
+      })
+      .catch((err) => {
+        // Display alert box with corresponding message.
+        switch (err.response.data.code) {
+          case 'DB_ERROR':
+            this.setAlert('FAILURE', 'Database error occurred.');
+            break;
+
+          case 'MISSING_TITLE':
+            this.setAlert('FAILURE', 'Your recipe needs a title.');
+            break;
+
+          case 'MISSING_TAGLINE':
+            this.setAlert('FAILURE', 'You should really provide a short summary of your recipe.');
+            break;
+
+          case 'MISSING_INGREDIENTS':
+            this.setAlert('FAILURE', 'No ingredients? What are you making? Air?');
+            break;
+
+          case 'MISSING_INSTRUCTIONS':
+            this.setAlert('FAILURE', 'No preparation instructions? Did you buy this dish from a supermarket?');
+            break;
+
+          case 'MULTIPLE_INGREDIENTS_NEEDED':
+            this.setAlert('FAILURE', 'You must provide at least 2 ingredients.');
+            break;
+
+          case 'MULTIPLE_PREPARATION_STEPS_NEEDED':
+            this.setAlert('FAILURE', 'At least 2 preparation instructions are needed.');
+            break;
+
+          default:
+            break;
+        }
+      });
   }
 
   // Method to handle form reset.
   handleFormReset() {
     // Clear fields.
+    this.setState({
+      title: null,      // Recipe title.
+      tagline: null,    // Recipe tagline.
+      ingredients: [],  // Array of recipe ingredients.
+      instructions: [], // Array of recipe preparation instructions.
+    });
   }
 
   // Method to update the ingredient at a given index in the array.
@@ -184,7 +260,9 @@ class NewRecipeWidget extends React.Component {
             </div>
           </div>
 
-          <button className="width-100 btn btn-submit" type="submit" value="submit">Save Recipe</button>
+          <button className="width-100 btn btn-submit" type="submit" value="submit">
+            Save Recipe
+          </button>
         </form>
       </div>
     );
@@ -195,7 +273,12 @@ class NewRecipeWidget extends React.Component {
 const mapStateToProps = state => ({ token: state.token });
 
 // Allow component access to Redux store.
-export default connect(mapStateToProps, null)(NewRecipeWidget);
+export default connect(mapStateToProps, null)(withRouter(NewRecipeWidget));
+
+// Prop validation.
+NewRecipeWidget.propTypes = {
+  token: React.PropTypes.string,
+};
 
 /*
  *
