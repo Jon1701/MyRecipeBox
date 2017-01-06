@@ -10,10 +10,13 @@ import { storeToken, deleteToken } from 'actions/token'; // Store token in Redux
 class NavBar extends React.Component {
   // Component render.
   render() {
-    // Check to see if a token is in local storage.
-    const token = localStorage.getItem('token');
-    if (token) {
-      this.props.storeToken(token);
+    // Get token in local storage, and redux store.
+    const tokenLocalStorage = localStorage.getItem('token');
+    const tokenRedux = this.props.token;
+
+    // Load token from local storage if one exists, and no token is in Redux store.
+    if (!tokenRedux && tokenLocalStorage) {
+      this.props.storeToken(tokenLocalStorage);
     }
 
     return (
@@ -50,6 +53,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
 // Prop validation.
 NavBar.propTypes = {
   token: React.PropTypes.string,
+  storeToken: React.PropTypes.func.isRequired,
 };
 
 /*
