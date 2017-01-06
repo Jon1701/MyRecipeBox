@@ -224,7 +224,7 @@ class NewRecipeWidget extends React.Component {
     return (
       <div className="box shadow">
         <AlertBox alert={this.state.alert} handleClose={this.clearAlert} />
-        <form type="POST" onSubmit={this.handleFormSubmit}>
+        <form type="POST" className="form-newrecipe-widget" onSubmit={this.handleFormSubmit}>
           <div className="input-group">
             <input
               className="input"
