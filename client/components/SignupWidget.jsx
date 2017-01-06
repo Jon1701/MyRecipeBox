@@ -117,38 +117,45 @@ class SignupWidget extends React.Component {
     return (
       <div className="box shadow text-center">
         <AlertBox alert={this.state.alert} handleClose={this.clearAlert} />
-        <form type="POST" onSubmit={this.handleFormSubmit}>
-          <label htmlFor="username">Username:</label>
-          <input
-            className="width-100"
-            type="text"
-            id="username"
-            ref={(input) => { this.inputUsername = input; }}
-            minLength="8"
-            maxLength="25"
-          />
+        <form type="POST" className="form-signup-widget" onSubmit={this.handleFormSubmit}>
 
-          <label htmlFor="password">Password:</label>
-          <input
-            className="width-100"
-            type="password"
-            id="password1"
-            ref={(input) => { this.inputPassword1 = input; }}
-            minLength="8"
-            maxLength="50"
-          />
+          <div className="input-group">
+            <label htmlFor="username">Username:</label>
+            <input
+              className="input"
+              type="text"
+              id="username"
+              ref={(input) => { this.inputUsername = input; }}
+              minLength="8"
+              maxLength="25"
+            />
+          </div>
 
-        <label htmlFor="password">Confirm Password:</label>
-          <input
-            className="width-100"
-            type="password"
-            id="password2"
-            ref={(input) => { this.inputPassword2 = input; }}
-            minLength="8"
-            maxLength="50"
-          />
+          <div className="input-group">
+            <label htmlFor="password">Password:</label>
+            <input
+              className="input"
+              type="password"
+              id="password1"
+              ref={(input) => { this.inputPassword1 = input; }}
+              minLength="8"
+              maxLength="50"
+            />
+          </div>
 
-        <button type="submit" className="width-100">Signup</button>
+          <div className="input-group">
+            <label htmlFor="password">Confirm Password:</label>
+              <input
+                className="input"
+                type="password"
+                id="password2"
+                ref={(input) => { this.inputPassword2 = input; }}
+                minLength="8"
+                maxLength="50"
+              />
+          </div>
+
+          <button type="submit" className="btn btn-submit">Create Account</button>
         </form>
       </div>
     );
