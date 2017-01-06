@@ -5,6 +5,7 @@ body {
   font-family: Arial, sans-serif;
 }
 
+// Sets the cursor to a Hand.
 .cursor-hand {
   cursor: pointer;
 }
@@ -13,20 +14,6 @@ body {
 a {
   color: inherit;
   text-decoration: none;
-}
-
-// Navigation bar styles.
-@import '_NavBar';
-
-// Alertbox styles.
-@import '_AlertBox';
-
-.btn-group-plusminus {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-
-  button { flex: 1; }
 }
 
 // Remove header spacing, and make font normal.
@@ -56,78 +43,23 @@ h1, h2, h3, h4, h5, h6, p {
   padding: 10px;
 }
 
-@mixin box-sizing($value) {
-  -moz-box-sizing: $value;
-  -webkit-box-sizing: $value;
-  box-sizing: $value;
-}
-
+// Hides element.
 .hidden {
   display: none;
 }
 
+// Sets element width to 100%.
 .width-100 {
   width: 100%;
 }
 
-form {
+/*
+ *
+ *  Component styles.
+ *
+ */
 
-  // Form is a flexbox container.
-  display: flex;
-  flex-direction: column;
-  flex-wrap: no-wrap;
-
-  .input-group {
-    flex-grow: 1;
-  }
-
-  .ingredients-group {
-    margin: 25px 0 25px 0;
-  }
-
-  .instructions-group {
-    margin: 0 0 25px 0;
-  }
-
-  .input {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    @include box-sizing(border-box);
-  }
-
-  .input-textarea {
-    width: 100%;
-    border: solid 1px #D3D3D3;
-    overflow: auto;
-    padding: 10px;
-    font-size: 1rem;
-    @include box-sizing(border-box);
-  }
-
-  .btn {
-    height: 30px;
-    font-size: 0.9em;
-    @include box-sizing(border-box);
-  }
-
-  .btn-submit {
-    border: none;
-    background-color: #DC143C;
-    color: #FFFFFF;
-  }
-
-  .btn-add-remove {
-    border: solid 1px #D3D3D3;
-    background-color: #FFFFFF;
-    color: #000000;
-    margin-bottom: 2px;
-  }
-
-  // Remove left and right margins on the Add/Remove buttons, respectively.
-  .btn-group-plusminus {
-    button:nth-child(1) { margin-left: 0;}
-    button:nth-child(2) { margin-right: 0; }
-  }
-
-}
+@import '_NavBar';          // Navigation bar styles.
+@import '_AlertBox';        // Alertbox styles.
+@import '_LoginWidget';     // Login widget.
+@import '_NewRecipeWidget'; // New recipe widget.
