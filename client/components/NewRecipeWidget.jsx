@@ -3,9 +3,11 @@ import React from 'react';                  // React.
 import request from 'common/request';       // HTTP GET/POST functionality.
 import { connect } from 'react-redux';      // Connects component to Redux store.
 import { withRouter } from 'react-router';  // Allows component to be aware of React Router.
+import classNames from 'classnames';
 
 // React Components.
 import AlertBox from 'components/AlertBox'; // Alert Box.
+import PlusMinus from 'components/PlusMinus'
 
 // Component definition.
 class NewRecipeWidget extends React.Component {
@@ -17,10 +19,11 @@ class NewRecipeWidget extends React.Component {
     // Local state.
     this.state = {
       alert: null,  // Alert Box notification.
-      title: null,      // Recipe title.
-      tagline: null,    // Recipe tagline.
+      title: '',      // Recipe title.
+      tagline: '',    // Recipe tagline.
       ingredients: [],  // Array of recipe ingredients.
       instructions: [], // Array of recipe preparation instructions.
+      hideForm: false, // Track form visibility.
     };
 
     // Bind methods to component instance.
@@ -31,6 +34,47 @@ class NewRecipeWidget extends React.Component {
     this.updateIngredient = this.updateIngredient.bind(this);
     this.updateInstruction = this.updateInstruction.bind(this);
     this.addRemoveFields = this.addRemoveFields.bind(this); // Adds/Remove ingredients/instructions.
+  }
+
+  // Component did mount.
+  componentDidMount() {
+    // Load recipe data if in ViewRecipe mode.
+    if (this.props.mode === 'ViewRecipe') {
+      // Get the recipe id from router props.
+      const recipeID = this.props.params.recipe_id;
+
+      request
+        .get(`/api/get_recipes?recipe_id=${recipeID}`)
+        .then((res) => {
+          switch (res.data.code) {
+            // Recipes found.
+            case 'RECIPE_SEARCH_COMPLETE': {
+              // If no matching recipes were found, throw error for .catch().
+              if (res.data.payload.recipes.length === 0) {
+                throw new Error();
+              }
+
+              // Deconstruct recipe fields.
+              const { title, tagline, ingredients, instructions } = res.data.payload.recipes[0];
+
+              // Store recipe in state.
+              this.setState({ title, tagline, ingredients, instructions });
+            }
+              break;
+
+            // Default case: do nothing.
+            default:
+              break;
+          }
+        })
+        .catch((err) => {
+          // Hide the form if a recipe could not be found.
+          this.setState({ hideForm: true });
+
+          // Display error message.
+          this.setAlert('FAILURE', 'No recipe was found.');
+        });
+    }
   }
 
   // Method to set the current alert.
@@ -124,8 +168,8 @@ class NewRecipeWidget extends React.Component {
   handleFormReset() {
     // Clear fields.
     this.setState({
-      title: null,      // Recipe title.
-      tagline: null,    // Recipe tagline.
+      title: '',      // Recipe title.
+      tagline: '',    // Recipe tagline.
       ingredients: [],  // Array of recipe ingredients.
       instructions: [], // Array of recipe preparation instructions.
     });
@@ -221,26 +265,34 @@ class NewRecipeWidget extends React.Component {
       />
     ));
 
+    // Classes to control visibility of form.
+    const classesForm = classNames({
+      'form-newrecipe-widget': true,
+      hidden: this.state.hideForm,
+    });
+
     return (
       <div className="box shadow">
         <AlertBox alert={this.state.alert} handleClose={this.clearAlert} />
-        <form type="POST" className="form-newrecipe-widget" onSubmit={this.handleFormSubmit}>
+        <form type="POST" className={classesForm} onSubmit={this.handleFormSubmit}>
           <div className="input-group">
+            <div className="text-center">Recipe Title:</div>
             <input
               className="input"
               type="text"
               onChange={e => this.setState({ title: e.target.value })}
-              placeholder="Recipe Title"
+              value={this.state.title}
             />
           </div>
 
           <div className="input-group">
+            <div className="text-center">Recipe Tagline:</div>
             <input
               className="input"
               type="text"
               id="recipe-tagline"
               onChange={e => this.setState({ tagline: e.target.value })}
-              placeholder="Tagline"
+              value={this.state.tagline}
             />
           </div>
 
@@ -278,26 +330,5 @@ export default connect(mapStateToProps, null)(withRouter(NewRecipeWidget));
 // Prop validation.
 NewRecipeWidget.propTypes = {
   token: React.PropTypes.string,
-};
-
-/*
- *
- *
- *  Presentational Components.
- *
- *
- */
-
-// Component containing buttons to add/remove fields.
-const PlusMinus = ({ handleClick, stateKey }) => (
-  <div className="btn-group-plusminus">
-    <button className="btn btn-add-remove" type="button" onClick={(e) => { handleClick(e, 'ADD', stateKey); }}>Add</button>
-    <button className="btn btn-add-remove" type="button" onClick={(e) => { handleClick(e, 'REMOVE', stateKey); }}>Remove</button>
-  </div>
-);
-
-// Prop validation.
-PlusMinus.propTypes = {
-  handleClick: React.PropTypes.func.isRequired,
-  stateKey: React.PropTypes.oneOf(['instructions', 'ingredients']).isRequired,
+  mode: React.PropTypes.oneOf(['NewRecipe', 'ViewRecipe']),
 };
