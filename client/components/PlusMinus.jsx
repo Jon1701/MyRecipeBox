@@ -20,6 +20,7 @@ export default class PlusMinus extends React.Component {
           className="btn btn-add-remove"
           type="button"
           onClick={(e) => { handleClick(e, 'ADD', stateKey); }}
+          readOnly={this.props.readOnly}
         >
           Add
         </button>
@@ -28,6 +29,7 @@ export default class PlusMinus extends React.Component {
           className="btn btn-add-remove"
           type="button"
           onClick={(e) => { handleClick(e, 'REMOVE', stateKey); }}
+          readOnly={this.props.readOnly}
         >
           Remove
         </button>

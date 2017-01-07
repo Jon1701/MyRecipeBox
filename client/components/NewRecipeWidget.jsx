@@ -24,6 +24,7 @@ class NewRecipeWidget extends React.Component {
       ingredients: [],  // Array of recipe ingredients.
       instructions: [], // Array of recipe preparation instructions.
       hideForm: false, // Track form visibility.
+      readOnly: false,  // Form read only or editable
     };
 
     // Bind methods to component instance.
@@ -38,8 +39,16 @@ class NewRecipeWidget extends React.Component {
 
   // Component did mount.
   componentDidMount() {
+    // If creating a new recipe, make the form not read-only.
+    if (this.props.mode === 'NewRecipe') {
+      this.setState({ readOnly: false });
+    }
+
     // Load recipe data if in ViewRecipe mode.
     if (this.props.mode === 'ViewRecipe') {
+      // Set read-only state to true.
+      this.setState({ readOnly: true });
+
       // Get the recipe id from router props.
       const recipeID = this.props.params.recipe_id;
 
@@ -250,6 +259,7 @@ class NewRecipeWidget extends React.Component {
         type="text"
         value={this.state.ingredients[idx]}
         onChange={(e) => { this.updateIngredient(e, idx); }}
+        disabled={this.state.readOnly}
       />
     ));
 
@@ -262,6 +272,7 @@ class NewRecipeWidget extends React.Component {
         value={this.state.instructions[idx]}
         onChange={(e) => { this.updateInstruction(e, idx); }}
         rows="2"
+        disabled={this.state.readOnly}
       />
     ));
 
@@ -282,6 +293,7 @@ class NewRecipeWidget extends React.Component {
               type="text"
               onChange={e => this.setState({ title: e.target.value })}
               value={this.state.title}
+              disabled={this.state.readOnly}
             />
           </div>
 
@@ -293,12 +305,13 @@ class NewRecipeWidget extends React.Component {
               id="recipe-tagline"
               onChange={e => this.setState({ tagline: e.target.value })}
               value={this.state.tagline}
+              disabled={this.state.readOnly}
             />
           </div>
 
           <div className="input-group ingredients-group">
             <div className="text-center">Ingredients:</div>
-            <PlusMinus handleClick={this.addRemoveFields} stateKey="ingredients" />
+            <PlusMinus handleClick={this.addRemoveFields} stateKey="ingredients" readOnly={this.state.readOnly} />
             <div className="ingredients-list">
               {renderIngredients}
             </div>
@@ -306,7 +319,7 @@ class NewRecipeWidget extends React.Component {
 
           <div className="input-group instructions-group">
             <div className="text-center">Preparation Instructions:</div>
-            <PlusMinus handleClick={this.addRemoveFields} stateKey="instructions" />
+            <PlusMinus handleClick={this.addRemoveFields} stateKey="instructions" readOnly={this.state.readOnly} />
             <div className="ingredients-list">
               {renderInstructions}
             </div>
