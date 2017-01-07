@@ -10,7 +10,7 @@ const NewRecipePage = () => (
 
     <h1 className="text-center">Create a New Recipe</h1>
 
-    <NewRecipeWidget />
+    <NewRecipeWidget mode="NewRecipe" />
 
   </div>
 );

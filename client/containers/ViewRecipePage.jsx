@@ -10,7 +10,7 @@ const ViewRecipePage = () => (
 
     <h1 className="text-center">View Recipe</h1>
 
-    <NewRecipeWidget />
+    <NewRecipeWidget mode="ViewRecipe" />
 
   </div>
 );
