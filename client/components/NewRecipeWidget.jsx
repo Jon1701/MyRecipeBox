@@ -187,6 +187,11 @@ class NewRecipeWidget extends React.Component {
             this.setAlert('FAILURE', 'At least 2 preparation instructions are needed.');
             break;
 
+          // Invalid token.
+          case 'INVALID_TOKEN':
+            this.setAlert('FAILURE', 'Your session is invalid. Please log in again.');
+            break;
+
           // Default action: do nothing.
           default:
             break;
