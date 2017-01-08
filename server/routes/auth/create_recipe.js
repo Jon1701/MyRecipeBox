@@ -1,5 +1,7 @@
 // Dependencies.
 const rfr = require('rfr'); // Root-relative paths.
+const isObjectIdValid = require('mongoose').Types.ObjectId.isValid; // Checks validity of ObjectID.
+const mongoose = require('mongoose');
 
 // Database models.
 const Recipe = rfr('/server/models/Recipe');  // Recipe database model.
@@ -14,7 +16,9 @@ const MSG = (code) => {
     MULTIPLE_INGREDIENTS_NEEDED: 'More than 1 ingredient is required.',
     MULTIPLE_PREPARATION_STEPS_NEEDED: 'More than 1 instruction step is required.',
     CREATE_RECIPE_SUCCESS: 'Recipe successfully created.',
+    UPDATE_RECIPE_SUCCESS: 'Recipe successfully updated.',
     DB_ERROR: 'Unknown database error occurred.',
+    INVALID_RECIPE_ID: 'Invalid Recipe ID',
   };
 
   // Return message as an Object.
@@ -36,8 +40,15 @@ const createRecipe = (req, res, next) => {
   const username = req.decoded.username;  // String.
   const title = req.body.title;           // String.
   const tagline = req.body.tagline;       // String.
+  const recipeID = req.body.recipe_id;    // ObjectID
   let ingredients = req.body.ingredients;   // Array of Strings.
   let instructions = req.body.instructions; // Array of Strings.
+
+  // Error check: recipeID.
+  if (recipeID && !isObjectIdValid(recipeID)) {
+    // If recipe ID provided, but not a valid ObjectId, return error.
+    return next(MSG('INVALID_RECIPE_ID'));
+  }
 
   // Error check: title.
   if (!title || title.trim().length === 0) {
@@ -93,20 +104,38 @@ const createRecipe = (req, res, next) => {
     return next(MSG('MULTIPLE_PREPARATION_STEPS_NEEDED'));
   }
 
-  // Create a new Recipe document using the Recipe model.
-  const newRecipe = new Recipe({ username, title, tagline, ingredients, instructions });
+  // Query.
+  const query = {};
 
-  // Store the new Recipe in the recipes collection.
-  newRecipe.save((err, result) => {
+  // If a recipe ID was provided, include it in the query, if not, create one.
+  if (recipeID) {
+    query['_id'] = mongoose.Types.ObjectId(recipeID);
+  } else {
+    query['_id'] = mongoose.Types.ObjectId();
+  }
+
+  // New recipe document.
+  const newDoc = { username, title, tagline, ingredients, instructions };
+
+  Recipe.findOneAndUpdate(query, newDoc, { upsert: true, new: true }, (err, result) => {
     // Database error check.
     if (err) (next(MSG('DB_ERROR')));
 
     // Response payload containing the recipe.
     const payload = { recipe: result };
 
+    // Change response message if updating or creating a recipe.
+    let messageCode;
+    if (recipeID) {
+      // If a recipe ID was provided, an update occurred.
+      messageCode = 'UPDATE_RECIPE_SUCCESS';
+    } else {
+      messageCode = 'CREATE_RECIPE_SUCCESS';
+    }
+
     // Return success response.
     return res.json(Object.assign({},
-      MSG('CREATE_RECIPE_SUCCESS'),
+      MSG(messageCode),
       { payload }));
   });
 
