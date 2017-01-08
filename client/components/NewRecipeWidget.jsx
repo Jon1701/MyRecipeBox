@@ -24,7 +24,7 @@ class NewRecipeWidget extends React.Component {
       ingredients: [],  // Array of recipe ingredients.
       instructions: [], // Array of recipe preparation instructions.
       hideForm: false, // Track form visibility.
-      readOnly: false,  // Form read only or editable
+      readOnly: this.props.mode === 'ViewRecipe',  // Form read only or editable
     };
 
     // Bind methods to component instance.
@@ -39,16 +39,8 @@ class NewRecipeWidget extends React.Component {
 
   // Component did mount.
   componentDidMount() {
-    // If creating a new recipe, make the form not read-only.
-    if (this.props.mode === 'NewRecipe') {
-      this.setState({ readOnly: false });
-    }
-
     // Load recipe data if in ViewRecipe mode.
     if (this.props.mode === 'ViewRecipe') {
-      // Set read-only state to true.
-      this.setState({ readOnly: true });
-
       // Get the recipe id from router props.
       const recipeID = this.props.params.recipe_id;
 
@@ -76,7 +68,7 @@ class NewRecipeWidget extends React.Component {
               break;
           }
         })
-        .catch((err) => {
+        .catch(() => {
           // Hide the form if a recipe could not be found.
           this.setState({ hideForm: true });
 
@@ -282,10 +274,21 @@ class NewRecipeWidget extends React.Component {
       hidden: this.state.hideForm,
     });
 
+    // If a token is provided, get username.
+    if (this.props.token) {
+      // Extract username from token.
+      const username = JSON.parse(atob(this.props.token.split('.')[1])).username;
+
+      console.log(username);
+    }
+
     return (
       <div className="box shadow">
         <AlertBox alert={this.state.alert} handleClose={this.clearAlert} />
         <form type="POST" className={classesForm} onSubmit={this.handleFormSubmit}>
+          <div>
+            <button type="button" onClick={() => this.setState({ readOnly: !this.state.readOnly })}>Edit</button>
+          </div>
           <div className="input-group">
             <div className="text-center">Recipe Title:</div>
             <input
