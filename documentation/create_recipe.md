@@ -100,6 +100,8 @@ All known errors cause the resource to return HTTP error code header along with 
 | MISSING_INSTRUCTIONS        | Recipe preparation instructions not provided |
 | MULTIPLE_INGREDIENTS_NEEDED | Few than 2 ingredients provided |
 | MULTIPLE_PREPARATION_STEPS_NEEDED | Fewer than 2 preparation steps provided |
+| MISSING_TOKEN | JSON Web Token was not provided |
+| INVALID_TOKEN | JSON Web Token is malformed/invalid |
 
 ### Examples
 ```
