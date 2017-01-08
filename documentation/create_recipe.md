@@ -18,6 +18,7 @@
 | tagline  | string  | required  | Recipe tagline |
 | ingredients  | [ string ]  | required  | List of ingredients |
 | instructions | [ string ]  | required  | List of preparation steps |
+| recipe_id | ObjectId  | optional  | ID of the recipe to be updated |
 
 ***
 
@@ -35,7 +36,7 @@ A JSON object with the following keys and values:
     * **ingredients** - List of ingredients
     * **instructions** - List of preparation instructions
 
-### Example
+### Examples
 ```
 {
   "code": "CREATE_RECIPE_SUCCESS",
@@ -55,6 +56,29 @@ A JSON object with the following keys and values:
         "Cook",
         "Wait for a bit.",
         "Eat."
+      ]
+    }
+  }
+}
+```
+
+```
+{
+  "code": "UPDATE_RECIPE_SUCCESS",
+  "message": "Recipe successfully updated.",
+  "payload": {
+    "recipe": {
+      "_id": "586bdb148d53a309258e5869",
+      "username": "Sam I am",
+      "title": "Blue Eggs and Jam",
+      "tagline": "A traditional delicacy from Dr. Seuss.",
+      "ingredients": [
+        "5 eggs",
+        "1 tablespoon pancakes"
+      ],
+      "instructions": [
+        "Preheat oven to 375F",
+        "Cook"
       ]
     }
   }
