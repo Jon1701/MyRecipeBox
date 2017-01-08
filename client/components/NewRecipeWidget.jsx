@@ -7,7 +7,7 @@ import classNames from 'classnames';
 
 // React Components.
 import AlertBox from 'components/AlertBox'; // Alert Box.
-import PlusMinus from 'components/PlusMinus'
+import PlusMinus from 'components/PlusMinus';
 
 // Component definition.
 class NewRecipeWidget extends React.Component {
@@ -56,10 +56,11 @@ class NewRecipeWidget extends React.Component {
               }
 
               // Deconstruct recipe fields.
-              const { title, tagline, ingredients, instructions } = res.data.payload.recipes[0];
+              const { title, tagline, ingredients, instructions, username }
+                    = res.data.payload.recipes[0];
 
               // Store recipe in state.
-              this.setState({ title, tagline, ingredients, instructions });
+              this.setState({ title, tagline, ingredients, instructions, username });
             }
               break;
 
@@ -241,6 +242,34 @@ class NewRecipeWidget extends React.Component {
     return this.setState({ instructions: arrayItems });
   }
 
+  // Helper function to determine if the Edit and Save buttons should be visible.
+  setEditSaveButtonVisibility() {
+    // By default, hide Save and Edit buttons.
+    let hideSaveButton = true;
+    let hideEditButton = true;
+
+    // If viewing a recipe and token is provided.
+    if (this.props.token && this.state.username && this.props.mode === 'ViewRecipe') {
+      // Extract username from token, and recipe.
+      const usernameToken = JSON.parse(atob(this.props.token.split('.')[1])).username;
+      const usernameRecipe = this.state.username;
+
+      /*
+       * If the usernames are the same, then the logged in user wrote the recipe.
+       *  Display edit and save buttons.
+       */
+      if (usernameToken === usernameRecipe) {
+        hideSaveButton = false;
+        hideEditButton = false;
+      }
+    } else if (this.props.mode === 'NewRecipe') {
+      hideEditButton = true;
+      hideSaveButton = false;
+    }
+
+    return { hideSaveButton, hideEditButton };
+  }
+
   // Component render.
   render() {
     // Dynamically render <input/> for each ingredient.
@@ -268,27 +297,41 @@ class NewRecipeWidget extends React.Component {
       />
     ));
 
+    // Visibility of the Edit and Save buttons.
+    const { hideEditButton, hideSaveButton } = this.setEditSaveButtonVisibility();
+
     // Classes to control visibility of form.
     const classesForm = classNames({
       'form-newrecipe-widget': true,
       hidden: this.state.hideForm,
     });
 
-    // If a token is provided, get username.
-    if (this.props.token) {
-      // Extract username from token.
-      const username = JSON.parse(atob(this.props.token.split('.')[1])).username;
+    // Classes to control visibility of edit and save button.
+    const classesEditButton = classNames({
+      hidden: hideEditButton,
+      'text-center': true,
+    });
 
-      console.log(username);
-    }
+    // Classes to control visibility of edit and save button.
+    const classesSaveButton = classNames({
+      hidden: hideSaveButton,
+    });
 
     return (
       <div className="box shadow">
         <AlertBox alert={this.state.alert} handleClose={this.clearAlert} />
         <form type="POST" className={classesForm} onSubmit={this.handleFormSubmit}>
-          <div>
-            <button type="button" onClick={() => this.setState({ readOnly: !this.state.readOnly })}>Edit</button>
+
+          <div className={classesEditButton}>
+            <button
+              className="btn btn-submit"
+              type="button"
+              onClick={() => this.setState({ readOnly: !this.state.readOnly })}
+            >
+              { this.state.readOnly ? 'Enable Editing' : 'Disable Editing' }
+            </button>
           </div>
+
           <div className="input-group">
             <div className="text-center">Recipe Title:</div>
             <input
@@ -314,23 +357,30 @@ class NewRecipeWidget extends React.Component {
 
           <div className="input-group ingredients-group">
             <div className="text-center">Ingredients:</div>
-            <PlusMinus handleClick={this.addRemoveFields} stateKey="ingredients" readOnly={this.state.readOnly} />
-            <div className="ingredients-list">
-              {renderIngredients}
-            </div>
+            <PlusMinus
+              handleClick={this.addRemoveFields}
+              stateKey="ingredients"
+              readOnly={this.state.readOnly}
+            />
+            <div className="ingredients-list">{renderIngredients}</div>
           </div>
 
           <div className="input-group instructions-group">
             <div className="text-center">Preparation Instructions:</div>
-            <PlusMinus handleClick={this.addRemoveFields} stateKey="instructions" readOnly={this.state.readOnly} />
-            <div className="ingredients-list">
-              {renderInstructions}
-            </div>
+            <PlusMinus
+              handleClick={this.addRemoveFields}
+              stateKey="instructions"
+              readOnly={this.state.readOnly}
+            />
+            <div className="ingredients-list">{renderInstructions}</div>
           </div>
 
-          <button className="width-100 btn btn-submit" type="submit" value="submit">
-            Save Recipe
-          </button>
+          <div className={classesSaveButton}>
+            <button className="btn btn-submit width-100" type="submit" value="submit">
+              Save Recipe
+            </button>
+          </div>
+
         </form>
       </div>
     );
