@@ -103,6 +103,12 @@ class NewRecipeWidget extends React.Component {
     // Request body.
     const body = { title, tagline, ingredients, instructions };
 
+    // Get the recipe id from router props.
+    const recipeID = this.props.params.recipe_id;
+
+    // If the recipe ID exists, add it to the request body.
+    body['recipe_id'] = recipeID;
+
     // Make a POST request to the API server, send recipe data, and token.
     request
       .post('/api/auth/create_recipe', body, this.props.token)
@@ -110,7 +116,10 @@ class NewRecipeWidget extends React.Component {
         // Get recipe ID.
         const recipeID = res.data.payload.recipe['_id'];
 
+        // Different behaviour based on success message.
         switch (res.data.code) {
+
+          // Recipe successfully created.
           case 'CREATE_RECIPE_SUCCESS': {
             // Display success message.
             this.setAlert('SUCCESS', 'Recipe successfully created. Redirecting now.');
@@ -125,6 +134,16 @@ class NewRecipeWidget extends React.Component {
             break;
           }
 
+          // Recipe successfully updated.
+          case 'UPDATE_RECIPE_SUCCESS':
+            // Display success message.
+            this.setAlert('SUCCESS', 'Recipe successfully updated.');
+
+            // Set form to read only, since the user has finished editing.
+            this.setState({ readOnly: true });
+            break;
+
+          // Default behaviour: do nothing.
           default:
             break;
         }
@@ -132,34 +151,43 @@ class NewRecipeWidget extends React.Component {
       .catch((err) => {
         // Display alert box with corresponding message.
         switch (err.response.data.code) {
+
+          // Database error.
           case 'DB_ERROR':
             this.setAlert('FAILURE', 'Database error occurred.');
             break;
 
+          // Missing title.
           case 'MISSING_TITLE':
             this.setAlert('FAILURE', 'Your recipe needs a title.');
             break;
 
+          // Missing tagline.
           case 'MISSING_TAGLINE':
             this.setAlert('FAILURE', 'You should really provide a short summary of your recipe.');
             break;
 
+          // Missing ingredients.
           case 'MISSING_INGREDIENTS':
             this.setAlert('FAILURE', 'No ingredients? What are you making? Air?');
             break;
 
+          // Missing instructions.
           case 'MISSING_INSTRUCTIONS':
             this.setAlert('FAILURE', 'No preparation instructions? Did you buy this dish from a supermarket?');
             break;
 
+          // Not enough ingredients.
           case 'MULTIPLE_INGREDIENTS_NEEDED':
             this.setAlert('FAILURE', 'You must provide at least 2 ingredients.');
             break;
 
+          // Not enough preparation steps.
           case 'MULTIPLE_PREPARATION_STEPS_NEEDED':
             this.setAlert('FAILURE', 'At least 2 preparation instructions are needed.');
             break;
 
+          // Default action: do nothing.
           default:
             break;
         }
