@@ -2,30 +2,33 @@ $navbar-bgcolor: #DC143C;
 $accent-color: 	#ED1C40;
 
 .navbar-primary {
+
   background-color: $navbar-bgcolor;
   color: #FFFFFF;
 
-  // Navbar child container.
+  display: flex;
+  justify-content: space-between;
+
   ul {
+    list-style-type: none;
     margin: 0;
     padding: 0;
-    list-style-type: none;
+  }
+
+  .subnav-left > ul {
     display: flex;
-    justify-content: space-between;
-   }
+    flex-flow: row wrap;
+  }
 
-  // Navbar item.
-  .nav-item {
+  .subnav-right > ul {
+    display: flex;
+    flex-row: row wrap;
+  }
+
+  .nav-item-link {
+    display: block;
     padding: 20px 15px 20px 15px;
-  }
-
-  // Navbar item link.
-  .nav-item-link:hover {
-    background-color: $accent-color;
-  }
-
-  .brand {
-    padding-left: 15px;
+    &:hover { background-color: $accent-color; }
   }
 
 }

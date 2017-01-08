@@ -22,19 +22,21 @@ class NavBar extends React.Component {
     return (
       <div>
         <nav className="navbar-primary">
-          <ul>
-            <li className="subnav-left">
-              <ul>
-                <li className="brand cursor-hand nav-item">
-                  <Link to="/">Brand</Link>
-                </li>
-              </ul>
-            </li>
 
-            <li className="subnav-right">
-              {this.props.token ? <LoggedInSubNav handleLogout={this.props.deleteToken} /> : <NotLoggedInSubNav />}
-            </li>
-          </ul>
+          <nav className="subnav-left">
+            <ul>
+              <li className="nav-item cursor-hand">
+                <Link className="nav-item-link" to="/">Recipe Box</Link>
+              </li>
+            </ul>
+          </nav>
+
+          <nav className="subnav-right">
+            {this.props.token
+              ? <LoggedInSubNav handleLogout={this.props.deleteToken} />
+              : <NotLoggedInSubNav />}
+          </nav>
+
         </nav>
       </div>
     );
@@ -67,26 +69,26 @@ NavBar.propTypes = {
 // SubNavigation bar for unauthenticated users.
 const NotLoggedInSubNav = () => (
   <ul>
-    <li className="nav-item nav-item-link cursor-hand">
-      <Link to="/login">Login</Link>
+    <li className="nav-item cursor-hand">
+      <Link className="nav-item-link" to="/login">Login</Link>
     </li>
-    <li className="nav-item nav-item-link cursor-hand">
-      <Link to="/signup">Sign up</Link>
+    <li className="nav-item cursor-hand">
+      <Link className="nav-item-link" to="/signup">Sign up</Link>
     </li>
   </ul>
 );
 
 // SubNavifation bar for authenticated users.
-const LoggedInSubNav = (props) => (
+const LoggedInSubNav = ({ handleLogout }) => (
   <ul>
-    <li className="nav-item nav-item-link cursor-hand">
-      <Link to="/new_recipe">New Recipe</Link>
+    <li className="nav-item cursor-hand">
+      <Link className="nav-item-link" to="/new_recipe">New Recipe</Link>
     </li>
-    <li className="nav-item nav-item-link cursor-hand">
-      <Link to="/dashboard">My Recipes</Link>
+    <li className="nav-item cursor-hand">
+      <Link className="nav-item-link" to="/dashboard">My Recipes</Link>
     </li>
-    <li className="nav-item nav-item-link cursor-hand">
-      <Link onClick={props.handleLogout}>Logout</Link>
+    <li className="nav-item cursor-hand">
+      <Link className="nav-item-link" onClick={handleLogout}>Logout</Link>
     </li>
   </ul>
 );
