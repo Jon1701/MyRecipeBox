@@ -110,13 +110,13 @@ class ViewRecipeWidget extends React.Component {
     const { username, title, tagline, ingredients, instructions } = this.state.recipe;
 
     // Build a list (<li>) of ingredients.
-    const ingredientsItems = ingredients.map(ingredient => (
-      <li>{ingredient}</li>
+    const ingredientsItems = ingredients.map((ingredient, index) => (
+      <li key={`ingredient-item-${index}`}>{ingredient}</li>
     ));
 
     // Build a list (<li>) of preparation instructions.
-    const instructionsItems = instructions.map(instruction => (
-      <li>{instruction}</li>
+    const instructionsItems = instructions.map((instruction, index) => (
+      <li key={`instruction-item-${index}`}>{instruction}</li>
     ));
 
     return (
