@@ -58,6 +58,7 @@ const ApplicationUIContainer = (
           <Route path='/new_recipe' component={NewRecipePage} />
           <Route path='/view_recipe/:recipe_id' component={ViewRecipePage} />
           <Route path='/edit_recipe/:recipe_id' component={EditRecipePage} />
+          <Route path='/dashboard' component={Dummy} />
       </Route>
     </Router>
   </Provider>
