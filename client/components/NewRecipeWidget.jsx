@@ -138,6 +138,7 @@ class NewRecipeWidget extends React.Component {
           case 'UPDATE_RECIPE_SUCCESS':
             // Display success message.
             this.setAlert('SUCCESS', 'Recipe successfully updated.');
+            break;
 
           // Default behaviour: do nothing.
           default:
