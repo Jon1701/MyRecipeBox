@@ -33,6 +33,7 @@ const auth = rfr('/server/config/auth');  // Secret keys.
  */
 
 // Default Connect to the database.
+mongoose.Promise = global.Promise;
 mongoose.connect(DBCONFIG.CONNSTRING);
 
 // Mongoose log if connected.
