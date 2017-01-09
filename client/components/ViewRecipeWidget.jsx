@@ -2,7 +2,7 @@
 import React from 'react';                  // React.
 import request from 'common/request';       // HTTP GET/POST functionality.
 import { withRouter } from 'react-router';  // Allows component to be aware of React Router.
-import classNames from 'classnames';
+import classNames from 'classnames';        // Toggleable CSS classes.
 
 // React Components.
 import AlertBox from 'components/AlertBox'; // Alert Box.
@@ -26,6 +26,7 @@ class ViewRecipeWidget extends React.Component {
     this.clearAlert = this.clearAlert.bind(this); // Clear the current alert.
   }
 
+  // Component Lifecycle Method.
   componentDidMount() {
     // Get the recipe ID from route.
     const recipeID = this.props.params.recipe_id;
@@ -101,12 +102,14 @@ class ViewRecipeWidget extends React.Component {
       return <NoRecipeFound />;
     }
 
+    // Classes to toggle display of recipe.
     const classesContainer = classNames({
-      hidden: this.state.recipe === null,
+      hidden: this.state.recipe === null, // Hide if no recipe was loaded in state.
       box: true,
       shadow: true,
     });
 
+    // Deconstruct recipe variables.
     const { username, title, tagline, ingredients, instructions } = this.state.recipe;
 
     // Build a list (<li>) of ingredients.
@@ -142,7 +145,6 @@ class ViewRecipeWidget extends React.Component {
         </div>
       </div>
     );
-
   }
 }
 
@@ -151,19 +153,23 @@ export default withRouter(ViewRecipeWidget);
 
 // Prop validation.
 ViewRecipeWidget.propTypes = {
-
+  params: React.PropTypes.shape({
+    recipe_id: React.PropTypes.string,
+  }),
 };
 
 /*
  *  Presentational Components.
  */
 
+// Loading component.
 const Loading = () => (
   <div className="box shadow text-center">
     Loading
   </div>
 );
 
+// No recipe found.
 const NoRecipeFound = () => (
   <div className="box shadow text-center">
     No recipe found.
