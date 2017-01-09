@@ -9,6 +9,7 @@ import LoginPage from 'containers/LoginPage';
 import SignupPage from 'containers/SignupPage';
 import NewRecipePage from 'containers/NewRecipePage';
 import ViewRecipePage from 'containers/ViewRecipePage';
+import EditRecipePage from 'containers/EditRecipePage';
 import Dummy from 'components/Dummy';
 
 // React Router dependencies.
@@ -54,6 +55,7 @@ const ApplicationUIContainer = (
           <Route path='/signup' component={SignupPage} />
           <Route path='/new_recipe' component={NewRecipePage} />
           <Route path='/view_recipe/:recipe_id' component={ViewRecipePage} />
+          <Route path='/edit_recipe/:recipe_id' component={EditRecipePage} />
       </Route>
     </Router>
   </Provider>
