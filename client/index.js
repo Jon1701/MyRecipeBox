@@ -13,6 +13,9 @@ import ViewRecipePage from 'containers/ViewRecipePage';
 import EditRecipePage from 'containers/EditRecipePage';
 import Dummy from 'components/Dummy';
 
+// Route authentication.
+import authRoute from 'common/authRoute';
+
 // React Router dependencies.
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
@@ -43,6 +46,33 @@ store.subscribe(() => {
   console.log(store.getState());
 });
 
+// Route authentication.
+const auth = (nextState, replace) => {
+  // Get token from the redux state.
+  const token = store.getState().token;
+
+  try {
+    // Check if there is a JSON web token.
+    if (!token) {
+      throw new Error();
+    }
+
+    // Check if the JSON web token has a username field.
+    JSON.parse(atob(token.split('.')[1])).username;
+  } catch (e) {
+    /*
+     * If no token is in the redux state, or token is malformed, redirect to
+     * the login page.
+     *
+     * When done authenticating, proceed to the originally requested route.
+     */
+    replace({
+      pathname: '/login',
+      state: { nextPathname: nextState.location.pathname },
+    });
+  }
+};
+
 // Application stylesheet.
 require("stylesheets/stylesheet.scss");
 
@@ -55,7 +85,7 @@ const ApplicationUIContainer = (
         <Route path="/login" component={LoginPage} />
         <Route path="/logout" component={LogoutPage} />
         <Route path="/signup" component={SignupPage} />
-        <Route path="/new_recipe" component={NewRecipePage} />
+        <Route path="/new_recipe" component={NewRecipePage} onEnter={auth} />
         <Route path="/view_recipe/:recipe_id" component={ViewRecipePage} />
         <Route path="/edit_recipe/:recipe_id" component={EditRecipePage} />
         <Route path="/dashboard" component={Dummy} />
