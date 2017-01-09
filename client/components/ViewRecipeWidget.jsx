@@ -26,16 +26,6 @@ class ViewRecipeWidget extends React.Component {
     this.clearAlert = this.clearAlert.bind(this); // Clear the current alert.
   }
 
-  // Method to set the current alert.
-  setAlert(type, message) {
-    this.setState({ alert: { type, message } });
-  }
-
-  // Method to clear the current alert.
-  clearAlert() {
-    this.setState({ alert: null });
-  }
-
   componentDidMount() {
     // Get the recipe ID from route.
     const recipeID = this.props.params.recipe_id;
@@ -87,6 +77,16 @@ class ViewRecipeWidget extends React.Component {
           this.setState({ loading: false });
         });
     }
+  }
+
+  // Method to set the current alert.
+  setAlert(type, message) {
+    this.setState({ alert: { type, message } });
+  }
+
+  // Method to clear the current alert.
+  clearAlert() {
+    this.setState({ alert: null });
   }
 
   // Component render.
