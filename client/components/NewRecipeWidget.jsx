@@ -23,6 +23,7 @@ class NewRecipeWidget extends React.Component {
       tagline: '',    // Recipe tagline.
       ingredients: [],  // Array of recipe ingredients.
       instructions: [], // Array of recipe preparation instructions.
+      mode: this.props.mode,  // Mode of this component: NewRecipe or EditRecipe.
     };
 
     // Bind methods to component instance.
@@ -43,6 +44,49 @@ class NewRecipeWidget extends React.Component {
   // Method to clear the current alert.
   clearAlert() {
     this.setState({ alert: null });
+  }
+
+  // Component Lifecycle Method.
+  componentDidMount() {
+    // If the component mode is EditRecipe, get recipe data and store it in state.
+    if (this.state.mode === 'EditRecipe') {
+      // Get recipe ID from route parameter.
+      const recipeID = this.props.params.recipe_id;
+
+      // Get recipe data from the API server.
+      request
+        .get(`/api/get_recipes?recipe_id=${recipeID}`)
+        .then((res) => {
+          // Success response handling.
+          switch (res.data.code) {
+
+            // Recipe search complete.
+            case 'RECIPE_SEARCH_COMPLETE': {
+              // If no recipes were found, throw an error, .catch() will handle it.
+              if (res.data.payload.recipes.length === 0) {
+                throw new Error();
+              } else {
+                // Deconstruct recipe fields.
+                const { title, tagline, ingredients, instructions, username }
+                  = res.data.payload.recipes[0];
+
+                // Store recipe in state.
+                this.setState({ title, tagline, ingredients, instructions, username });
+              }
+              break;
+            }
+
+            // Default case: do nothing.
+            default:
+              break;
+
+          }
+        })
+        .catch(() => {
+          // If any error occurs, display error message.
+          this.setAlert('FAILURE', 'No recipe found.');
+        });
+    }
   }
 
   // Method to handle form submit.
@@ -304,4 +348,5 @@ export default connect(mapStateToProps, null)(withRouter(NewRecipeWidget));
 // Prop validation.
 NewRecipeWidget.propTypes = {
   token: React.PropTypes.string,
+  mode: React.PropTypes.oneOf(['NewRecipe', 'EditRecipe']),
 };
