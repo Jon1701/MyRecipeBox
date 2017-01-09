@@ -9,7 +9,7 @@
 ## Request Parameters
 | Name  | Data Type | Required/Optional | Description |
 |-------|-----------|-------------------|-------------|
-| recipeID | ObjectID/string  | optional  | Recipe ID |
+| recipe_id | ObjectID/string  | optional  | Recipe ID |
 | username | string  | optional  | Recipe Author |
 | pageNum  | number  | optional  | Current page of results |
 
