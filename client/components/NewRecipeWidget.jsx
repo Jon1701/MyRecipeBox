@@ -103,6 +103,12 @@ class NewRecipeWidget extends React.Component {
     // Request body.
     const body = { title, tagline, ingredients, instructions };
 
+    // Get the recipe id from router props.
+    const recipeID = this.props.params.recipe_id;
+
+    // If the recipe ID exists, add it to the request body.
+    body['recipe_id'] = recipeID;
+
     // Make a POST request to the API server, send recipe data, and token.
     request
       .post('/api/auth/create_recipe', body, this.props.token)
@@ -127,6 +133,11 @@ class NewRecipeWidget extends React.Component {
             setTimeout(redirect.bind(this), 2000);
             break;
           }
+
+          // Recipe successfully updated.
+          case 'UPDATE_RECIPE_SUCCESS':
+            // Display success message.
+            this.setAlert('SUCCESS', 'Recipe successfully updated.');
 
           // Default behaviour: do nothing.
           default:
@@ -262,6 +273,40 @@ class NewRecipeWidget extends React.Component {
 
   // Component render.
   render() {
+    /*
+     *  If component mode is EditRecipe, and no recipe was found, return
+     *  message stating no recipe found.
+     */
+    if (this.props.mode === 'EditRecipe' && this.state.title === '') {
+      return (
+        <div className="box shadow text-center">
+          No recipe found.
+        </div>
+      );
+    }
+
+    /*
+     *  If:
+     *  - component mode is EditRecipe
+     *  - user logged in
+     *  - logged in user and recipe user are different
+     *  prevent editing.
+     */
+    if (this.props.mode === 'EditRecipe' && this.props.token) {
+      // Get username and recipe username.
+      const recipeUsername = this.state.username;
+      const tokenUsername = JSON.parse(atob(this.props.token.split('.')[1])).username;
+
+      // If usernames are different, return message stating that useris not authorized to edit.
+      if (recipeUsername !== tokenUsername) {
+        return (
+          <div className="box shadow text-center">
+            Not authorized to edit this recipe.
+          </div>
+        );
+      }
+    }
+
     // Dynamically render <input/> for each ingredient.
     const renderIngredients = this.state.ingredients.map((val, idx) => (
       <input
