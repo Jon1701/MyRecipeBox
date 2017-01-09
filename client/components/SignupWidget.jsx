@@ -161,14 +161,14 @@ class SignupWidget extends React.Component {
 
           <div className="input-group">
             <label htmlFor="password">Confirm Password:</label>
-              <input
-                className="input"
-                type="password"
-                id="password2"
-                ref={(input) => { this.inputPassword2 = input; }}
-                minLength="8"
-                maxLength="50"
-              />
+            <input
+              className="input"
+              type="password"
+              id="password2"
+              ref={(input) => { this.inputPassword2 = input; }}
+              minLength="8"
+              maxLength="50"
+            />
           </div>
 
           <button type="submit" className="btn btn-submit">Create Account</button>
