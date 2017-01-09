@@ -52,13 +52,13 @@ const ApplicationUIContainer = (
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={HomePage} />
-          <Route path='/login' component={LoginPage} />
-          <Route path='/logout' component={LogoutPage} />
-          <Route path='/signup' component={SignupPage} />
-          <Route path='/new_recipe' component={NewRecipePage} />
-          <Route path='/view_recipe/:recipe_id' component={ViewRecipePage} />
-          <Route path='/edit_recipe/:recipe_id' component={EditRecipePage} />
-          <Route path='/dashboard' component={Dummy} />
+        <Route path="/login" component={LoginPage} />
+        <Route path="/logout" component={LogoutPage} />
+        <Route path="/signup" component={SignupPage} />
+        <Route path="/new_recipe" component={NewRecipePage} />
+        <Route path="/view_recipe/:recipe_id" component={ViewRecipePage} />
+        <Route path="/edit_recipe/:recipe_id" component={EditRecipePage} />
+        <Route path="/dashboard" component={Dummy} />
       </Route>
     </Router>
   </Provider>
