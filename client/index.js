@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import App from 'containers/App';
 import HomePage from 'containers/HomePage';
 import LoginPage from 'containers/LoginPage';
+import LogoutPage from 'containers/LogoutPage';
 import SignupPage from 'containers/SignupPage';
 import NewRecipePage from 'containers/NewRecipePage';
 import ViewRecipePage from 'containers/ViewRecipePage';
@@ -52,6 +53,7 @@ const ApplicationUIContainer = (
       <Route path="/" component={App}>
         <IndexRoute component={HomePage} />
           <Route path='/login' component={LoginPage} />
+          <Route path='/logout' component={LogoutPage} />
           <Route path='/signup' component={SignupPage} />
           <Route path='/new_recipe' component={NewRecipePage} />
           <Route path='/view_recipe/:recipe_id' component={ViewRecipePage} />
