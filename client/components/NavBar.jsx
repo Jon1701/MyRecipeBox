@@ -4,7 +4,7 @@ import { connect } from 'react-redux';  // Connects component to Redux store.
 import { bindActionCreators } from 'redux'; // Binds actions to component.
 
 // Redux actions.
-import { storeToken, deleteToken } from 'actions/token'; // Store token in Redux store.
+import { storeToken } from 'actions/token'; // Store token in Redux store.
 
 // Component definition.
 class NavBar extends React.Component {
@@ -33,7 +33,7 @@ class NavBar extends React.Component {
 
           <nav className="subnav-right">
             {this.props.token
-              ? <LoggedInSubNav handleLogout={this.props.deleteToken} />
+              ? <LoggedInSubNav />
               : <NotLoggedInSubNav />}
           </nav>
 
@@ -47,7 +47,7 @@ class NavBar extends React.Component {
 const mapStateToProps = state => ({ token: state.token });
 
 // Allows access of actions as props.
-const mapDispatchToProps = dispatch => (bindActionCreators({ storeToken, deleteToken }, dispatch));
+const mapDispatchToProps = dispatch => (bindActionCreators({ storeToken }, dispatch));
 
 // Allow component access to Redux store.
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
@@ -79,7 +79,7 @@ const NotLoggedInSubNav = () => (
 );
 
 // SubNavifation bar for authenticated users.
-const LoggedInSubNav = ({ handleLogout }) => (
+const LoggedInSubNav = () => (
   <ul>
     <li className="nav-item cursor-hand">
       <Link className="nav-item-link" to="/new_recipe">New Recipe</Link>
@@ -88,7 +88,7 @@ const LoggedInSubNav = ({ handleLogout }) => (
       <Link className="nav-item-link" to="/dashboard">My Recipes</Link>
     </li>
     <li className="nav-item cursor-hand">
-      <Link className="nav-item-link" onClick={handleLogout}>Logout</Link>
+      <Link className="nav-item-link" to="/logout">Logout</Link>
     </li>
   </ul>
 );
