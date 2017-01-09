@@ -1,7 +1,12 @@
 // Dependencies.
 import React from 'react';                  // React.
 import request from 'common/request';       // HTTP GET/POST functionality.
+import { bindActionCreators } from 'redux'; // Binds actions to component.
+import { connect } from 'react-redux';      // Connects component to Redux store.
 import { withRouter } from 'react-router';  // Allows component to be aware of React Router.
+
+// Redux actions.
+import { storeToken } from 'actions/token'; // Store token in Redux store.
 
 // React Components.
 import AlertBox from 'components/AlertBox'; // Alert Box.
@@ -56,17 +61,28 @@ class SignupWidget extends React.Component {
           // Login successful.
           case 'USER_CREATED': {
             // Set alert box.
-            this.setAlert('SUCCESS', 'Your account has been created. Redirecting to login screen.');
+            this.setAlert('SUCCESS', 'Your account has been created. You are being logged in.');
 
-            // Redirect function.
-            const redirect = () => {
-              this.props.router.replace('/login');
-            }
+            // Log the user in.
+            request
+              .post('/api/login', { username, password: password1 })
+              .then((resLogin) => {
+                // Store token in redux store.
+                this.props.storeToken(resLogin.data.payload.token);
 
-            // Redirect to the login page.
-            setTimeout(redirect.bind(this), 2000);
-            break;
+                // Redirect function.
+                const redirect = () => {
+                  this.props.router.replace('/dashboard');
+                };
+
+                // Redirect to the dashboard page.
+                setTimeout(redirect.bind(this), 2000);
+              })
+              .catch(() => {
+                // Ignore errors.
+              });
           }
+            break;
 
           // Default.
           default:
@@ -162,10 +178,14 @@ class SignupWidget extends React.Component {
   }
 }
 
+// Allows access of actions as props.
+const mapDispatchToProps = dispatch => (bindActionCreators({ storeToken }, dispatch));
+
+
 // Allow component access to Redux store.
-export default withRouter(SignupWidget);
+export default connect(null, mapDispatchToProps)(withRouter(SignupWidget));
 
 // Prop validation.
 SignupWidget.propTypes = {
-
+  storeToken: React.PropTypes.func,
 };
