@@ -36,16 +36,6 @@ class NewRecipeWidget extends React.Component {
     this.addRemoveFields = this.addRemoveFields.bind(this); // Adds/Remove ingredients/instructions.
   }
 
-  // Method to set the current alert.
-  setAlert(type, message) {
-    this.setState({ alert: { type, message } });
-  }
-
-  // Method to clear the current alert.
-  clearAlert() {
-    this.setState({ alert: null });
-  }
-
   // Component Lifecycle Method.
   componentDidMount() {
     // If the component mode is EditRecipe, get recipe data and store it in state.
@@ -87,6 +77,16 @@ class NewRecipeWidget extends React.Component {
           this.setAlert('FAILURE', 'No recipe found.');
         });
     }
+  }
+
+  // Method to set the current alert.
+  setAlert(type, message) {
+    this.setState({ alert: { type, message } });
+  }
+
+  // Method to clear the current alert.
+  clearAlert() {
+    this.setState({ alert: null });
   }
 
   // Method to handle form submit.
