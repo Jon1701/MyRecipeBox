@@ -11,10 +11,8 @@ import SignupPage from 'containers/SignupPage';
 import NewRecipePage from 'containers/NewRecipePage';
 import ViewRecipePage from 'containers/ViewRecipePage';
 import EditRecipePage from 'containers/EditRecipePage';
+import Dashboard from 'containers/Dashboard';
 import Dummy from 'components/Dummy';
-
-// Route authentication.
-import authRoute from 'common/authRoute';
 
 // React Router dependencies.
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
@@ -88,7 +86,7 @@ const ApplicationUIContainer = (
         <Route path="/new_recipe" component={NewRecipePage} onEnter={auth} />
         <Route path="/view_recipe/:recipe_id" component={ViewRecipePage} />
         <Route path="/edit_recipe/:recipe_id" component={EditRecipePage} />
-        <Route path="/dashboard" component={Dummy} />
+        <Route path="/dashboard" component={Dashboard} />
       </Route>
     </Router>
   </Provider>
