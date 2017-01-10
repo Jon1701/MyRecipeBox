@@ -104,42 +104,41 @@ const createRecipe = (req, res, next) => {
     return next(MSG('MULTIPLE_PREPARATION_STEPS_NEEDED'));
   }
 
-  // Query.
-  const query = {};
-
-  // If a recipe ID was provided, include it in the query, if not, create one.
+  // If a recipe ID was provided, user wants to edit an existing recipe.
   if (recipeID) {
-    query['_id'] = mongoose.Types.ObjectId(recipeID);
+    // Define query and setter.
+    const query = { '_id': recipeID };
+    const setter = { $set: { username, title, tagline, ingredients, instructions } };
+    const options = { upsert: false, new: true };
+
+    Recipe.findByIdAndUpdate(query, setter, options, (err, result) => {
+      // Database error check.
+      if (err) { return next(MSG('DB_ERROR')); }
+
+      // Response payload.
+      const payload = { recipe: result };
+
+      // Send response to server.
+      return res.json(Object.assign({}, MSG('UPDATE_RECIPE_SUCCESS'), { payload }));
+    });
   } else {
-    query['_id'] = mongoose.Types.ObjectId();
+    // Create a new recipe document.
+    const newRecipe = Recipe({ username, title, tagline, ingredients, instructions });
+
+    // Save the new recipe into the recipes collection.
+    newRecipe.save((err, result) => {
+      // Database error check.
+      if (err) { return next(MSG('DB_ERROR')); }
+
+      // Response payload: recipe.
+      const payload = { recipe: result };
+
+      // Send response to server.
+      return res.json(Object.assign({}, MSG('CREATE_RECIPE_SUCCESS'), { payload }));
+    });
   }
 
-  // New recipe document.
-  const newDoc = { username, title, tagline, ingredients, instructions };
-
-  Recipe.findOneAndUpdate(query, newDoc, { upsert: true, new: true }, (err, result) => {
-    // Database error check.
-    if (err) (next(MSG('DB_ERROR')));
-
-    // Response payload containing the recipe.
-    const payload = { recipe: result };
-
-    // Change response message if updating or creating a recipe.
-    let messageCode;
-    if (recipeID) {
-      // If a recipe ID was provided, an update occurred.
-      messageCode = 'UPDATE_RECIPE_SUCCESS';
-    } else {
-      messageCode = 'CREATE_RECIPE_SUCCESS';
-    }
-
-    // Return success response.
-    return res.json(Object.assign({},
-      MSG(messageCode),
-      { payload }));
-  });
-
-  // Return statement as required by esline.
+  // Return statement as required by eslint.
   return true;
 };
 
