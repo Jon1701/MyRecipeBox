@@ -2,6 +2,7 @@
 import React from 'react';
 import request from 'common/request';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';      // Connects component to Redux store.
 
 // Component definition.
 class DashboardRecipes extends React.Component {
@@ -58,8 +59,11 @@ class DashboardRecipes extends React.Component {
   }
 
   getRecipes(pageNum) {
+    // Get token from props.
+    const token = this.props.token;
+
     // Get username from props.
-    const username = this.props.username;
+    const username = JSON.parse(atob(token.split('.')[1])).username;
 
     // Get number of recipes per page from state.
     const perPage = this.state.perPage;
@@ -151,5 +155,13 @@ class DashboardRecipes extends React.Component {
 
 }
 
-// Component export.
-export default DashboardRecipes;
+// Maps state to props.
+const mapStateToProps = state => ({ token: state.token });
+
+// Allow component access to Redux store.
+export default connect(mapStateToProps, null)(DashboardRecipes);
+
+// Prop validation.
+DashboardRecipes.propTypes = {
+  token: React.PropTypes.string,
+};

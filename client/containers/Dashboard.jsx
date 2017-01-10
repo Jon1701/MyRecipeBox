@@ -8,7 +8,7 @@ import DashboardRecipes from 'components/DashboardRecipes';
 const Dashboard = () => (
   <div className="container-page">
     <div>
-      <DashboardRecipes username={'username1'} />
+      <DashboardRecipes />
     </div>
   </div>
 );
