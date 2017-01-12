@@ -13,6 +13,8 @@
 | username | string  | optional  | Recipe Author |
 | pageNum  | number  | optional  | Current page of results, at least 1 |
 | perPage  | number  | optional  | Number of results per page, between 1 and 20 |
+| sort_by     | string | optional | Field to sort results by. One of: username, title, tagline, creationDate |
+| sort_order  | string | optional | Sort direction. One of: ascending, descending |
 
 ***
 
