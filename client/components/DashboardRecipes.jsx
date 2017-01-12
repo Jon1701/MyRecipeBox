@@ -70,7 +70,7 @@ class DashboardRecipes extends React.Component {
 
     // Get the latest recipes from the server.
     request
-      .get(`/api/get_recipes?username=${username}&pageNum=${pageNum}&perPage=${perPage}`)
+      .get(`/api/get_recipes?username=${username}&page_num=${pageNum}&per_page=${perPage}`)
       .then((res) => {
         // Success response handling.
         switch (res.data.code) {
