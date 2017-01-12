@@ -68,16 +68,19 @@ class DashboardRecipes extends React.Component {
     // Get number of recipes per page from state.
     const perPage = this.state.perPage;
 
+    // Build URL to the API server.
+    const url = [
+      `/api/get_recipes`,
+      `?username=${username}`,
+      `&page_num=${pageNum}`,
+      `&per_page=${perPage}`,
+      `&sort_by=title`,
+      `&sort_order=descending`,
+    ].join('');
+
     // Get the latest recipes from the server.
     request
-      .get(`
-        /api/get_recipes?
-        username=${username}
-        &page_num=${pageNum}
-        &per_page=${perPage}
-        &sort_by=creationDate
-        &sort_order=descending
-        `)
+      .get(url)
       .then((res) => {
         // Success response handling.
         switch (res.data.code) {
