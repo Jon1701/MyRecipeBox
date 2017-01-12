@@ -11,7 +11,8 @@
 |-------|-----------|-------------------|-------------|
 | recipe_id | ObjectID/string  | optional  | Recipe ID |
 | username | string  | optional  | Recipe Author |
-| pageNum  | number  | optional  | Current page of results |
+| pageNum  | number  | optional  | Current page of results, at least 1 |
+| perPage  | number  | optional  | Number of results per page, between 1 and 20 |
 
 ***
 
