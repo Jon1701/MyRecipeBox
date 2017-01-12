@@ -25,39 +25,24 @@ class DashboardRecipes extends React.Component {
     this.nextPage = this.nextPage.bind(this);
   }
 
+  // Method to get the previous page of results.
   previousPage() {
-    // Get the current page number.
-    const { pageNum } = this.state;
-
     // Get the previous page number.
-    const prevPageNum = pageNum - 1;
+    const prevPageNum = this.state.pageNum - 1;
 
     // Only go to previous page if the previous page number is at least 1.
     if (prevPageNum >= 1) {
       // Get the next page of recipes.
       this.getRecipes(prevPageNum);
-
-      // Update page number in state.
-      this.setState({ pageNum: prevPageNum });
     }
   }
 
+  // Method to get the next page of results.
   nextPage() {
-    // Get current page number, and recipes array.
-    const { pageNum, recipes } = this.state;
-
-    // Get next page number.
-    const nextPageNum = pageNum + 1;
-
-    if (recipes.length > 0) {
-      // Get the next page of recipes.
-      this.getRecipes(nextPageNum);
-
-      // Update page number in state.
-      this.setState({ pageNum: nextPageNum });
-    }
+    this.getRecipes(this.state.pageNum + 1);
   }
 
+  // Method to get a page of results.
   getRecipes(pageNum) {
     // Get token from props.
     const token = this.props.token;
@@ -87,11 +72,22 @@ class DashboardRecipes extends React.Component {
 
           // Search complete
           case 'RECIPE_SEARCH_COMPLETE': {
-            // Store recipes in state, set loading to false.
-            this.setState({
-              recipes: res.data.payload.recipes,
-              loading: false,
-            });
+            // Get array of recipes.
+            const recipes = res.data.payload.recipes;
+
+            /*
+             * If results were returned by the server,
+             * store them in state,
+             * set loading to false to display results,
+             * set the current page number.
+             */
+            if (recipes.length > 0) {
+              this.setState({
+                loading: false, // Disable loading screen.
+                recipes,  // Array of recipes.
+                pageNum,  // Current page number.
+              });
+            }
           }
             break;
 
