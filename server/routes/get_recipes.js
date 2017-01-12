@@ -114,8 +114,8 @@ const getRecipes = (req, res, next) => {
   // Extract request parameters
   const recipeID = req.query.recipe_id; // Recipe ID.
   const username = req.query.username;  // Recipe author.
-  const pageNum = sanitizePageNum(req.query.pageNum); // Page of results to return.
-  const perPage = sanitizePerPage(req.query.perPage); // Number of results per page to return.
+  const pageNum = sanitizePageNum(req.query.page_num); // Page of results to return.
+  const perPage = sanitizePerPage(req.query.per_page); // Number of results per page to return.
   const sortOrder = sanitizeSortOrder(req.query.sort_order);  // Sort order of results.
   const sortBy = sanitizeSortBy(req.query.sort_by);
 
