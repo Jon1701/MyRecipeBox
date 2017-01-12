@@ -15,7 +15,7 @@ class DashboardRecipes extends React.Component {
     this.state = {
       loading: true,  // Is the component currently loading.
       pageNum: 1,  // Current page number.
-      perPage: 20,   // Number of recipes per page. Server is hardcoded to 20, but may change.
+      perPage: 5,   // Number of recipes per page. Server is hardcoded to 20, but may change.
       recipes: [],  // Array of recipes.
     };
 
@@ -70,7 +70,14 @@ class DashboardRecipes extends React.Component {
 
     // Get the latest recipes from the server.
     request
-      .get(`/api/get_recipes?username=${username}&page_num=${pageNum}&per_page=${perPage}`)
+      .get(`
+        /api/get_recipes?
+        username=${username}
+        &page_num=${pageNum}
+        &per_page=${perPage}
+        &sort_by=creationDate
+        &sort_order=descending
+        `)
       .then((res) => {
         // Success response handling.
         switch (res.data.code) {
