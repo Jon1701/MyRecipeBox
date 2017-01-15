@@ -245,19 +245,19 @@ class NewRecipeWidget extends React.Component {
     // Create a copy of that array.
     arrayItems = arrayItems.slice();
 
-    // Mutate copy of array.
+    // Add or remove elements in array copy.
     switch (action) {
-      // Different actions each case.
+      // Add new blank string to the array.
       case 'ADD':
-        // Add new blank string to the array.
         arrayItems.push('');
         break;
 
+      // Remove last element from array.
       case 'REMOVE':
-        // Remove last element.
         arrayItems = arrayItems.slice(0, arrayItems.length - 1);
         break;
 
+      // Default case: do nothing.
       default:
         break;
     }
@@ -335,44 +335,25 @@ class NewRecipeWidget extends React.Component {
         <AlertBox alert={this.state.alert} handleClose={this.clearAlert} />
         <form type="POST" className="form-newrecipe-widget" onSubmit={this.handleFormSubmit}>
 
-          <div className="input-group">
-            <div className="text-center">Recipe Title:</div>
-            <input
-              className="input"
-              type="text"
-              onChange={e => this.setState({ title: e.target.value })}
-              value={this.state.title}
-            />
-          </div>
+          <RecipeTitle
+            handleChange={title => this.setState({ title })}
+            title={this.state.title}
+          />
 
-          <div className="input-group">
-            <div className="text-center">Recipe Tagline:</div>
-            <input
-              className="input"
-              type="text"
-              id="recipe-tagline"
-              onChange={e => this.setState({ tagline: e.target.value })}
-              value={this.state.tagline}
-            />
-          </div>
+          <RecipeTagline
+            handleChange={tagline => this.setState({ tagline })}
+            tagline={this.state.tagline}
+          />
 
-          <div className="input-group ingredients-group">
-            <div className="text-center">Ingredients:</div>
-            <PlusMinus
-              handleClick={this.addRemoveFields}
-              stateKey="ingredients"
-            />
-            <div className="ingredients-list">{renderIngredients}</div>
-          </div>
+          <RecipeIngredients
+            handleClick={this.addRemoveFields}
+            renderIngredients={renderIngredients}
+          />
 
-          <div className="input-group instructions-group">
-            <div className="text-center">Preparation Instructions:</div>
-            <PlusMinus
-              handleClick={this.addRemoveFields}
-              stateKey="instructions"
-            />
-            <div className="ingredients-list">{renderInstructions}</div>
-          </div>
+          <RecipeInstructions
+            handleClick={this.addRemoveFields}
+            renderInstructions={renderInstructions}
+          />
 
           <button className="btn btn-submit width-100" type="submit" value="submit">
             Save Recipe
@@ -394,4 +375,77 @@ export default connect(mapStateToProps, null)(withRouter(NewRecipeWidget));
 NewRecipeWidget.propTypes = {
   token: React.PropTypes.string,
   mode: React.PropTypes.oneOf(['NewRecipe', 'EditRecipe']),
+};
+
+/*
+ *
+ *  Presentational components.
+ *
+ */
+
+// Recipe Title.
+const RecipeTitle = ({ title, handleChange }) => (
+  <div className="input-group">
+    <div className="text-center">Recipe Title:</div>
+    <input
+      className="input"
+      type="text"
+      onChange={e => handleChange(e.target.value)}
+      value={title}
+    />
+  </div>
+);
+RecipeTitle.propTypes = {
+  title: React.PropTypes.string.isRequired,
+  handleChange: React.PropTypes.func.isRequired,
+};
+
+// Recipe Tagline.
+const RecipeTagline = ({ tagline, handleChange }) => (
+  <div className="input-group">
+    <div className="text-center">Recipe Tagline:</div>
+    <input
+      className="input"
+      type="text"
+      id="recipe-tagline"
+      onChange={e => handleChange(e.target.value)}
+      value={tagline}
+    />
+  </div>
+);
+RecipeTagline.propTypes = {
+  tagline: React.PropTypes.string.isRequired,
+  handleChange: React.PropTypes.func.isRequired,
+};
+
+// Recipe Ingredients.
+const RecipeIngredients = ({ handleClick, renderIngredients }) => (
+  <div className="input-group ingredients-group">
+    <div className="text-center">Ingredients:</div>
+    <PlusMinus
+      handleClick={handleClick}
+      stateKey="ingredients"
+    />
+    <div className="ingredients-list">{renderIngredients}</div>
+  </div>
+);
+RecipeIngredients.propTypes = {
+  handleClick: React.PropTypes.func.isRequired,
+  renderIngredients: React.PropTypes.node.isRequired,
+};
+
+// Recipe Instructions.
+const RecipeInstructions = ({ handleClick, renderInstructions }) => (
+  <div className="input-group instructions-group">
+    <div className="text-center">Preparation Instructions:</div>
+    <PlusMinus
+      handleClick={handleClick}
+      stateKey="instructions"
+    />
+    <div className="ingredients-list">{renderInstructions}</div>
+  </div>
+);
+RecipeInstructions.propTypes = {
+  handleClick: React.PropTypes.func.isRequired,
+  renderInstructions: React.PropTypes.node.isRequired,
 };
