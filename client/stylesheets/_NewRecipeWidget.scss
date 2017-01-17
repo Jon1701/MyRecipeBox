@@ -9,7 +9,6 @@
   // Form is a flexbox container.
   display: flex;
   flex-direction: column;
-  flex-wrap: no-wrap;
 
   .input-group {
     flex-grow: 1;
@@ -26,10 +25,10 @@
 
   .btn-group-plusminus {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     justify-content: space-between;
 
-    button { flex: 1; }
+    button { flex: 1 1 50%; }
   }
 
   .input {
@@ -58,6 +57,7 @@
     border: none;
     background-color: #DC143C;
     color: #FFFFFF;
+    height: 50px;
   }
 
   .btn-add-remove {

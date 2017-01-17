@@ -355,7 +355,7 @@ class NewRecipeWidget extends React.Component {
             renderInstructions={renderInstructions}
           />
 
-          <button className="btn btn-submit width-100" type="submit" value="submit">
+          <button className="btn btn-submit" type="submit" value="submit">
             Save Recipe
           </button>
 
