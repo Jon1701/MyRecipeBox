@@ -34,6 +34,7 @@
 - **[<code>POST</code> /api/login](documentation/login.md)**
 - **[<code>POST</code> /api/signup](documentation/signup.md)**
 - **[<code>POST</code> /api/auth/create_recipe](documentation/create_recipe.md)**
+- **[<code>POST</code> /api/auth/upload_image](documentation/upload_image.md)**
 
 ## Tests
 
