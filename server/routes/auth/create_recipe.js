@@ -40,7 +40,8 @@ const createRecipe = (req, res, next) => {
   const username = req.decoded.username;  // String.
   const title = req.body.title;           // String.
   const tagline = req.body.tagline;       // String.
-  const recipeID = req.body.recipe_id;    // ObjectID
+  const recipeID = req.body.recipe_id;    // ObjectID.
+  const image = req.body.image;           // String.
   let ingredients = req.body.ingredients;   // Array of Strings.
   let instructions = req.body.instructions; // Array of Strings.
 
@@ -108,7 +109,7 @@ const createRecipe = (req, res, next) => {
   if (recipeID) {
     // Define query and setter.
     const query = { '_id': recipeID };
-    const setter = { $set: { username, title, tagline, ingredients, instructions } };
+    const setter = { $set: { username, title, tagline, ingredients, instructions, image } };
     const options = { upsert: false, new: true };
 
     Recipe.findByIdAndUpdate(query, setter, options, (err, result) => {
@@ -123,7 +124,7 @@ const createRecipe = (req, res, next) => {
     });
   } else {
     // Create a new recipe document.
-    const newRecipe = Recipe({ username, title, tagline, ingredients, instructions });
+    const newRecipe = Recipe({ username, title, tagline, ingredients, instructions, image });
 
     // Save the new recipe into the recipes collection.
     newRecipe.save((err, result) => {
