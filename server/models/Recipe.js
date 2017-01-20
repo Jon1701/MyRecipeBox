@@ -11,6 +11,7 @@ const Recipe = mongoose.model('Recipe', new Schema({
   tagline: String,
   ingredients: [String],
   instructions: [String],
+  image: String,
   creationDate: { type: Date, default: Date.now },
 }));
 
