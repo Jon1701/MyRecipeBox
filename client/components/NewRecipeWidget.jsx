@@ -19,8 +19,9 @@ class NewRecipeWidget extends React.Component {
     // Local state.
     this.state = {
       alert: null,  // Alert Box notification.
-      title: '',      // Recipe title.
-      tagline: '',    // Recipe tagline.
+      title: '',    // Recipe title.
+      tagline: '',  // Recipe tagline.
+      image: null,    // Recipe image.
       ingredients: ['', ''],  // Array of recipe ingredients.
       instructions: ['', ''], // Array of recipe preparation instructions.
       mode: this.props.mode,  // Mode of this component: NewRecipe or EditRecipe.
@@ -57,11 +58,11 @@ class NewRecipeWidget extends React.Component {
                 throw new Error();
               } else {
                 // Deconstruct recipe fields.
-                const { title, tagline, ingredients, instructions, username }
+                const { title, tagline, ingredients, instructions, username, image }
                   = res.data.payload.recipes[0];
 
                 // Store recipe in state.
-                this.setState({ title, tagline, ingredients, instructions, username });
+                this.setState({ title, tagline, ingredients, instructions, username, image });
               }
               break;
             }
@@ -98,10 +99,10 @@ class NewRecipeWidget extends React.Component {
     this.clearAlert();
 
     // Gather form field values.
-    const { title, tagline, ingredients, instructions } = this.state;
+    const { title, tagline, ingredients, instructions, image } = this.state;
 
     // Request body.
-    const body = { title, tagline, ingredients, instructions };
+    const body = { title, tagline, ingredients, instructions, image };
 
     // Get the recipe id from router props.
     const recipeID = this.props.params.recipe_id;
@@ -351,7 +352,10 @@ class NewRecipeWidget extends React.Component {
             renderIngredients={renderIngredients}
           />
 
-          <ImageUploader token={this.props.token} />
+          <ImageUploader
+            token={this.props.token}
+            storeImage={imageURL => this.setState({ image: imageURL })}
+          />
 
           <RecipeInstructions
             handleClick={this.addRemoveFields}
