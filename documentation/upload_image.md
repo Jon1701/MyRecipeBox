@@ -40,11 +40,11 @@ A JSON object with the following keys and values:
   "message": "Image uploaded successfully.",
   "payload": {
     "image": {
-      "width": 800,
-      "height": 665,
-      "format": "png",
-      "url": "http://res.cloudinary.com/recipebox/image/upload/v1484945924/fsv1gzfvbvy3wuxazm1i.png",
-      "secure_url": "https://res.cloudinary.com/recipebox/image/upload/v1484945924/fsv1gzfvbvy3wuxazm1i.png",
+      "width": 864,
+      "height": 576,
+      "format": "jpg",
+      "url": "http://res.cloudinary.com/recipebox/image/upload/v1484933154/sample.jpg",
+      "secure_url": "https://res.cloudinary.com/recipebox/image/upload/v1484933154/sample.jpg",
       "filesize_in_bytes": 35407
     }
   }
