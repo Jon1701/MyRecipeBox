@@ -122,6 +122,9 @@ authRoutes.use(rfr('/server/middleware/verifyJWT'));
 // Create recipe route.
 authRoutes.post('/create_recipe', rfr('/server/routes/auth/create_recipe'));
 
+// Upload image.
+authRoutes.post('/upload_image', rfr('/server/routes/auth/upload_image'));
+
 /*
  *
  *
