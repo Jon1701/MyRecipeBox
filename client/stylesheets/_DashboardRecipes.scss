@@ -1,0 +1,33 @@
+.widget-dashboardrecipes {
+
+  // List of recent recipes.
+  .container-recent-recipes {
+
+    // Surrounding border.
+    border: solid 1px #CCCCCC;
+
+    // Individual recipe.
+    .recipe {
+      // Show bottom border for all recipes, except for the last one.
+      &:not(:last-child) { border-bottom: solid 1px #CCCCCC; }
+
+      // Make entire link area clickable.
+      a {
+        display: block;
+        padding: 10px;
+      }
+    }
+  }
+
+  // Pagination controls.
+  .container-inline {
+    margin-top: 5px;
+    button, div {
+      flex-grow: 1;
+      &:nth-child(1) { margin-left: 0; }
+      &:nth-child(3) { margin-right: 0; }
+    }
+
+  }
+
+}

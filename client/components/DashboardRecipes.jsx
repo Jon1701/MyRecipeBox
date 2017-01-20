@@ -55,12 +55,12 @@ class DashboardRecipes extends React.Component {
 
     // Build URL to the API server.
     const url = [
-      `/api/get_recipes`,
+      '/api/get_recipes',
       `?username=${username}`,
       `&page_num=${pageNum}`,
       `&per_page=${perPage}`,
-      `&sort_by=title`,
-      `&sort_order=descending`,
+      '&sort_by=title',
+      '&sort_order=descending',
     ].join('');
 
     // Get the latest recipes from the server.
@@ -95,6 +95,9 @@ class DashboardRecipes extends React.Component {
           default:
             break;
         }
+
+        // Disable loading screen.
+        this.setState({ loading: false });
       })
       .catch((err) => {
         // Do nothing.
@@ -110,8 +113,13 @@ class DashboardRecipes extends React.Component {
   // Component render.
   render() {
     // If component is currently loading, display loading message.
-    if (this.state.loading) {
-      return (<div className="text-center">Loading</div>);
+    if (this.state.loading && this.state.recipes.length === 0) {
+      return (<Loading />);
+    }
+
+    // If component is not loading, and has no recipes, display message.
+    if (!this.state.loading && this.state.recipes.length === 0) {
+      return (<NoRecipes />);
     }
 
     const displayRecipes = this.state.recipes.map((recipe) => {
@@ -119,7 +127,7 @@ class DashboardRecipes extends React.Component {
       const recipeID = recipe['_id'];
 
       return (
-        <div key={`recipe-id-${recipeID}`}>
+        <div className="recipe" key={`recipe-id-${recipeID}`}>
           <Link to={`/view_recipe/${recipeID}`}>{recipe.title}</Link>
         </div>
       );
@@ -127,31 +135,27 @@ class DashboardRecipes extends React.Component {
 
     // If loading is complete, display recipes.
     return (
-      <div className="box shadow">
+      <div className="box shadow text-center widget-dashboardrecipes">
         <div>
           <h3>
             Your most recent recipes:
           </h3>
         </div>
 
-        <div>
+        <div className="container-recent-recipes">
           {displayRecipes}
         </div>
 
-        <div>
-          <a
-            onClick={this.previousPage}
-          >
+        <div className="container-inline">
+          <button className="btn btn-default cursor-hand" onClick={this.previousPage}>
             Previous
-          </a>
+          </button>
 
-          <a>Page {this.state.pageNum}</a>
+          <button className="btn btn-default">Page {this.state.pageNum}</button>
 
-          <a
-            onClick={this.nextPage}
-          >
+          <button className="btn btn-default cursor-hand" onClick={this.nextPage}>
             Next
-          </a>
+          </button>
         </div>
       </div>
     );
@@ -169,3 +173,21 @@ export default connect(mapStateToProps, null)(DashboardRecipes);
 DashboardRecipes.propTypes = {
   token: React.PropTypes.string,
 };
+
+/*
+ *  Presentational Components.
+ */
+
+// Loading screen.
+const Loading = () => (
+  <div className="box shadow text-center">
+    Loading...
+  </div>
+);
+
+// No Recipes message.
+const NoRecipes = () => (
+  <div className="box shadow text-center">
+    No recipes found.
+  </div>
+);
