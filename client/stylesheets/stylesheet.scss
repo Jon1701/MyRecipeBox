@@ -53,6 +53,29 @@ h1, h2, h3, h4, h5, h6, p {
   width: 100%;
 }
 
+
+
+
+@mixin box-sizing($value) {
+  -moz-box-sizing: $value;
+  -webkit-box-sizing: $value;
+  box-sizing: $value;
+}
+
+.input-text {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  @include box-sizing(border-box);
+}
+
+.btn {
+  height: 30px;
+  font-size: 0.9em;
+  @include box-sizing(border-box);
+}
+
+
 /*
  *
  *  Component styles.

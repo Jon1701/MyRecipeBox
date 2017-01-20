@@ -119,7 +119,7 @@ class DashboardRecipes extends React.Component {
       const recipeID = recipe['_id'];
 
       return (
-        <div className="tbl-row btn-hover" key={`recipe-id-${recipeID}`}>
+        <div key={`recipe-id-${recipeID}`}>
           <Link to={`/view_recipe/${recipeID}`}>{recipe.title}</Link>
         </div>
       );
@@ -127,29 +127,27 @@ class DashboardRecipes extends React.Component {
 
     // If loading is complete, display recipes.
     return (
-      <div className="widget-dashboard-recipes box shadow">
+      <div className="box shadow">
         <div>
-          <h3 className="text-center">
+          <h3>
             Your most recent recipes:
           </h3>
         </div>
 
-        <div className="tbl cursor-hand">
+        <div>
           {displayRecipes}
         </div>
 
-        <div className="container-prev-next">
+        <div>
           <a
-            className="btn btn-hover cursor-hand"
             onClick={this.previousPage}
           >
             Previous
           </a>
 
-          <a className="btn">Page {this.state.pageNum}</a>
+          <a>Page {this.state.pageNum}</a>
 
           <a
-            className="btn btn-hover cursor-hand"
             onClick={this.nextPage}
           >
             Next

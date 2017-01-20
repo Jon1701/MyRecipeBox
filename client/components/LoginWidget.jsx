@@ -115,12 +115,11 @@ class LoginWidget extends React.Component {
     return (
       <div className="box shadow text-center">
         <AlertBox alert={this.state.alert} handleClose={this.clearAlert} />
-        <form type="POST" className="form-login-widget" onSubmit={this.handleFormSubmit}>
+        <form type="POST" onSubmit={this.handleFormSubmit}>
 
-          <div className="input-group">
+          <div>
             <label htmlFor="username">Username:</label>
             <input
-              className="input"
               type="text"
               id="username"
               ref={(input) => { this.inputUsername = input; }}
@@ -129,10 +128,9 @@ class LoginWidget extends React.Component {
             />
           </div>
 
-          <div className="input-group">
+          <div>
             <label htmlFor="password">Password:</label>
             <input
-              className="input"
               type="password"
               id="password"
               ref={(input) => { this.inputPassword = input; }}
@@ -141,7 +139,7 @@ class LoginWidget extends React.Component {
             />
           </div>
 
-          <button type="submit" className="btn btn-submit">Log In</button>
+          <button type="submit">Log In</button>
         </form>
       </div>
     );

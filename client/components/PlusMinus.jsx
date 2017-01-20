@@ -11,13 +11,11 @@ export default class PlusMinus extends React.Component {
     // Classnames to control component visibility.
     const myClasses = classNames({
       hidden: readOnly,
-      'btn-group-plusminus': true,
     });
 
     return (
       <div className={myClasses}>
         <button
-          className="btn btn-add-remove"
           type="button"
           onClick={(e) => { handleClick(e, 'ADD', stateKey); }}
           readOnly={this.props.readOnly}
@@ -26,7 +24,6 @@ export default class PlusMinus extends React.Component {
         </button>
 
         <button
-          className="btn btn-add-remove"
           type="button"
           onClick={(e) => { handleClick(e, 'REMOVE', stateKey); }}
           readOnly={this.props.readOnly}

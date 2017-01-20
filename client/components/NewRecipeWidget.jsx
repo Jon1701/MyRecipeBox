@@ -311,7 +311,6 @@ class NewRecipeWidget extends React.Component {
     // Dynamically render <input/> for each ingredient.
     const renderIngredients = this.state.ingredients.map((val, idx) => (
       <input
-        className="input"
         key={`recipe-ingredient-${idx}`}
         type="text"
         value={this.state.ingredients[idx]}
@@ -322,7 +321,6 @@ class NewRecipeWidget extends React.Component {
     // Dynamically render <input/> for each instruction.
     const renderInstructions = this.state.instructions.map((val, idx) => (
       <textarea
-        className="input-textarea"
         key={`recipe-instruction-${idx}`}
         type="text"
         value={this.state.instructions[idx]}
@@ -360,7 +358,7 @@ class NewRecipeWidget extends React.Component {
             renderInstructions={renderInstructions}
           />
 
-          <button className="btn btn-submit" type="submit" value="submit">
+          <button type="submit" value="submit">
             Save Recipe
           </button>
 
@@ -390,10 +388,9 @@ NewRecipeWidget.propTypes = {
 
 // Recipe Title.
 const RecipeTitle = ({ title, handleChange }) => (
-  <div className="input-group">
-    <div className="text-center">Recipe Title:</div>
+  <div>
+    <div>Recipe Title:</div>
     <input
-      className="input"
       type="text"
       onChange={e => handleChange(e.target.value)}
       value={title}
@@ -407,10 +404,9 @@ RecipeTitle.propTypes = {
 
 // Recipe Tagline.
 const RecipeTagline = ({ tagline, handleChange }) => (
-  <div className="input-group">
-    <div className="text-center">Recipe Tagline:</div>
+  <div>
+    <div>Recipe Tagline:</div>
     <input
-      className="input"
       type="text"
       id="recipe-tagline"
       onChange={e => handleChange(e.target.value)}
@@ -425,8 +421,8 @@ RecipeTagline.propTypes = {
 
 // Recipe Ingredients.
 const RecipeIngredients = ({ handleClick, renderIngredients }) => (
-  <div className="input-group ingredients-group">
-    <div className="text-center">Ingredients:</div>
+  <div>
+    <div>Ingredients:</div>
     <PlusMinus
       handleClick={handleClick}
       stateKey="ingredients"
@@ -441,13 +437,13 @@ RecipeIngredients.propTypes = {
 
 // Recipe Instructions.
 const RecipeInstructions = ({ handleClick, renderInstructions }) => (
-  <div className="input-group instructions-group">
-    <div className="text-center">Preparation Instructions:</div>
+  <div>
+    <div>Preparation Instructions:</div>
     <PlusMinus
       handleClick={handleClick}
       stateKey="instructions"
     />
-    <div className="ingredients-list">{renderInstructions}</div>
+    <div>{renderInstructions}</div>
   </div>
 );
 RecipeInstructions.propTypes = {
