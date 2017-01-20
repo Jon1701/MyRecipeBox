@@ -84,12 +84,14 @@ const uploadImage = (req, res, next) => {
 
     // Response payload.
     const payload = {
-      width,
-      height,
-      format,
-      url,
-      secure_url,
-      filesize_in_bytes: bytes,
+      image: {
+        width,
+        height,
+        format,
+        url,
+        secure_url,
+        filesize_in_bytes: bytes,
+      },
     };
 
     // Send response back to client.
