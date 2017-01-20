@@ -14,10 +14,11 @@
     flex-grow: 1;
     margin-bottom: 25px;
   }
-
+  /*
   .ingredients-group {
     margin: 25px 0 25px 0;
   }
+  */
 
   .instructions-group {
     margin: 0 0 25px 0;
@@ -71,6 +72,17 @@
   .btn-group-plusminus {
     button:nth-child(1) { margin-left: 0;}
     button:nth-child(2) { margin-right: 0; }
+  }
+
+  .flex-container-ingredients-imageuploader {
+    display: flex;
+
+    .ingredients-group {
+      flex: 0 1 50%;
+    }
+    .imageuploader-group {
+      flex: 0 1 50%;
+    }
   }
 
 }
