@@ -351,7 +351,7 @@ class NewRecipeWidget extends React.Component {
             renderIngredients={renderIngredients}
           />
 
-          <ImageUploader />
+          <ImageUploader token={this.props.token} />
 
           <RecipeInstructions
             handleClick={this.addRemoveFields}
@@ -376,7 +376,7 @@ export default connect(mapStateToProps, null)(withRouter(NewRecipeWidget));
 
 // Prop validation.
 NewRecipeWidget.propTypes = {
-  token: React.PropTypes.string,
+  token: React.PropTypes.string.isRequired,
   mode: React.PropTypes.oneOf(['NewRecipe', 'EditRecipe']),
 };
 
