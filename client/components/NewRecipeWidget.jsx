@@ -7,6 +7,7 @@ import { withRouter } from 'react-router';  // Allows component to be aware of R
 // React Components.
 import AlertBox from 'components/AlertBox'; // Alert Box.
 import PlusMinus from 'components/PlusMinus';
+import ImageUploader from 'components/ImageUploader';
 
 // Component definition.
 class NewRecipeWidget extends React.Component {
@@ -345,10 +346,14 @@ class NewRecipeWidget extends React.Component {
             tagline={this.state.tagline}
           />
 
-          <RecipeIngredients
-            handleClick={this.addRemoveFields}
-            renderIngredients={renderIngredients}
-          />
+          <div className="flex-container-ingredients-imageuploader">
+            <RecipeIngredients
+              handleClick={this.addRemoveFields}
+              renderIngredients={renderIngredients}
+            />
+
+            <ImageUploader />
+          </div>
 
           <RecipeInstructions
             handleClick={this.addRemoveFields}
