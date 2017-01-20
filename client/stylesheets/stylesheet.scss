@@ -5,11 +5,6 @@ body {
   font-family: Arial, sans-serif;
 }
 
-// Sets the cursor to a Hand.
-.cursor-hand {
-  cursor: pointer;
-}
-
 // Remove ugly default hyperlink styling.
 a {
   color: inherit;
@@ -20,6 +15,11 @@ a {
 h1, h2, h3, h4, h5, h6, p {
   margin: 0;
   font-weight: normal;
+}
+
+// Sets the cursor to a Hand.
+.cursor-hand {
+  cursor: pointer;
 }
 
 // Center text.
@@ -53,28 +53,69 @@ h1, h2, h3, h4, h5, h6, p {
   width: 100%;
 }
 
-
-
-
 @mixin box-sizing($value) {
   -moz-box-sizing: $value;
   -webkit-box-sizing: $value;
   box-sizing: $value;
 }
 
-.input-text {
-  width: 100%;
-  padding: 10px;
-  font-size: 1rem;
-  @include box-sizing(border-box);
-}
-
 .btn {
   height: 30px;
   font-size: 0.9em;
+  &:active { color: inherit; }
   @include box-sizing(border-box);
 }
 
+.btn-default {
+  background: none;
+  border: solid 1px #CCCCCC;
+}
+
+.btn-submit {
+  border: none;
+  background-color: #DC143C;
+  color: #FFFFFF;
+}
+
+form {
+  // Form field group: Label and Input.
+  .field {
+    display: flex;
+    flex-flow: column nowrap;
+  }
+
+  // Form input text field.
+  .input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    outline: none;
+    border: solid 1px #CCCCCC;
+    @include box-sizing(border-box);
+  }
+
+  .textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    outline: none;
+    border: solid 1px #CCCCCC;
+    @include box-sizing(border-box);
+  }
+
+  // Form field margins.
+  .field, .btn-submit {
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+// Container for inline elements.
+.container-inline {
+  display: flex;
+  flex-flow: row nowrap;  // All single line.
+}
 
 /*
  *

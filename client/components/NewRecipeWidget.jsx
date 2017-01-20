@@ -311,6 +311,7 @@ class NewRecipeWidget extends React.Component {
     // Dynamically render <input/> for each ingredient.
     const renderIngredients = this.state.ingredients.map((val, idx) => (
       <input
+        className="input"
         key={`recipe-ingredient-${idx}`}
         type="text"
         value={this.state.ingredients[idx]}
@@ -321,6 +322,7 @@ class NewRecipeWidget extends React.Component {
     // Dynamically render <input/> for each instruction.
     const renderInstructions = this.state.instructions.map((val, idx) => (
       <textarea
+        className="textarea"
         key={`recipe-instruction-${idx}`}
         type="text"
         value={this.state.instructions[idx]}
@@ -330,9 +332,9 @@ class NewRecipeWidget extends React.Component {
     ));
 
     return (
-      <div className="box shadow">
+      <div className="box shadow text-center widget-new-recipe">
         <AlertBox alert={this.state.alert} handleClose={this.clearAlert} />
-        <form type="POST" className="form-newrecipe-widget" onSubmit={this.handleFormSubmit}>
+        <form type="POST" onSubmit={this.handleFormSubmit}>
 
           <RecipeTitle
             handleChange={title => this.setState({ title })}
@@ -344,21 +346,19 @@ class NewRecipeWidget extends React.Component {
             tagline={this.state.tagline}
           />
 
-          <div className="flex-container-ingredients-imageuploader">
-            <RecipeIngredients
-              handleClick={this.addRemoveFields}
-              renderIngredients={renderIngredients}
-            />
+          <RecipeIngredients
+            handleClick={this.addRemoveFields}
+            renderIngredients={renderIngredients}
+          />
 
-            <ImageUploader />
-          </div>
+          <ImageUploader />
 
           <RecipeInstructions
             handleClick={this.addRemoveFields}
             renderInstructions={renderInstructions}
           />
 
-          <button type="submit" value="submit">
+          <button className="btn btn-submit width-100" type="submit" value="submit">
             Save Recipe
           </button>
 
@@ -388,9 +388,11 @@ NewRecipeWidget.propTypes = {
 
 // Recipe Title.
 const RecipeTitle = ({ title, handleChange }) => (
-  <div>
-    <div>Recipe Title:</div>
+  <div className="field">
+    <label className="label" htmlFor="recipe-title">Recipe Title:</label>
     <input
+      className="input"
+      id="recipe-title"
       type="text"
       onChange={e => handleChange(e.target.value)}
       value={title}
@@ -404,9 +406,10 @@ RecipeTitle.propTypes = {
 
 // Recipe Tagline.
 const RecipeTagline = ({ tagline, handleChange }) => (
-  <div>
-    <div>Recipe Tagline:</div>
+  <div className="field">
+    <label className="label" htmlFor="recipe-tagline">Recipe Tagline:</label>
     <input
+      className="input"
       type="text"
       id="recipe-tagline"
       onChange={e => handleChange(e.target.value)}
@@ -421,13 +424,13 @@ RecipeTagline.propTypes = {
 
 // Recipe Ingredients.
 const RecipeIngredients = ({ handleClick, renderIngredients }) => (
-  <div>
-    <div>Ingredients:</div>
+  <div className="field">
+    <label className="label" htmlFor="recipe-ingredients">Ingredients:</label>
     <PlusMinus
       handleClick={handleClick}
       stateKey="ingredients"
     />
-    <div className="ingredients-list">{renderIngredients}</div>
+    <div>{renderIngredients}</div>
   </div>
 );
 RecipeIngredients.propTypes = {
@@ -437,13 +440,13 @@ RecipeIngredients.propTypes = {
 
 // Recipe Instructions.
 const RecipeInstructions = ({ handleClick, renderInstructions }) => (
-  <div>
-    <div>Preparation Instructions:</div>
+  <div className="field">
+    <label className="label" htmlFor="recipe-instructions">Preparation Instructions:</label>
     <PlusMinus
       handleClick={handleClick}
       stateKey="instructions"
     />
-    <div>{renderInstructions}</div>
+    <div className="container-textareas">{renderInstructions}</div>
   </div>
 );
 RecipeInstructions.propTypes = {
