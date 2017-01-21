@@ -41,6 +41,8 @@ h1, h2, h3, h4, h5, h6, p {
 // Page container
 .container-page {
   padding: 10px;
+  margin: 0 auto;
+  max-width: 992px;
 }
 
 // Hides element.
