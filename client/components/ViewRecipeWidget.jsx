@@ -139,9 +139,9 @@ class ViewRecipeWidget extends React.Component {
           </ul>
 
           <h3>Preparation Instructions</h3>
-          <ul>
+          <ol>
             {instructionsItems}
-          </ul>
+          </ol>
         </div>
       </div>
     );
