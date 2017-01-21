@@ -356,6 +356,7 @@ class NewRecipeWidget extends React.Component {
             <ImageUploader
               token={this.props.token}
               storeImage={imageURL => this.setState({ image: imageURL })}
+              image={this.state.image}
             />
           </div>
 

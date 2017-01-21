@@ -14,7 +14,6 @@ class ImageUploader extends React.Component {
 
     // Component state.
     this.state = {
-      imageURL: null,
       uploading: false,
     };
 
@@ -77,7 +76,6 @@ class ImageUploader extends React.Component {
 
               // Store image in state, set uploading to false.
               this.setState({
-                imageURL: url,
                 uploading: false,
               });
               break;
@@ -100,13 +98,14 @@ class ImageUploader extends React.Component {
 
   render() {
     // Deconstruct state.
-    const { imageURL, uploading } = this.state;
+    const { uploading } = this.state;
+    const image = this.props.image;
 
     // Display image.
     let displayImage;
 
     // Case: No image, no upload.
-    if (imageURL === null && !uploading) {
+    if (image === null && !uploading) {
       displayImage = (
         <div className="text-center">
           <img src="https://placeholdit.imgix.net/~text?txtsize=70&txt=No%20Photo&w=300&h=300" role="presentation" />
@@ -124,10 +123,10 @@ class ImageUploader extends React.Component {
     }
 
     // Case: Image is available, not uploading.
-    if (imageURL && !uploading) {
+    if (image && !uploading) {
       displayImage = (
         <div className="text-center">
-          <img src={imageURL} role="presentation" />
+          <img src={image} role="presentation" />
         </div>
       );
     }
