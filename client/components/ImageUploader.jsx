@@ -109,7 +109,7 @@ class ImageUploader extends React.Component {
     if (imageURL === null && !uploading) {
       displayImage = (
         <div className="text-center">
-          No Image
+          <img src="https://placeholdit.imgix.net/~text?txtsize=70&txt=No%20Photo&w=300&h=300" role="presentation" />
         </div>
       );
     }
