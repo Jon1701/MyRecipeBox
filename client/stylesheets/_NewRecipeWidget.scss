@@ -27,6 +27,9 @@
     flex-flow: row nowrap;
     justify-content: space-between;
 
+    // Spacing between this container and the next.
+    margin-bottom: 20px;
+
     // Ingredients limited to 50% of width.
     .container-recipe-ingredients {
       flex: 1 0 50%;

@@ -347,7 +347,7 @@ class NewRecipeWidget extends React.Component {
             tagline={this.state.tagline}
           />
 
-        <div className="container-ingredients-uploader">
+          <div className="container-ingredients-uploader">
             <RecipeIngredients
               handleClick={this.addRemoveFields}
               renderIngredients={renderIngredients}
