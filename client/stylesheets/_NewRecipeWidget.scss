@@ -20,4 +20,28 @@
   .textarea {
     margin: 0px;
   }
+
+  // Container for displaying ingredients and uploader side by side.
+  .container-ingredients-uploader {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+    // Ingredients limited to 50% of width.
+    .container-recipe-ingredients {
+      flex: 1 0 50%;
+    }
+
+    // Image uploader limited to 50% of width.
+    .container-recipe-uploader {
+      flex: 1 0 50%;
+
+      // Recipe image.
+      img {
+        max-width: 100%;    // Limit width.
+        max-height: 300px;  // Limit height.
+        border: solid 1px #CCCCCC;
+      }
+    }
+  }
 }

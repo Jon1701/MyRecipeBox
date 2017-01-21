@@ -347,15 +347,17 @@ class NewRecipeWidget extends React.Component {
             tagline={this.state.tagline}
           />
 
-          <RecipeIngredients
-            handleClick={this.addRemoveFields}
-            renderIngredients={renderIngredients}
-          />
+        <div className="container-ingredients-uploader">
+            <RecipeIngredients
+              handleClick={this.addRemoveFields}
+              renderIngredients={renderIngredients}
+            />
 
-          <ImageUploader
-            token={this.props.token}
-            storeImage={imageURL => this.setState({ image: imageURL })}
-          />
+            <ImageUploader
+              token={this.props.token}
+              storeImage={imageURL => this.setState({ image: imageURL })}
+            />
+          </div>
 
           <RecipeInstructions
             handleClick={this.addRemoveFields}
@@ -428,7 +430,7 @@ RecipeTagline.propTypes = {
 
 // Recipe Ingredients.
 const RecipeIngredients = ({ handleClick, renderIngredients }) => (
-  <div className="field">
+  <div className="field container-recipe-ingredients">
     <label className="label" htmlFor="recipe-ingredients">Ingredients:</label>
     <PlusMinus
       handleClick={handleClick}

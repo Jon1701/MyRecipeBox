@@ -133,7 +133,7 @@ class ImageUploader extends React.Component {
     }
 
     return (
-      <div className="field">
+      <div className="container-recipe-uploader field">
         <label className="label" htmlFor="recipe-upload">Upload Image</label>
 
         {displayImage}
