@@ -1,5 +1,15 @@
 .widget-viewrecipe {
 
+  // Section spacing.
+  .title, .username, .tagline {
+    margin-bottom: 20px;
+  }
+
+  // List item spacing.
+  li:not(:last-child) {
+    margin-bottom: 15px;
+  }
+
   // Ingredients and Image on same line.
   .flexcontainer-ingredients-image {
     display: flex;

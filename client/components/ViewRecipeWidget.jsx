@@ -119,11 +119,11 @@ class ViewRecipeWidget extends React.Component {
       <div className="box shadow widget-viewrecipe">
         <AlertBox alert={this.state.alert} handleClose={this.clearAlert} />
 
-        <h1 className="text-center">{title}</h1>
+        <h1 className="title text-center">{title}</h1>
 
-        <p className="text-center">by: {username}</p>
+        <p className="username text-center">by: {username}</p>
 
-        <p className="text-center">{tagline}</p>
+        <p className="tagline text-center">{tagline}</p>
 
         <div className="flexcontainer-ingredients-image">
           <div className="container-ingredients">
