@@ -102,15 +102,8 @@ class ViewRecipeWidget extends React.Component {
       return <NoRecipeFound />;
     }
 
-    // Classes to toggle display of recipe.
-    const classesContainer = classNames({
-      hidden: this.state.recipe === null, // Hide if no recipe was loaded in state.
-      box: true,
-      shadow: true,
-    });
-
     // Deconstruct recipe variables.
-    const { username, title, tagline, ingredients, instructions } = this.state.recipe;
+    const { username, title, tagline, ingredients, instructions, image } = this.state.recipe;
 
     // Build a list (<li>) of ingredients.
     const ingredientsItems = ingredients.map((ingredient, index) => (
@@ -123,26 +116,32 @@ class ViewRecipeWidget extends React.Component {
     ));
 
     return (
-      <div>
+      <div className="box shadow widget-viewrecipe">
         <AlertBox alert={this.state.alert} handleClose={this.clearAlert} />
-        <div className={classesContainer}>
 
-          <h1 className="text-center">{title}</h1>
+        <h1 className="text-center">{title}</h1>
 
-          <p className="text-center">by: {username}</p>
+        <p className="text-center">by: {username}</p>
 
-          <p className="text-center">{tagline}</p>
+        <p className="text-center">{tagline}</p>
 
-          <h3>Ingregients</h3>
-          <ul>
-            {ingredientsItems}
-          </ul>
+        <div className="flexcontainer-ingredients-image">
+          <div className="container-ingredients">
+            <h3 className="text-center">Ingredients</h3>
+            <ul>
+              {ingredientsItems}
+            </ul>
+          </div>
 
-          <h3>Preparation Instructions</h3>
-          <ol>
-            {instructionsItems}
-          </ol>
+          <div className="container-image text-center">
+            <img src={image} role="presentation" />
+          </div>
         </div>
+
+        <h3 className="text-center">Preparation Instructions</h3>
+        <ol>
+          {instructionsItems}
+        </ol>
       </div>
     );
   }

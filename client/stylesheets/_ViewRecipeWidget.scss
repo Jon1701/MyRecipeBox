@@ -1,0 +1,26 @@
+.widget-viewrecipe {
+
+  // Ingredients and Image on same line.
+  .flexcontainer-ingredients-image {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  // Ingredients container max width of 50%;
+  .container-ingredients {
+    flex: 1 0 50%;
+  }
+
+  // Image container max width of 50%;
+  .container-image {
+    flex: 1 0 50%;
+
+    // Limit image dimensions.
+    img {
+      max-width: 100%;    // Limit width.
+      max-height: 300px;  // Limit height.
+    }
+  }
+}
