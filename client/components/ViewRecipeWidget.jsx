@@ -182,9 +182,7 @@ const NoRecipeFound = () => (
 
 // Edit Button.
 const EditButton = ({ recipeID }) => (
-  <button>
-    <Link to={`/edit_recipe/${recipeID}`} className="btn btn-submit width-100">Edit Recipe</Link>
-  </button>
+  <Link to={`/edit_recipe/${recipeID}`} className="link-submit width-100">Edit Recipe</Link>
 );
 EditButton.propTypes = {
   recipeID: React.PropTypes.string.isRequired,

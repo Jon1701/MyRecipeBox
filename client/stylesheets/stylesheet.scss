@@ -79,6 +79,16 @@ h1, h2, h3, h4, h5, h6, p {
   color: #FFFFFF;
 }
 
+.link-submit {
+  display: block;
+  width: 100%;
+  padding: 5px 0 5px 0;
+  background-color: #DC143C;
+  color: #FFFFFF;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 form {
   // Form field group: Label and Input.
   .field {
