@@ -1,8 +1,9 @@
 // Dependencies.
 import React from 'react';                  // React.
 import request from 'common/request';       // HTTP GET/POST functionality.
-import { withRouter } from 'react-router';  // Allows component to be aware of React Router.
+import { Link, withRouter } from 'react-router';  // Allows component to be aware of React Router.
 import classNames from 'classnames';        // Toggleable CSS classes.
+import { connect } from 'react-redux';      // Connects component to Redux store.
 
 // React Components.
 import AlertBox from 'components/AlertBox'; // Alert Box.
@@ -115,9 +116,23 @@ class ViewRecipeWidget extends React.Component {
       <li key={`instruction-item-${index}`}>{instruction}</li>
     ));
 
+    // Display Edit button if recipe username is same as logged in user.
+    let editButton;
+    if (this.props.token) {
+      // Extract username from token.
+      const usernameToken = JSON.parse(atob(this.props.token.split('.')[1])).username;
+
+      // Return Edit Button.
+      editButton = ((username === usernameToken)
+        ? <EditButton recipeID={this.props.params.recipe_id} />
+        : null);
+    }
+
     return (
       <div className="box shadow widget-viewrecipe">
         <AlertBox alert={this.state.alert} handleClose={this.clearAlert} />
+
+        {editButton}
 
         <h1 className="title text-center">{title}</h1>
 
@@ -147,14 +162,18 @@ class ViewRecipeWidget extends React.Component {
   }
 }
 
+// Maps state to props.
+const mapStateToProps = state => ({ token: state.token });
+
 // Allow component access to Redux store.
-export default withRouter(ViewRecipeWidget);
+export default connect(mapStateToProps, null)(withRouter(ViewRecipeWidget));
 
 // Prop validation.
 ViewRecipeWidget.propTypes = {
   params: React.PropTypes.shape({
     recipe_id: React.PropTypes.string,
   }),
+  token: React.PropTypes.string,
 };
 
 /*
@@ -174,3 +193,13 @@ const NoRecipeFound = () => (
     No recipe found.
   </div>
 );
+
+// Edit Button.
+const EditButton = ({ recipeID }) => (
+  <button>
+    <Link to={`/edit_recipe/${recipeID}`} className="btn btn-submit width-100">Edit Recipe</Link>
+  </button>
+);
+EditButton.propTypes = {
+  recipeID: React.PropTypes.string.isRequired,
+};
