@@ -7,9 +7,10 @@ import { connect } from 'react-redux';      // Connects component to Redux store
 
 // React Components.
 import AlertBox from 'components/AlertBox'; // Alert Box.
+import CustomComponent from 'components/CustomComponent'; // React component with AlertBox methods.
 
 // Component definition.
-class ViewRecipeWidget extends React.Component {
+class ViewRecipeWidget extends CustomComponent {
 
   // Component constructor.
   constructor(props) {
@@ -18,13 +19,8 @@ class ViewRecipeWidget extends React.Component {
     // Local state.
     this.state = {
       recipe: null, // Recipe data.
-      alert: null,  // Alert Box notification.
       loading: true,  // Show loading message.
     };
-
-    // Bind methods to component instance.
-    this.setAlert = this.setAlert.bind(this); // Set current alert.
-    this.clearAlert = this.clearAlert.bind(this); // Clear the current alert.
   }
 
   // Component Lifecycle Method.
@@ -79,16 +75,6 @@ class ViewRecipeWidget extends React.Component {
           this.setState({ loading: false });
         });
     }
-  }
-
-  // Method to set the current alert.
-  setAlert(type, message) {
-    this.setState({ alert: { type, message } });
-  }
-
-  // Method to clear the current alert.
-  clearAlert() {
-    this.setState({ alert: null });
   }
 
   // Component render.

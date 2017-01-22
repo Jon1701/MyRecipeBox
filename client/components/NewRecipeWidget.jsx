@@ -8,9 +8,10 @@ import { withRouter } from 'react-router';  // Allows component to be aware of R
 import AlertBox from 'components/AlertBox'; // Alert Box.
 import PlusMinus from 'components/PlusMinus';
 import ImageUploader from 'components/ImageUploader';
+import CustomComponent from 'components/CustomComponent'; // React component with AlertBox methods.
 
 // Component definition.
-class NewRecipeWidget extends React.Component {
+class NewRecipeWidget extends CustomComponent {
 
   // Component constructor.
   constructor(props) {
@@ -18,7 +19,6 @@ class NewRecipeWidget extends React.Component {
 
     // Local state.
     this.state = {
-      alert: null,  // Alert Box notification.
       title: '',    // Recipe title.
       tagline: '',  // Recipe tagline.
       image: null,    // Recipe image.
@@ -30,8 +30,6 @@ class NewRecipeWidget extends React.Component {
     // Bind methods to component instance.
     this.handleFormSubmit = this.handleFormSubmit.bind(this); // Form Submit.
     this.handleFormReset = this.handleFormReset.bind(this); // Form Reset.
-    this.setAlert = this.setAlert.bind(this); // Set current alert.
-    this.clearAlert = this.clearAlert.bind(this); // Clear the current alert.
     this.updateIngredient = this.updateIngredient.bind(this);
     this.updateInstruction = this.updateInstruction.bind(this);
     this.addRemoveFields = this.addRemoveFields.bind(this); // Adds/Remove ingredients/instructions.
@@ -78,16 +76,6 @@ class NewRecipeWidget extends React.Component {
           this.setAlert('FAILURE', 'No recipe found.');
         });
     }
-  }
-
-  // Method to set the current alert.
-  setAlert(type, message) {
-    this.setState({ alert: { type, message } });
-  }
-
-  // Method to clear the current alert.
-  clearAlert() {
-    this.setState({ alert: null });
   }
 
   // Method to handle form submit.

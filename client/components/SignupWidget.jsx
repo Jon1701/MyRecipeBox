@@ -10,34 +10,18 @@ import { storeToken } from 'actions/token'; // Store token in Redux store.
 
 // React Components.
 import AlertBox from 'components/AlertBox'; // Alert Box.
+import CustomComponent from 'components/CustomComponent'; // React component with AlertBox methods.
 
 // Component definition.
-class SignupWidget extends React.Component {
+class SignupWidget extends CustomComponent {
 
   // Component constructor.
   constructor(props) {
     super(props);
 
-    // Local state.
-    this.state = {
-      alert: null,  // Alert Box notification.
-    };
-
     // Bind methods to component instance.
     this.handleFormSubmit = this.handleFormSubmit.bind(this); // Form Submit.
     this.handleFormReset = this.handleFormReset.bind(this); // Form Reset.
-    this.setAlert = this.setAlert.bind(this); // Set current alert.
-    this.clearAlert = this.clearAlert.bind(this); // Clear the current alert.
-  }
-
-  // Method to set the current alert.
-  setAlert(type, message) {
-    this.setState({ alert: { type, message } });
-  }
-
-  // Method to clear the current alert.
-  clearAlert() {
-    this.setState({ alert: null });
   }
 
   // Method to handle form submit.
