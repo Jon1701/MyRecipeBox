@@ -35,7 +35,15 @@ const getFileSize = (image) => {
   const imageData = image.replace(/=+/, '');
 
   // Image padding.
-  const imagePadding = image.match(/=+/)[0];
+  let imagePadding;
+
+  // Try and get the string of padding characters.
+  try {
+    imagePadding = image.match(/=+/)[0];
+  } catch (e) {
+    // If there is no string of padding characters, return an empty array.
+    imagePadding = [];
+  }
 
   // Calculate filesize in bytes.
   const fileSizeInBytes = Math.ceil(((imageData.length) * 0.75) - imagePadding.length);
