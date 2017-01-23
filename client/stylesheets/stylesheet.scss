@@ -123,6 +123,11 @@ form {
   flex-flow: row nowrap;  // All single line.
 }
 
+.container-btn-sxs {
+  .btn:nth-child(1) { flex: 1 0 50%; }
+  .btn:nth-child(2) { flex: 1 0 50%; }
+}
+
 .recipe-image {
   max-width: 300px;
   max-height: 300px;

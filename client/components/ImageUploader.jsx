@@ -146,10 +146,10 @@ class ImageUploader extends React.Component {
           accept="image/bmp,image/jpeg,image/pjpeg,image/png,image/gif"
         />
 
-        <div className="container-inline">
+        <div className="container-btn-sxs">
           <button
             onClick={() => this.fileInput.click()}
-            className="btn btn-default width-100"
+            className="btn btn-default"
             type="button"
           >
             Choose Image
@@ -157,7 +157,7 @@ class ImageUploader extends React.Component {
 
           <button
             onClick={() => this.props.storeImage(null)}
-            className="btn btn-default width-100"
+            className="btn btn-default"
             type="button"
           >
             Remove Image
