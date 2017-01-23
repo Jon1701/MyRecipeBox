@@ -108,13 +108,6 @@ form {
     border: solid 1px #CCCCCC;
     @include box-sizing(border-box);
   }
-
-  // Form field margins.
-  .field, .btn-submit {
-    &:not(:last-child) {
-      margin-bottom: 20px;
-    }
-  }
 }
 
 // Container for inline elements.

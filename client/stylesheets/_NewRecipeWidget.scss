@@ -1,10 +1,5 @@
 .widget-new-recipe {
 
-  // Section spacing.
-  .field {
-    margin-bottom: 20px;
-  }
-
   // Add/remove button container.
   .container-inline {
     .btn {
@@ -31,23 +26,18 @@
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-
-    // Spacing between this container and the next.
-    margin-bottom: 20px;
   }
 
   // Ingredients limited to 50% of width.
   .container-recipe-ingredients {
     flex: 1 0 50%;
     padding-right: 5px;
-    margin-bottom: 0px;
   }
 
   // Image uploader limited to 50% of width.
   .container-recipe-uploader {
     flex: 1 0 50%;
     padding-left: 5px;
-    margin-bottom: 0px;
 
     // Recipe image.
     img {
