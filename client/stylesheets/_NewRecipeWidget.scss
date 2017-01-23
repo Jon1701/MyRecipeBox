@@ -33,11 +33,13 @@
     // Ingredients limited to 50% of width.
     .container-recipe-ingredients {
       flex: 1 0 50%;
+      padding-right: 5px;
     }
 
     // Image uploader limited to 50% of width.
     .container-recipe-uploader {
       flex: 1 0 50%;
+      padding-left: 5px;
 
       // Recipe image.
       img {

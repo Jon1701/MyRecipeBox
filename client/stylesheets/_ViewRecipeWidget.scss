@@ -25,12 +25,14 @@
   // Ingredients container max width of 50%;
   .container-ingredients {
     flex: 1 0 50%;
+    padding-right: 5px;
   }
 
   // Image container max width of 50%;
   .container-image {
     flex: 1 0 50%;
-
+    padding-left: 5px;
+    
     // Limit image dimensions.
     img {
       max-width: 100%;    // Limit width.
