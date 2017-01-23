@@ -156,6 +156,7 @@ class ImageUploader extends React.Component {
           </button>
 
           <button
+            onClick={() => this.props.storeImage(null)}
             className="btn btn-default width-100"
             type="button"
           >
