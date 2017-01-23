@@ -1,0 +1,14 @@
+.container-addremovebuttons {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+
+  button {
+    flex: 1 0 auto;
+
+    // Remove left margin on leftmost button, right margin on rightmost button.
+    &:first-child { margin-left: 0px; }
+    &:last-child { margin-right: 0px; }
+  }
+
+}

@@ -321,7 +321,7 @@ class NewRecipeWidget extends CustomComponent {
     ));
 
     return (
-      <div className="box shadow text-center widget-new-recipe">
+      <div className="box shadow text-center widget-newrecipe">
         <AlertBox alert={this.state.alert} handleClose={this.clearAlert} />
         <form type="POST" onSubmit={this.handleFormSubmit}>
 
@@ -383,7 +383,7 @@ NewRecipeWidget.propTypes = {
 
 // Recipe Title.
 const RecipeTitle = ({ title, handleChange }) => (
-  <div className="field">
+  <div className="container-recipe-title container-field">
     <label className="label" htmlFor="recipe-title">Recipe Title:</label>
     <input
       className="input"
@@ -401,7 +401,7 @@ RecipeTitle.propTypes = {
 
 // Recipe Tagline.
 const RecipeTagline = ({ tagline, handleChange }) => (
-  <div className="field">
+  <div className="container-recipe-ingredients container-field">
     <label className="label" htmlFor="recipe-tagline">Recipe Tagline:</label>
     <input
       className="input"
@@ -419,7 +419,7 @@ RecipeTagline.propTypes = {
 
 // Recipe Ingredients.
 const RecipeIngredients = ({ handleClick, renderIngredients }) => (
-  <div className="container-recipe-ingredients field">
+  <div className="container-recipe-ingredients container-field">
     <label className="label" htmlFor="recipe-ingredients">Ingredients:</label>
     <PlusMinus
       handleClick={handleClick}
@@ -435,13 +435,13 @@ RecipeIngredients.propTypes = {
 
 // Recipe Instructions.
 const RecipeInstructions = ({ handleClick, renderInstructions }) => (
-  <div className="field">
+  <div className="container-recipe-instructions container-field">
     <label className="label" htmlFor="recipe-instructions">Preparation Instructions:</label>
     <PlusMinus
       handleClick={handleClick}
       stateKey="instructions"
     />
-    <div className="container-textareas">{renderInstructions}</div>
+    <div>{renderInstructions}</div>
   </div>
 );
 RecipeInstructions.propTypes = {

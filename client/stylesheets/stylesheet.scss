@@ -50,6 +50,11 @@ h1, h2, h3, h4, h5, h6, p {
   display: none !important;
 }
 
+// Makes element invisible.
+.invisible {
+  visibility: hidden;
+}
+
 // Sets element width to 100%.
 .width-100 {
   width: 100%;
@@ -64,6 +69,7 @@ h1, h2, h3, h4, h5, h6, p {
 .btn {
   height: 30px;
   font-size: 0.9em;
+  cursor: pointer;
   &:active { color: inherit; }
   @include box-sizing(border-box);
 }
@@ -110,20 +116,19 @@ form {
   }
 }
 
-// Container for inline elements.
-.container-inline {
-  display: flex;
-  flex-flow: row nowrap;  // All single line.
-}
-
-.container-btn-sxs {
-  .btn:nth-child(1) { flex: 1 0 50%; }
-  .btn:nth-child(2) { flex: 1 0 50%; }
-}
-
+// Recipe image.
 .recipe-image {
-  max-width: 300px;
-  max-height: 300px;
+  max-width: 300px;    // Limit width.
+  max-height: 300px;  // Limit height.
+  border: solid 1px #CCCCCC;
+}
+
+// Disable text highlighting and selection.
+.noselect {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /*
@@ -140,3 +145,4 @@ form {
 @import '_DashboardRecipes';  // Dashboard Recipes.
 @import '_ImageUploader';
 @import '_ViewRecipeWidget';
+@import '_AddRemoveButtons';

@@ -1,24 +1,8 @@
-.widget-new-recipe {
+.widget-newrecipe {
 
-  // Add/remove button container.
-  .container-inline {
-    .btn {
-      // Spacing between buttons.
-      &:nth-child(1) { margin-right: 1px; }
-      &:nth-child(2) { margin-left: 1px; }
-
-      // Spacing between buttons and input field.
-      margin-bottom: 1px;
-    }
-  }
-
-  .container-textareas {
-    margin-top: 2px;
-  }
-
-  // Textareas.
-  .textarea {
-    margin: 0px;
+  // Form field container spacing.
+  .container-field {
+    margin-bottom: 20px;
   }
 
   // Container for displaying ingredients and uploader side by side.
@@ -32,20 +16,21 @@
   .container-recipe-ingredients {
     flex: 1 0 50%;
     padding-right: 5px;
+
+    // Custom margins on <input type="text"/>.
+    input[type='text'] {
+      margin: 0;        // Reset margins.
+      margin-top: 3px;  // Spacing between <input/>'s.
+
+      // Different spacing for first <input/>
+      &:first-child { margin-top: 2px; }
+    }
   }
 
   // Image uploader limited to 50% of width.
   .container-recipe-uploader {
     flex: 1 0 50%;
     padding-left: 5px;
-
-    // Recipe image.
-    img {
-      max-width: 100%;    // Limit width.
-      max-height: 300px;  // Limit height.
-      border: solid 1px #CCCCCC;
-    }
-
   }
 
   // Move recipe image below ingredients if screen width is below 625px;
@@ -60,10 +45,21 @@
       padding-right: 0px;
     }
 
-    // Image is full width.
+    // Image uploader is full width.
     .container-recipe-uploader {
       flex: 1 0 100%;
       padding-left: 0px;
+    }
+  }
+
+  // Recipe preparation instructions.
+  .container-recipe-instructions {
+    // Custom margins on <input type="text"/>.
+    textarea {
+      display: block;  // Force block element to remove bottom margin.
+      resize: none;    // Disable resize.
+      margin: 0px;     // Reset margins.
+      margin-top: 3px; // Spacing between <textarea/>
     }
   }
 }

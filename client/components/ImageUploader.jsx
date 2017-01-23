@@ -101,14 +101,31 @@ class ImageUploader extends React.Component {
     const { uploading } = this.state;
     const image = this.props.image;
 
+    // Display Remove Image button.
+    let displayRemoveImageButton;
+    if (image !== null && !uploading) {
+      displayRemoveImageButton = (
+        <button
+          onClick={() => this.props.storeImage(null)}
+          className="btn btn-default"
+          type="button"
+        >
+          Remove Image
+        </button>
+      );
+    }
+
     // Display image.
     let displayImage;
 
     // Case: No image, no upload.
     if (image === null && !uploading) {
       displayImage = (
-        <div className="text-center">
-          <img src="https://placeholdit.imgix.net/~text?txtsize=70&txt=No%20Photo&w=300&h=300" role="presentation" />
+        <div
+          className="recipe-image-placeholder cursor-hand"
+          onClick={() => this.fileInput.click()}
+        >
+          Upload a photo
         </div>
       );
     }
@@ -125,15 +142,15 @@ class ImageUploader extends React.Component {
     // Case: Image is available, not uploading.
     if (image && !uploading) {
       displayImage = (
-        <div className="text-center">
+        <div>
           <img src={image} role="presentation" />
         </div>
       );
     }
 
     return (
-      <div className="container-recipe-uploader field">
-        <label className="label" htmlFor="recipe-upload">Upload Image</label>
+      <div className="noselect container-recipe-uploader container-field">
+        <label className="label invisible" htmlFor="recipe-upload">Upload Image</label>
 
         {displayImage}
 
@@ -146,23 +163,8 @@ class ImageUploader extends React.Component {
           accept="image/bmp,image/jpeg,image/pjpeg,image/png,image/gif"
         />
 
-        <div className="container-btn-sxs">
-          <button
-            onClick={() => this.fileInput.click()}
-            className="btn btn-default"
-            type="button"
-          >
-            Choose Image
-          </button>
+      { displayRemoveImageButton }
 
-          <button
-            onClick={() => this.props.storeImage(null)}
-            className="btn btn-default"
-            type="button"
-          >
-            Remove Image
-          </button>
-        </div>
       </div>
     );
   }
