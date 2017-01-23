@@ -101,7 +101,7 @@ class LoginWidget extends CustomComponent {
         <AlertBox alert={this.state.alert} handleClose={this.clearAlert} />
         <form type="POST" onSubmit={this.handleFormSubmit}>
 
-          <div className="field">
+          <div className="container-field">
             <label className="label" htmlFor="username">Username:</label>
             <input
               className="input"
@@ -113,7 +113,7 @@ class LoginWidget extends CustomComponent {
             />
           </div>
 
-          <div className="field">
+          <div className="container-field">
             <label className="label" htmlFor="password">Password:</label>
             <input
               className="input"
