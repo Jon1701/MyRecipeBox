@@ -32,11 +32,31 @@
   .container-image {
     flex: 1 0 50%;
     padding-left: 5px;
-    
+
     // Limit image dimensions.
     img {
       max-width: 100%;    // Limit width.
       max-height: 300px;  // Limit height.
     }
   }
+
+  // Move recipe image below ingredients if screen width is below 625px;
+  @media (max-width: 625px) {
+    .flexcontainer-ingredients-image {
+      flex-flow: column nowrap;
+    }
+
+    // Ingredients is full width.
+    .container-ingredients {
+      flex: 1 0 100%;
+      padding-right: 0px;
+    }
+
+    // Image is full width.
+    .container-image {
+      flex: 1 0 100%;
+      padding-left: 0px;
+    }
+  }
+
 }
