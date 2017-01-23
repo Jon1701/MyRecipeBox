@@ -419,7 +419,7 @@ RecipeTagline.propTypes = {
 
 // Recipe Ingredients.
 const RecipeIngredients = ({ handleClick, renderIngredients }) => (
-  <div className="field container-recipe-ingredients">
+  <div className="container-recipe-ingredients field">
     <label className="label" htmlFor="recipe-ingredients">Ingredients:</label>
     <PlusMinus
       handleClick={handleClick}

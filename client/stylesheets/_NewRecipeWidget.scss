@@ -1,5 +1,10 @@
 .widget-new-recipe {
 
+  // Section spacing.
+  .field {
+    margin-bottom: 20px;
+  }
+
   // Add/remove button container.
   .container-inline {
     .btn {
@@ -29,24 +34,47 @@
 
     // Spacing between this container and the next.
     margin-bottom: 20px;
+  }
 
-    // Ingredients limited to 50% of width.
-    .container-recipe-ingredients {
-      flex: 1 0 50%;
-      padding-right: 5px;
+  // Ingredients limited to 50% of width.
+  .container-recipe-ingredients {
+    flex: 1 0 50%;
+    padding-right: 5px;
+    margin-bottom: 0px;
+  }
+
+  // Image uploader limited to 50% of width.
+  .container-recipe-uploader {
+    flex: 1 0 50%;
+    padding-left: 5px;
+    margin-bottom: 0px;
+
+    // Recipe image.
+    img {
+      max-width: 100%;    // Limit width.
+      max-height: 300px;  // Limit height.
+      border: solid 1px #CCCCCC;
     }
 
-    // Image uploader limited to 50% of width.
-    .container-recipe-uploader {
-      flex: 1 0 50%;
-      padding-left: 5px;
+  }
 
-      // Recipe image.
-      img {
-        max-width: 100%;    // Limit width.
-        max-height: 300px;  // Limit height.
-        border: solid 1px #CCCCCC;
-      }
+  // Move recipe image below ingredients if screen width is below 625px;
+  @media (max-width: 625px) {
+    .container-ingredients-uploader {
+      flex-flow: column nowrap;
+      margin-bottom: 0px;
+    }
+
+    // Ingredients is full width.
+    .container-ingredients {
+      flex: 1 0 100%;
+      padding-right: 0px;
+    }
+
+    // Image is full width.
+    .container-recipe-uploader {
+      flex: 1 0 100%;
+      padding-left: 0px;
     }
   }
 }

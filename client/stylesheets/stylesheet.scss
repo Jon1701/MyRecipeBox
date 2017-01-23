@@ -90,12 +90,6 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 form {
-  // Form field group: Label and Input.
-  .field {
-    display: flex;
-    flex-flow: column nowrap;
-  }
-
   // Form input text field.
   .input {
     width: 100%;
