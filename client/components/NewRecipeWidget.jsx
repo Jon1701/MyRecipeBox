@@ -3,6 +3,7 @@ import React from 'react';                  // React.
 import request from 'common/request';       // HTTP GET/POST functionality.
 import { connect } from 'react-redux';      // Connects component to Redux store.
 import { withRouter } from 'react-router';  // Allows component to be aware of React Router.
+import decodeToken from 'common/decodeToken'; // Decodes the header and payload of a JSON Web token.
 
 // React Components.
 import AlertBox from 'components/AlertBox'; // Alert Box.
@@ -312,7 +313,7 @@ class NewRecipeWidget extends CustomComponent {
     if (this.props.mode === 'EditRecipe' && this.props.token) {
       // Get username and recipe username.
       const recipeUsername = this.state.username;
-      const tokenUsername = JSON.parse(atob(this.props.token.split('.')[1])).username;
+      const tokenUsername = decodeToken(this.props.token).payload.username;
 
       // If usernames are different, return message stating that useris not authorized to edit.
       if (recipeUsername !== tokenUsername) {

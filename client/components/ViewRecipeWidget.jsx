@@ -4,6 +4,7 @@ import request from 'common/request';       // HTTP GET/POST functionality.
 import { Link, withRouter } from 'react-router';  // Allows component to be aware of React Router.
 import classNames from 'classnames';        // Toggleable CSS classes.
 import { connect } from 'react-redux';      // Connects component to Redux store.
+import decodeToken from 'common/decodeToken'; // Decodes the header and payload of a JSON Web token.
 
 // React Components.
 import AlertBox from 'components/AlertBox'; // Alert Box.
@@ -106,7 +107,7 @@ class ViewRecipeWidget extends CustomComponent {
     let editButton;
     if (this.props.token) {
       // Extract username from token.
-      const usernameToken = JSON.parse(atob(this.props.token.split('.')[1])).username;
+      const usernameToken = decodeToken(this.props.token).payload.username;
 
       // Return Edit Button.
       editButton = ((username === usernameToken)
