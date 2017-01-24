@@ -239,13 +239,40 @@ class NewRecipeWidget extends CustomComponent {
     switch (action) {
       // Add new blank string to the array.
       case 'ADD':
+        // Display a warning alert if the maximum number of ingredients is reached..
+        if ((stateKey === 'ingredients') && (ingredients.length === 50)) {
+          this.setAlert('WARNING', 'Maximum of 50 ingredients allowed.');
+          return;
+        }
+
+        // Display a warning alert if the maximum number of instructions is reached.
+        if ((stateKey === 'instructions') && (instructions.length === 50)) {
+          this.setAlert('WARNING', 'Maximum of 50 preparation instructions are allowed.');
+          return;
+        }
+
+        // Add a blank element to the array. Creates a new input/textarea.
         arrayItems.push('');
         break;
 
       // Remove last element from array.
-      case 'REMOVE':
+      case 'REMOVE': {
+        // Display a warning alert if only 2 ingredients are left.
+        if ((stateKey === 'ingredients') && (ingredients.length === 2)) {
+          this.setAlert('WARNING', 'At least 2 ingredients are needed.');
+          return;
+        }
+
+        // Display a warning alert if only 2 instructions are left.
+        if ((stateKey === 'instructions') && (instructions.length === 2)) {
+          this.setAlert('WARNING', 'At least 2 preparation instructions are needed.');
+          return;
+        }
+
+        // Remove the last element in the array.
         arrayItems = arrayItems.slice(0, arrayItems.length - 1);
         break;
+      }
 
       // Default case: do nothing.
       default:
