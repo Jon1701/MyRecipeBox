@@ -143,7 +143,7 @@ class ImageUploader extends React.Component {
     if (image && !uploading) {
       displayImage = (
         <div>
-          <img src={image} role="presentation" />
+          <img src={image} className="recipe-image" role="presentation" />
         </div>
       );
     }
