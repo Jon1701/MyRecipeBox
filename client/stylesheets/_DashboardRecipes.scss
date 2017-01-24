@@ -1,5 +1,40 @@
 .widget-dashboardrecipes {
 
+  // Spacing between sections.
+  & > div:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
+  // List of recipes.
+  .container-recipelist {
+    border: solid 1px #CCCCCC;
+
+    // Remove bottom border from last recipe in list.
+    .recipe:not(:last-child) { border-bottom: solid 1px #CCCCCC; };
+
+    // Make entire area clickable.
+    a {
+      display: block;
+      padding: 10px;
+    }
+  }
+
+  // Inline button controls.
+  .container-inline-buttons {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    margin-top: 4px;
+
+    // Button size and spacing.
+    .btn {
+      flex: 1 0 auto;
+      &:first-child { margin-left: 0px; }
+      &:last-child { margin-right: 0px; }
+    }
+  }
+
+/*
   // List of recent recipes.
   .container-recent-recipes {
 
@@ -20,7 +55,7 @@
   }
 
   // Pagination controls.
-  .container-inline {
+  .container-inline-buttons {
     margin-top: 5px;
     button, div {
       flex-grow: 1;
@@ -29,5 +64,5 @@
     }
 
   }
-
+*/
 }

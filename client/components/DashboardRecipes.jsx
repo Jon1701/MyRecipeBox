@@ -122,6 +122,7 @@ class DashboardRecipes extends React.Component {
       return (<NoRecipes />);
     }
 
+    // Generates HTML for each recipe.
     const displayRecipes = this.state.recipes.map((recipe) => {
       // Get recipe ID.
       const recipeID = recipe['_id'];
@@ -142,11 +143,11 @@ class DashboardRecipes extends React.Component {
           </h3>
         </div>
 
-        <div className="container-recent-recipes">
+        <div className="container-recipelist">
           {displayRecipes}
         </div>
 
-        <div className="container-inline">
+        <div className="container-inline-buttons">
           <button className="btn btn-default cursor-hand" onClick={this.previousPage}>
             Previous
           </button>
