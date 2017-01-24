@@ -22,8 +22,8 @@ class NewRecipeWidget extends CustomComponent {
       title: '',    // Recipe title.
       tagline: '',  // Recipe tagline.
       image: null,    // Recipe image.
-      ingredients: ['', ''],  // Array of recipe ingredients.
-      instructions: ['', ''], // Array of recipe preparation instructions.
+      ingredients: ['', '', '', '', ''],  // Array of recipe ingredients.
+      instructions: ['', '', ''], // Array of recipe preparation instructions.
       mode: this.props.mode,  // Mode of this component: NewRecipe or EditRecipe.
     };
 
