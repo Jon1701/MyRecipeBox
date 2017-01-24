@@ -6,7 +6,7 @@ import NavBar from 'components/NavBar';
 
 // Component definition.
 const App = props => (
-  <div>
+  <div id="container-ui">
     <NavBar />
     {props.children}
   </div>
