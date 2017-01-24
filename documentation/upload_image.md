@@ -1,21 +1,21 @@
 # Upload Image
 
-| Name       | Method  | Description  |
-|------------|---------|--------------|
-| /api/auth/upload_image | POST    | Uploads a new image to an image hosting server |
+| Name                   | Method | Description                                    |
+|------------------------|--------|------------------------------------------------|
+| /api/auth/upload_image | POST   | Uploads a new image to an image hosting server |
 
 ***
 
 ## Request Header
-| Name  | Data Type | Required/Optional | Description |
-|-------|-----------|-------------------|-------------|
-| x-access-token    | string  | required  | Access Token |
+| Name              | Data Type | Required/Optional | Description  |
+|-------------------|-----------|-------------------|--------------|
+| x-access-token    | string    | required          | Access Token |
 
 ## Request Body
 
-| Name  | Data Type | Required/Optional | Description |
-|-------|-----------|-------------------|-------------|
-| image_base64    | string  | required  | Base64 encoded string |
+| Name            | Data Type | Required/Optional | Description                               |
+|-----------------|-----------|-------------------|-------------------------------------------|
+| image_base64    | string    | required          | Base64 string representation of the image |
 
 ***
 
@@ -57,14 +57,14 @@ A JSON object with the following keys and values:
 
 All known errors cause the resource to return HTTP error code header along with a JSON object containing an **error code** and **error message**. The **error message** is provided only as a convenience, and should not be displayed to the user. Instead, use the **error code** and provide your own message to the end-user.
 
-| Code | Description |
-|------|-------------|
-| NO_IMAGE_PROVIDED | No image was provided |
-| INVALID_IMAGE | Invalid file format (Only .jpg, .gif, .png, and .bmp files allowed) |
-| FILE_TOO_LARGE | Image too large, must be 5MB or less. |
-| UPLOAD_FAILED | Upload failed. Server error or malformed image/base64 string',
-| MISSING_TOKEN | JSON Web Token was not provided |
-| INVALID_TOKEN | JSON Web Token is malformed/invalid |
+| Code              | Description                                                         |
+|-------------------|---------------------------------------------------------------------|
+| NO_IMAGE_PROVIDED | No image was provided                                               |
+| INVALID_IMAGE     | Invalid file format (Only .jpg, .gif, .png, and .bmp files allowed) |
+| FILE_TOO_LARGE    | Image too large, must be 5MB or less                                |
+| UPLOAD_FAILED     | Upload failed. Server error or malformed image/base64 string        |
+| MISSING_TOKEN     | JSON Web Token was not provided                                     |
+| INVALID_TOKEN     | JSON Web Token is malformed/invalid                                 |
 
 ### Examples
 ```

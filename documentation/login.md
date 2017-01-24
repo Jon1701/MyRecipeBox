@@ -1,16 +1,16 @@
 # User Login
 
-| Name       | Method  | Description  |
-|------------|---------|--------------|
-| /api/login | POST    | Facilitates user authentication  |
+| Name       | Method | Description                     |
+|------------|--------|---------------------------------|
+| /api/login | POST   | Facilitates user authentication |
 
 ***
 
 ## Request Body
-| Name  | Data Type | Required/Optional | Description | Minimum length | Maximum Length | Allowed Characters |
-|-------|-----------|-------------------|-------------|----------------|----------------|--------------------|
-| username  | string  | required  | Username |  8 | 25  |<code>\w\d</code>|
-| password  | string  | required  | Password |  8 | 50  |<code>\w\d</code>|
+| Name      | Data Type | Required/Optional | Description | Minimum length | Maximum Length | Allowed Characters |
+|-----------|-----------|-------------------|-------------|----------------|----------------|--------------------|
+| username  | string    | required          | Username    |  8             | 25             | <code>\w\d</code>  |
+| password  | string    | required          | Password    |  8             | 50             | <code>\w\d</code>  |
 
 ***
 
@@ -41,12 +41,11 @@ A JSON object with the following keys and values:
 
 All known errors cause the resource to return HTTP error code header along with a JSON object containing an **error code** and **error message**. The **error message** is provided only as a convenience, and should not be displayed to the user. Instead, use the **error code** and provide your own message to the end-user.
 
-| Code | Description |
-|------|-------------|
-| DB_ERROR            | Some database error occurred |
+| Code                | Description                           |
+|---------------------|---------------------------------------|
+| DB_ERROR            | Some database error occurred          |
 | MISSING_CREDENTIALS | No username or password were provided |
-| INVALID_CREDENTIALS | Invalid username or password |
-
+| INVALID_CREDENTIALS | Invalid username or password          |
 
 ### Example
 ```

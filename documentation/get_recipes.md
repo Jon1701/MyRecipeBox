@@ -1,20 +1,20 @@
 # Get recipes
 
-| Name       | Method  | Description  |
-|------------|---------|--------------|
+| Name              | Method | Description            |
+|-------------------|--------|------------------------|
 | /api/get_recipes  | GET    | Gets a list of recipes |
 
 ***
 
 ## Request Parameters
-| Name  | Data Type | Required/Optional | Description |
-|-------|-----------|-------------------|-------------|
-| recipe_id | ObjectID/string  | optional  | Recipe ID |
-| username | string  | optional  | Recipe Author |
-| page_num  | number  | optional  | Current page of results, at least 1 |
-| per_page  | number  | optional  | Number of results per page, between 1 and 20 |
-| sort_by     | string | optional | Field to sort results by. One of: username, title, tagline, creationDate |
-| sort_order  | string | optional | Sort direction. One of: ascending, descending |
+| Name       | Data Type | Required/Optional | Description |
+|------------|-----------|-------------------|-------------|
+| recipe_id  | string    | optional          | Recipe ID |
+| username   | string    | optional          | Recipe Author |
+| page_num   | number    | optional          | Current page of results, at least 1 |
+| per_page   | number    | optional          | Number of results per page, between 1 and 20 |
+| sort_by    | string    | optional          | Field to sort results by. One of: username, title, tagline, creationDate |
+| sort_order | string    | optional          | Sort direction. One of: ascending, descending |
 
 ***
 
@@ -106,10 +106,11 @@ A JSON object with the following keys and values:
 
 All known errors cause the resource to return HTTP error code header along with a JSON object containing an **error code** and **error message**. The **error message** is provided only as a convenience, and should not be displayed to the user. Instead, use the **error code** and provide your own message to the end-user.
 
-| Code | Description |
-|------|-------------|
-| DB_ERROR            | Some database error occurred |
-| INVALID_PAGE_NUMBER | Page number is invalid. Must be a positive integer greater than or equal to 1 |
+| Code                    | Description                                                                   |
+|-------------------------|-------------------------------------------------------------------------------|
+| DB_ERROR                | Some database error occurred                                                  |
+| INVALID_PAGE_NUMBER     | Page number is invalid. Must be a positive integer greater than or equal to 1 |
+| INVALID_PER_PAGE_NUMBER | Number of results per page is in valid. Must be a positive integer greater than or equal to 1 |
 | INVALID_RECIPE_ID   | Recipe ID is invalid. Must be a [MongoDB ObjectId](https://docs.mongodb.com/manual/reference/method/ObjectId/) |
 
 ### Examples

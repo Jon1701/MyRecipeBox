@@ -1,17 +1,17 @@
 # User Signup
 
-| Name        | Method  | Description  |
-|-------------|---------|--------------|
-| /api/signup | POST    | Facilitates user creation  |
+| Name        | Method | Description               |
+|-------------|--------|---------------------------|
+| /api/signup | POST   | Facilitates user creation |
 
 ***
 
 ## Request Body
-| Name  | Data Type | Required/Optional | Description | Minimum length | Maximum Length | Allowed Characters |
-|-------|-----------|-------------------|-------------|----------------|----------------|--------------------|
-| username   | string  | required  | Username |  8 | 25  |<code>\w\d</code>|
-| password1  | string  | required  | Password |  8 | 50  |<code>\w\d</code>|
-| password2  | string  | required  | Confirm Password | 8 | 50 | <code>\w\d</code>|
+| Name       | Data Type | Required/Optional | Description      | Minimum length | Maximum Length | Allowed Characters |
+|------------|-----------|-------------------|------------------|----------------|----------------|--------------------|
+| username   | string    | required          | Username         | 8              | 25             | <code>\w\d</code>  |
+| password1  | string    | required          | Password         | 8              | 50             | <code>\w\d</code>  |
+| password2  | string    | required          | Confirm Password | 8              | 50             | <code>\w\d</code>  |
 
 ***
 
@@ -41,15 +41,15 @@ A JSON object with the following keys and values:
 
 All known errors cause the resource to return HTTP error code header along with a JSON object containing an **error code** and **error message**. The **error message** is provided only as a convenience, and should not be displayed to the user. Instead, use the **error code** and provide your own message to the end-user.
 
-| Code | Description |
-|------|-------------|
-| DB_ERROR | Some database error occurred |
-| MISSING_CREDENTIALS | No username, password, or password confirmation were provided |
-| INVALID_USERNAME | Username is invalid |
-| INVALID_PASSWORD | Password is invalid |
-| PASSWORD_MISMATCH | Passwords do not match |
-| MISSING_PASSWORD_CONFIRMATION | Password Confirmation not provided |
-| USER_EXISTS | A user with that username already exists |
+| Code                          | Description                                                   |
+|-------------------------------|---------------------------------------------------------------|
+| DB_ERROR                      | Some database error occurred                                  |
+| MISSING_CREDENTIALS           | No username, password, or password confirmation were provided |
+| INVALID_USERNAME              | Username is invalid                                           |
+| INVALID_PASSWORD              | Password is invalid                                           |
+| PASSWORD_MISMATCH             | Passwords do not match                                        |
+| MISSING_PASSWORD_CONFIRMATION | Password Confirmation not provided                            |
+| USER_EXISTS                   | A user with that username already exists                      |
 
 ### Examples
 ```
