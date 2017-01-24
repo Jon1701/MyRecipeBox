@@ -401,7 +401,7 @@ RecipeTitle.propTypes = {
 
 // Recipe Tagline.
 const RecipeTagline = ({ tagline, handleChange }) => (
-  <div className="container-recipe-ingredients container-field">
+  <div className="container-recipe-tagline container-field">
     <label className="label" htmlFor="recipe-tagline">Recipe Tagline:</label>
     <input
       className="input"
