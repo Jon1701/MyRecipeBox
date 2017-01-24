@@ -6,7 +6,7 @@ import { withRouter } from 'react-router';  // Allows component to be aware of R
 
 // React Components.
 import AlertBox from 'components/AlertBox'; // Alert Box.
-import PlusMinus from 'components/PlusMinus';
+import AddRemoveButtons from 'components/AddRemoveButtons';
 import ImageUploader from 'components/ImageUploader';
 import CustomComponent from 'components/CustomComponent'; // React component with AlertBox methods.
 
@@ -421,7 +421,7 @@ RecipeTagline.propTypes = {
 const RecipeIngredients = ({ handleClick, renderIngredients }) => (
   <div className="container-recipe-ingredients container-field">
     <label className="label" htmlFor="recipe-ingredients">Ingredients:</label>
-    <PlusMinus
+    <AddRemoveButtons
       handleClick={handleClick}
       stateKey="ingredients"
     />
@@ -437,7 +437,7 @@ RecipeIngredients.propTypes = {
 const RecipeInstructions = ({ handleClick, renderInstructions }) => (
   <div className="container-recipe-instructions container-field">
     <label className="label" htmlFor="recipe-instructions">Preparation Instructions:</label>
-    <PlusMinus
+    <AddRemoveButtons
       handleClick={handleClick}
       stateKey="instructions"
     />

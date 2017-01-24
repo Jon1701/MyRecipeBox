@@ -3,7 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 // Component containing buttons to add/remove fields.
-export default class PlusMinus extends React.Component {
+export default class AddRemoveButtons extends React.Component {
   render() {
     // Deconstruct props.
     const { handleClick, stateKey, readOnly } = this.props;
@@ -39,7 +39,7 @@ export default class PlusMinus extends React.Component {
 }
 
 // Prop validation.
-PlusMinus.propTypes = {
+AddRemoveButtons.propTypes = {
   handleClick: React.PropTypes.func.isRequired,
   stateKey: React.PropTypes.oneOf(['instructions', 'ingredients']).isRequired,
   readOnly: React.PropTypes.bool,
