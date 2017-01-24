@@ -120,29 +120,38 @@ class ViewRecipeWidget extends CustomComponent {
 
         {editButton}
 
-        <h1 className="title text-center">{title}</h1>
+        <div className="container-field container-recipe-title text-center">
+          <h1>{title}</h1>
+        </div>
 
-        <p className="username text-center">by: {username}</p>
+        <div className="container-field container-recipe-username text-center">
+          by: {username}
+        </div>
 
-        <p className="tagline text-center">{tagline}</p>
+        <div className="container-field container-recipe-tagline text-center">
+          {tagline}
+        </div>
 
-        <div className="flexcontainer-ingredients-image">
-          <div className="container-ingredients">
+        <div className="container-ingredients-image">
+          <div className="container-field container-recipe-ingredients">
             <h3 className="text-center">Ingredients</h3>
             <ul>
               {ingredientsItems}
             </ul>
           </div>
 
-          <div className="container-image text-center">
-            <img src={image} role="presentation" />
+          <div className="container-field container-recipe-image text-center">
+            <img src={image} className="recipe-image" role="presentation" />
           </div>
         </div>
 
-        <h3 className="text-center">Preparation Instructions</h3>
-        <ol>
-          {instructionsItems}
-        </ol>
+        <div className="container-field container-recipe-instructions">
+          <h3 className="text-center">Preparation Instructions</h3>
+          <ol>
+            {instructionsItems}
+          </ol>
+        </div>
+
       </div>
     );
   }

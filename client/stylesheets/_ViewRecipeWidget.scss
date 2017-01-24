@@ -1,47 +1,58 @@
 .widget-viewrecipe {
 
+  // List item spacing.
+  li { padding-top: 15px; }
+
+  // Recipe tagline.
+  .container-recipe-tagline {
+    font-style: italic;
+  }
+
   // Ingredients and Image on same line.
-  .flexcontainer-ingredients-image {
+  .container-ingredients-image {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
   }
 
   // Ingredients container max width of 50%;
-  .container-ingredients {
+  .container-recipe-ingredients {
     flex: 1 0 50%;
     padding-right: 5px;
+
+    // List styling.
+    ul { margin: 0; }; // No margins.
   }
 
   // Image container max width of 50%;
-  .container-image {
+  .container-recipe-image {
     flex: 1 0 50%;
     padding-left: 5px;
-
-    // Limit image dimensions.
-    img {
-      max-width: 100%;    // Limit width.
-      max-height: 300px;  // Limit height.
-    }
   }
 
   // Move recipe image below ingredients if screen width is below 625px;
   @media (max-width: 625px) {
-    .flexcontainer-ingredients-image {
+    .container-ingredients-image {
       flex-flow: column nowrap;
     }
 
     // Ingredients is full width.
-    .container-ingredients {
+    .container-recipe-ingredients {
       flex: 1 0 100%;
       padding-right: 0px;
     }
 
     // Image is full width.
-    .container-image {
+    .container-recipe-image {
       flex: 1 0 100%;
       padding-left: 0px;
     }
+  }
+
+  // Preparation instructions.
+  .container-recipe-instructions {
+    // List styling.
+    ol { margin: 0; }; // No margins.
   }
 
 }
