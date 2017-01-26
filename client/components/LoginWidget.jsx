@@ -3,7 +3,7 @@ import React from 'react';                  // React.
 import request from 'common/request';       // HTTP GET/POST functionality.
 import { bindActionCreators } from 'redux'; // Binds actions to component.
 import { connect } from 'react-redux';      // Connects component to Redux store.
-import { withRouter } from 'react-router';  // Allows component to be aware of React Router.
+import { withRouter, Link } from 'react-router';  // Allows component to be aware of React Router.
 
 // React Components.
 import AlertBox from 'components/AlertBox'; // Alert Box.
@@ -97,7 +97,7 @@ class LoginWidget extends CustomComponent {
   // Component render.
   render() {
     return (
-      <div className="box shadow text-center">
+      <div className="box shadow text-center widget-login">
         <AlertBox alert={this.state.alert} handleClose={this.clearAlert} />
         <form type="POST" onSubmit={this.handleFormSubmit}>
 
@@ -126,6 +126,12 @@ class LoginWidget extends CustomComponent {
           </div>
 
           <button className="btn btn-submit width-100" type="submit">Log In</button>
+
+          <div className="container-signup-notice">
+            <Link to="/signup">
+              Don't have an account? Click here to sign up!
+            </Link>
+          </div>
         </form>
       </div>
     );
