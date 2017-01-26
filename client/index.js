@@ -86,7 +86,7 @@ const ApplicationUIContainer = (
         <Route path="/new_recipe" component={NewRecipePage} onEnter={auth} />
         <Route path="/view_recipe/:recipe_id" component={ViewRecipePage} />
         <Route path="/edit_recipe/:recipe_id" component={EditRecipePage} />
-        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/dashboard" component={Dashboard} onEnter={auth} />
       </Route>
     </Router>
   </Provider>
