@@ -26,7 +26,7 @@ class NavBar extends React.Component {
           <nav className="subnav-left">
             <ul>
               <li className="nav-item cursor-hand">
-                <Link className="nav-item-link" to="/">Recipe Box</Link>
+                <Link className="nav-item-link" to="/">My Recipe Box</Link>
               </li>
             </ul>
           </nav>
