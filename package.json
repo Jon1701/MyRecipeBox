@@ -1,8 +1,8 @@
 {
-  "name": "recipe-box",
-  "version": "2.0.0",
+  "name": "my-recipe-box",
+  "version": "1.0.0",
   "main": "server.js",
-  "repository": "https://github.com/Jon1701/RecipeBoxV2.git",
+  "repository": "https://github.com/Jon1701/MyRecipeBox.git",
   "author": "Jon1701",
   "license": "MIT",
   "engines": {

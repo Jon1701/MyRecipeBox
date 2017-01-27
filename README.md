@@ -1,4 +1,4 @@
-# RecipeBoxV2
+# MyRecipeBox
 
 ## Prerequisites
 
@@ -31,7 +31,7 @@
 1. Clone repository
 
   ```
-  git clone https://github.com/Jon1701/RecipeBoxV2.git
+  git clone https://github.com/Jon1701/MyRecipeBox.git
   ```
 
 2. Install dependencies
