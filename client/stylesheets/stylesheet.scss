@@ -18,7 +18,7 @@ body {
     // Flexbox.
     display: flex;
     flex-flow: column nowrap;
-    justify-content: space-around;
+    justify-content: center;
 
     // Box sizing.
     padding: 30px;
@@ -26,12 +26,17 @@ body {
 
     // Hero image properties.
     width: 100%;
-    min-height: 300px;
+    min-height: 500px;
     background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
                 url('../media/images/food-kitchen-cutting-board-cooking.jpg');
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
+
+    * {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
 
   }
 }
@@ -103,9 +108,11 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .btn {
-  height: 30px;
+  border: none;
+  background: none;
   font-size: 0.9em;
   cursor: pointer;
+  padding: 10px 15px 10px 15px;
   &:active { color: inherit; }
   @include box-sizing(border-box);
 }
@@ -118,7 +125,6 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .btn-default {
-  background: none;
   border: solid 1px #CCCCCC;
 
   &:hover {

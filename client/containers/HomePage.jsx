@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { browserHistory } from 'react-router';
 
 // Component definition.
 const HomePage = () => (
@@ -11,7 +12,9 @@ const HomePage = () => (
       <p>Create and share recipes with friends and family!</p>
 
       <div>
-        <Link to="/dashboard" className="btn btn-getstarted">Get Started</Link>
+        <button type="button" className="btn btn-getstarted" onClick={() => { browserHistory.push('/dashboard'); }}>
+          Get Started
+        </button>
       </div>
     </div>
 
