@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-1. Sign up for a Database-as-a-Service (DaaS) service such as [mLab.com](https://www.mlab.com), or set up your own local instance.
+1. Sign up for a MongoDB Database-as-a-Service (DaaS) service such as [mLab.com](https://www.mlab.com), or set up your own local instance.
 
 2. If creating your own local instance, refer to the MongoDB documentation for instructions on setting up authentication, and security.
 
